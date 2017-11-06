@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="classes">
+        <item>计算机1班</item>
+        <item>计算机2班</item>
+        <item>计算机3班</item>
+        <item>计算机4班</item>
+        <item>计算机5班</item>
+        <item>计算机6班</item>
+    </string-array>
+</resources>

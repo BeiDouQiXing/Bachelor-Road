@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/add_activity">
+    
+    <Button
+        android:id="@+id/add_departmrnt_my_departmrnt"
+        android:layout_width="160dp"
+        android:layout_height="68dp"
+        android:layout_marginLeft="422dp"
+        android:layout_marginStart="422dp"
+        android:layout_marginTop="20dp"
+        android:background="#00000000"
+        />
+    <Button
+        android:id="@+id/add_departmrnt_activity"
+        android:layout_width="160dp"
+        android:layout_height="68dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp"
+        android:background="#00000000"
+        />
+
+</RelativeLayout>
