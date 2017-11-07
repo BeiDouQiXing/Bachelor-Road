@@ -23,5 +23,12 @@
         android:layout_marginTop="20dp"
         android:background="#00000000" />
 
-
+    <Button
+        android:id = "@+id/activity_run_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bumen_likai" />
 </RelativeLayout>
