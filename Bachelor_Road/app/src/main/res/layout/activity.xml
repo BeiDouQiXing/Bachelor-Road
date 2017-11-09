@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/activity">
+
+    <Button
+        android:id = "@+id/activity_add_department"
+        android:layout_width="160dp"
+        android:layout_height="68dp"
+        android:layout_marginLeft="271dp"
+        android:layout_marginStart="271dp"
+        android:layout_marginTop="20dp"
+        android:background="#00000000" />
+
+    <Button
+        android:id="@+id/activity_my_department"
+        android:layout_width="160dp"
+        android:layout_height="68dp"
+        android:layout_marginLeft="422dp"
+        android:layout_marginStart="422dp"
+        android:layout_marginTop="20dp"
+        android:background="#00000000" />
+
+    <Button
+        android:id = "@+id/activity_run_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bumen_likai" />
+
+    <!--这里的text都是按钮-->
+    <TextView
+        android:id="@+id/activity_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="搬帐篷搬桌子"
+        android:layout_centerHorizontal="true"
+        android:textColor="#f7f5f5"
+        android:textSize="35sp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="93dp"
+        android:layout_marginLeft="300dp" />
+
+    <TextView
+        android:id="@+id/activity_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="搬帐篷搬桌子"
+        android:layout_centerHorizontal="true"
+        android:textColor="#f7f5f5"
+        android:textSize="35sp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="145dp"
+        android:layout_marginLeft="300dp" />
+
+    <TextView
+        android:id="@+id/activity_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="搬帐篷搬桌子"
+        android:layout_centerHorizontal="true"
+        android:textColor="#f7f5f5"
+        android:textSize="35sp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="197dp"
+        android:layout_marginLeft="300dp" />
+
+    <TextView
+        android:id="@+id/activity_four"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="搬帐篷搬桌子"
+        android:layout_centerHorizontal="true"
+        android:textColor="#f7f5f5"
+        android:textSize="35sp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="249dp"
+        android:layout_marginLeft="300dp" />
+
+    <TextView
+        android:id="@+id/activity_five"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="搬帐篷搬桌子"
+        android:layout_centerHorizontal="true"
+        android:textColor="#f7f5f5"
+        android:textSize="35sp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="301dp"
+        android:layout_marginLeft="300dp" />
+
+</RelativeLayout>

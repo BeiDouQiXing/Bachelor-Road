@@ -11,7 +11,7 @@
         android:layout_above="@+id/student_number"
         android:layout_alignLeft="@+id/student_number"
         android:layout_alignStart="@+id/student_number"
-        android:layout_marginBottom="27dp"
+        android:layout_marginBottom="16dp"
         android:background="@null"
         android:hint="@string/input_name"
         android:inputType="textPersonName"
@@ -24,9 +24,9 @@
         android:layout_above="@+id/classes"
         android:layout_alignLeft="@+id/queren"
         android:layout_alignStart="@+id/queren"
-        android:layout_marginBottom="29dp"
-        android:layout_marginLeft="43dp"
-        android:layout_marginStart="43dp"
+        android:layout_marginBottom="26dp"
+        android:layout_marginLeft="42dp"
+        android:layout_marginStart="42dp"
         android:background="@null"
         android:hint="@string/input_student_number"
         android:inputType="number"
@@ -37,10 +37,9 @@
         android:id="@+id/classes"
         android:layout_width="190dp"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/girl"
         android:layout_alignLeft="@+id/student_number"
         android:layout_alignStart="@+id/student_number"
-        android:layout_marginBottom="100dp"
+        android:layout_centerVertical="true"
         android:entries="@array/classes" />
 
     <Button
