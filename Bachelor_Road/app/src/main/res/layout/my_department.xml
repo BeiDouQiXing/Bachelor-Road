@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/my_department">
+
+    <Button
+        android:id = "@+id/my_department_activity"
+        android:layout_width="160dp"
+        android:layout_height="68dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="19dp"
+        android:background="#00000000"
+        />
+
+    <Button
+        android:id = "@+id/my_department_add_department"
+        android:layout_width="160dp"
+        android:layout_height="68dp"
+        android:layout_marginLeft="271dp"
+        android:layout_marginStart="271dp"
+        android:layout_marginTop="19dp"
+        android:background="#00000000" />
+
+    <Button
+        android:id = "@+id/my_department_run_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bumen_likai" />
+
+    <TextView
+        android:id="@+id/my_department_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="社委会信息部"
+        android:layout_centerHorizontal="true"
+        android:textColor="#f7f5f5"
+        android:textSize="35sp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="177dp"
+        android:layout_marginLeft="300dp" />
+
+</RelativeLayout>
