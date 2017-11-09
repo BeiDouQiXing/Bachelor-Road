@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login">
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/student_number"
+        android:layout_alignLeft="@+id/student_number"
+        android:layout_alignStart="@+id/student_number"
+        android:layout_marginBottom="27dp"
+        android:background="@null"
+        android:hint="@string/input_name"
+        android:inputType="textPersonName"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/student_number"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/classes"
+        android:layout_alignLeft="@+id/queren"
+        android:layout_alignStart="@+id/queren"
+        android:layout_marginBottom="29dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginStart="43dp"
+        android:background="@null"
+        android:hint="@string/input_student_number"
+        android:inputType="number"
+        android:singleLine="false"
+        android:textSize="30sp" />
+
+    <Spinner
+        android:id="@+id/classes"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/girl"
+        android:layout_alignLeft="@+id/student_number"
+        android:layout_alignStart="@+id/student_number"
+        android:layout_marginBottom="100dp"
+        android:entries="@array/classes" />
+
+    <Button
+        android:id="@+id/boy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/queren"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="44dp"
+        android:layout_marginLeft="68dp"
+        android:layout_marginStart="68dp"
+        android:background="@drawable/boy" />
+
+    <Button
+        android:id="@+id/girl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/boy"
+        android:layout_marginLeft="38dp"
+        android:layout_marginStart="38dp"
+        android:layout_toEndOf="@+id/boy"
+        android:layout_toRightOf="@+id/boy"
+        android:background="@drawable/girl" />
+
+    <Button
+        android:id="@+id/queren"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp"
+        android:background="@drawable/queren" />
+
+</RelativeLayout>
