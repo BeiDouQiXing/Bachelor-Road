@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Bachelor_Road.iml" filepath="$PROJECT_DIR$/Bachelor_Road.iml" />
-      <module fileurl="file://E:\Bachelor-Road\Bachelor_Road\Bachelor_Road.iml" filepath="E:\Bachelor-Road\Bachelor_Road\Bachelor_Road.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://E:\Bachelor-Road\Bachelor_Road\app\app.iml" filepath="E:\Bachelor-Road\Bachelor_Road\app\app.iml" />
     </modules>
   </component>
 </project>
