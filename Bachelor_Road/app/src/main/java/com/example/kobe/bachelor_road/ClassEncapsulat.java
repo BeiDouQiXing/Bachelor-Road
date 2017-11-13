@@ -1,8 +1,6 @@
 package com.example.kobe.bachelor_road;
 
 /**
- *
- * 人物类，部门类，课程类
  * Created by Administrator on 2017/11/6.
  */
 
@@ -11,25 +9,24 @@ public class ClassEncapsulat {
 }
 
 class Character{
-    private static int CHid;
-    private static String CHName;
-    private static String CHNo;
-    private static int CHClass;
-    private static int CHImage;
-    private static int CHCurrentEnergy;
-    private static int CHMaximumEnergy;
-    private static float CHCredit;
-    private static float CHComprehensiveTest;
-    private static int CHCurrentTime;      //从周一算起当前时间，以分钟计？
-    private static int CHCurrentWeek;       //当前第几周
-    private static boolean CHIsFirstLogin;
+    private int CHid;
+    private String CHName;
+    private String CHNo;
+    private int CHClass;
+    private int CHImage;
+    private int CHCurrentEnergy;
+    private int CHMaximumEnergy;
+    private double CHCredit;
+    private double CHComprehensiveTest;
+    private int CHCurrentTime;      //从周一算起当前时间，以分钟计？
+    private int CHCurrentWeek;       //当前第几周
 
     public Character(){
 
     }
 
     public Character(int CHid,String CHName,String CHNo,int CHClass,int CHImage,int CHCurrentEnergy,int CHMaximumEnergy,
-                     float CHCredit,float CHComprehensiveTest,int CHCurrentTime,int CHCurrentWeek,boolean CHIsFirstLogin){
+                     double CHCredit,double CHComprehensiveTest,int CHCurrentTime,int CHCurrentWeek){
         this.CHid = CHid;
         this.CHName = CHName;
         this.CHNo  = CHNo;
@@ -41,11 +38,10 @@ class Character{
         this.CHComprehensiveTest = CHComprehensiveTest;
         this.CHCurrentTime = CHCurrentTime;
         this.CHCurrentWeek = CHCurrentWeek;
-        this.CHIsFirstLogin = CHIsFirstLogin;
     }
 
     public void setCharacter(int CHid,String CHName,String CHNo,int CHClass,int CHImage,int CHCurrentEnergy,int CHMaximumEnergy,
-                             float CHCredit,float CHComprehensiveTest,int CHCurrentTime,int CHCurrentWeek,boolean CHIsFirstLogin){
+                             double CHCredit,double CHComprehensiveTest,int CHCurrentTime,int CHCurrentWeek){
         this.CHid = CHid;
         this.CHName = CHName;
         this.CHNo  = CHNo;
@@ -57,7 +53,6 @@ class Character{
         this.CHComprehensiveTest = CHComprehensiveTest;
         this.CHCurrentTime = CHCurrentTime;
         this.CHCurrentWeek = CHCurrentWeek;
-        this.CHIsFirstLogin = CHIsFirstLogin;
     }
 
     public int getCHid(){
@@ -88,19 +83,19 @@ class Character{
         return CHMaximumEnergy;
     }
 
-    public  void setCHCredit(float CHCredit){
+    public  void setCHCredit(double CHCredit){
         this.CHCredit = CHCredit;
     }
 
-    public  float getCHCredit(){
+    public  double getCHCredit(){
         return CHCredit;
     }
 
-    public  void setCHComprehensiveTest(float CHComprehensiveTest){
+    public  void setCHComprehensiveTest(double CHComprehensiveTest){
         this.CHComprehensiveTest = CHComprehensiveTest;
     }
 
-    public  float getCHComprehensiveTest(){
+    public  double getCHComprehensiveTest(){
         return CHComprehensiveTest;
     }
 
@@ -119,13 +114,66 @@ class Character{
     public  int getCHCurrentWeek(){
         return CHCurrentWeek;
     }
+}
 
-    public  void setCHIsFirstLogin(boolean CHIsFirstLogin){
-        this.CHIsFirstLogin = CHIsFirstLogin;
+class Course{
+    private int Cid;    //课程号
+    private String CName;       //课程名
+    private int CEachClassEnergy;   //每节课消耗多少活力值，int型
+    private double CCredit;       //课程总学分
+    private double CEachClassCredit;  //每节课获得多少学分，double型
+
+    public Course(){
+
     }
 
-    public  boolean getCHIsFirstLogin(){
-        return CHIsFirstLogin;
+    public Course(int id, String Name, int EachClassEnergy,double Credit,double  EachClassCredit){
+        Cid = id;
+        CName = Name;
+        CEachClassEnergy = EachClassEnergy;
+        CCredit = Credit;
+        CEachClassCredit = EachClassCredit;
+    }
+
+    public void setCourse(int id, String Name, int EachClassEnergy,double Credit,double  EachClassCredit){
+        Cid = id;
+        CName = Name;
+        CEachClassEnergy = EachClassEnergy;
+        CCredit = Credit;
+        CEachClassCredit = EachClassCredit;
+    }
+
+    public int getCid(){
+        return Cid;
+    }
+
+    public String getCName(){
+        return CName;
+    }
+
+    public int getCEachClassEnergy(){
+        return CEachClassEnergy;
+    }
+
+    public double getCCredit(){
+        return CCredit;
+    }
+
+    public double getCEachClassCredit(){
+        return CEachClassCredit;
     }
 
 }
+
+
+class CharacterCourse{
+    int CHCid;
+    int CHCWeek;
+    String CName;
+    int CHCSchooltimeWeek;
+    int CHCSchooltimeClass;
+    String CHCClassLocationBuild;
+    String CHCClassLocationClass;
+    boolean CHCIsAttendClass;
+}
+

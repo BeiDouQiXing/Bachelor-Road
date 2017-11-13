@@ -78,7 +78,7 @@ public class Login extends AppCompatActivity {
                     return;
                 } else if(isOk(stuName, stuNum)) {
                     //（待写入）存入数据库
-                    Character character = new Character(1,stuName,stuNum,stuClass,boyOrGirl,100,100,0,0,480,1,false);
+                    Character character = new Character(1,stuName,stuNum,stuClass,boyOrGirl,100,100,0,0,480,1);
                     String results = databaseManage.addCharacter(character);
                    Toast.makeText(Login.this,results,
                            Toast.LENGTH_SHORT).show();
