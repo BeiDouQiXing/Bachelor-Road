@@ -17,6 +17,7 @@ public class Lesson_View extends AppCompatActivity {
 
         Intent intent = getIntent();
         String data = intent.getStringExtra("week");
+
         TextView lesson_week = findViewById(R.id.lesson_week);
         lesson_week.setText(data);
 
@@ -29,6 +30,7 @@ public class Lesson_View extends AppCompatActivity {
         });
 
         final Button first_lesson = findViewById(R.id.first_lesson);
+        first_lesson.setText(intent.getStringExtra("first_lesson"));
         first_lesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +43,7 @@ public class Lesson_View extends AppCompatActivity {
         });
 
         final Button second_lesson = findViewById(R.id.second_lesson);
+        second_lesson.setText(intent.getStringExtra("second_lesson"));
         second_lesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +56,7 @@ public class Lesson_View extends AppCompatActivity {
         });
 
         final Button third_lesson = findViewById(R.id.third_lesson);
+        third_lesson.setText(intent.getStringExtra("third_lesson"));
         third_lesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +69,7 @@ public class Lesson_View extends AppCompatActivity {
         });
 
         final Button forth_lesson = findViewById(R.id.forth_lesson);
+        forth_lesson.setText(intent.getStringExtra("forth_lesson"));
         forth_lesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +82,7 @@ public class Lesson_View extends AppCompatActivity {
         });
 
         final Button fifth_lesson = findViewById(R.id.fifth_lesson);
+        fifth_lesson.setText("晚自习");
         fifth_lesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
