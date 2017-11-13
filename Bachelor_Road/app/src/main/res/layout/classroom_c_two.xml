@@ -18,10 +18,10 @@
         android:id="@+id/left_button_two"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginLeft="17dp"
-        android:layout_marginTop="230dp"
-        android:src="@drawable/left_button"/>
+        android:layout_alignLeft="@+id/c_program2"
+        android:layout_alignStart="@+id/c_program2"
+        android:layout_alignTop="@+id/right_button_two"
+        android:src="@drawable/left_button" />
 
     <ImageView
         android:id="@+id/right_button_two"
