@@ -1,4 +1,4 @@
-package com.xueshizhilu.xueshizhilusql;
+package com.example.kobe.bachelor_road;
 
 /**
  * Created by Administrator on 2017/11/6.
@@ -8,25 +8,26 @@ public class ClassEncapsulat {
 
 }
 
+/***************** 人物类***************/
 class Character{
-    private int CHid;
-    private String CHName;
-    private String CHNo;
-    private int CHClass;
-    private int CHImage;
-    private int CHCurrentEnergy;
-    private int CHMaximumEnergy;
-    private double CHCredit;
-    private double CHComprehensiveTest;
-    private int CHCurrentTime;      //从周一算起当前时间，以分钟计？
-    private int CHCurrentWeek;       //当前第几周
+    public int    CHid;
+    public String CHName;		//姓名
+    public String CHNo;			//学号
+    public int    CHClass;		//班级
+    public int    CHImage;		//头像
+    public int    CHCurrentEnergy;		//活力值，int型
+    public int 	  CHMaximumEnergy;		//活力值上限，int型
+    public double CHCredit;				//学分，double型
+    public double CHComprehensiveTest;	//综测，double型
+    public int 	  CHCurrentTime;      	//从周一算起当前时间，以分钟计，int型
+    public int 	  CHCurrentWeek;       	//当前第几周，int型
 
     public Character(){
 
     }
 
-    public Character(int CHid,String CHName,String CHNo,int CHClass,int CHImage,int CHCurrentEnergy,int CHMaximumEnergy,
-                     double CHCredit,double CHComprehensiveTest,int CHCurrentTime,int CHCurrentWeek){
+    public Character(int CHid, String CHName, String CHNo, int CHClass, int CHImage, int CHCurrentEnergy,
+                     int CHMaximumEnergy,double CHCredit,double CHComprehensiveTest,int CHCurrentTime,int CHCurrentWeek ){
         this.CHid = CHid;
         this.CHName = CHName;
         this.CHNo  = CHNo;
@@ -38,130 +39,67 @@ class Character{
         this.CHComprehensiveTest = CHComprehensiveTest;
         this.CHCurrentTime = CHCurrentTime;
         this.CHCurrentWeek = CHCurrentWeek;
-    }
-
-    public void setCharacter(int CHid,String CHName,String CHNo,int CHClass,int CHImage,int CHCurrentEnergy,int CHMaximumEnergy,
-                             double CHCredit,double CHComprehensiveTest,int CHCurrentTime,int CHCurrentWeek){
-        this.CHid = CHid;
-        this.CHName = CHName;
-        this.CHNo  = CHNo;
-        this.CHClass = CHClass;
-        this.CHImage = CHImage;
-        this.CHCurrentEnergy = CHCurrentEnergy;
-        this.CHMaximumEnergy = CHMaximumEnergy;
-        this.CHCredit = CHCredit;
-        this.CHComprehensiveTest = CHComprehensiveTest;
-        this.CHCurrentTime = CHCurrentTime;
-        this.CHCurrentWeek = CHCurrentWeek;
-    }
-
-    public int getCHid(){
-        return CHid;
-    }
-
-    public  String getCHName(){
-        return CHName;
-    }
-
-    public  String getCHNo(){
-        return CHNo;
-    }
-
-    public  int getCHClass(){
-        return CHClass;
-    }
-
-    public  int getCHImage(){
-        return CHImage;
-    }
-
-    public  int getCHCurrentEnergy(){
-        return CHCurrentEnergy;
-    }
-
-    public  int getCHMaximumEnergy(){
-        return CHMaximumEnergy;
-    }
-
-    public  void setCHCredit(double CHCredit){
-        this.CHCredit = CHCredit;
-    }
-
-    public  double getCHCredit(){
-        return CHCredit;
-    }
-
-    public  void setCHComprehensiveTest(double CHComprehensiveTest){
-        this.CHComprehensiveTest = CHComprehensiveTest;
-    }
-
-    public  double getCHComprehensiveTest(){
-        return CHComprehensiveTest;
-    }
-
-    public  void setCHCurrentTime(int CHCurrentTime){
-        this.CHCurrentTime = CHCurrentTime;
-    }
-
-    public  int getCHCurrentTime(){
-        return CHCurrentTime;
-    }
-
-    public  void setCHCurrentWeek(int CHCurrentWeek){
-        this.CHCurrentWeek = CHCurrentWeek;
-    }
-
-    public  int getCHCurrentWeek(){
-        return CHCurrentWeek;
     }
 }
 
+/************************ 课程类**********************/
 class Course{
-    private int Cid;    //课程号
-    private String CName;       //课程名
-    private int CEachClassEnergy;   //每节课消耗多少活力值，int型
-    private double CCredit;       //课程总学分
-    private double CEachClassCredit;  //每节课获得多少学分，double型
+    public int Cid;    //课程号
+    public String CName;       //课程名
+    public int CEachClassEnergy;   //每节课消耗多少活力值，int型
+    public double CCredit;       //课程总学分
+    public double CEachClassCredit;  //每节课获得多少学分，double型
 
     public Course(){
 
     }
+}
 
-    public Course(int id, String Name, int EachClassEnergy,double Credit,double  EachClassCredit){
-        Cid = id;
-        CName = Name;
-        CEachClassEnergy = EachClassEnergy;
-        CCredit = Credit;
-        CEachClassCredit = EachClassCredit;
+/******************** 功课表类*****************/
+class CharacterCourse{
+    public int CHCid;	//本节课id
+    public int CHCWeek;		//本节课第几周
+    public int Cid;			//本节课课程号
+    public String CName;	//本节课课程名
+    public int CHCSchooltimeWeek;	//周几上课，int型
+    public int CHCSchooltimeClass;	//当天第几节的课，int型
+    public String CHCClassLocation;	//上课地点
+    public boolean CHCIsAttendClass; //是否有参加本节课
+
+    public  CharacterCourse(){
+
     }
+}
 
-    public void setCourse(int id, String Name, int EachClassEnergy,double Credit,double  EachClassCredit){
-        Cid = id;
-        CName = Name;
-        CEachClassEnergy = EachClassEnergy;
-        CCredit = Credit;
-        CEachClassCredit = EachClassCredit;
+/********************* 部门类********************/
+class Department{
+    public int Did;     //部门id
+    public String DName;    //部门名称
+    public String DFunctions;   //部门职能
+    public boolean DIsJoinDepartment;   //是否加入部门
+
+    public Department(){
+
     }
+}
 
-    public int getCid(){
-        return Cid;
-    }
 
-    public String getCName(){
-        return CName;
-    }
+/****************** 部门活动类****************/
+class DepartmentActivities{
+    public int DAid;    //部门活动id
+    public int DAWeek;      //该活动第几周
+    public int Did;         // 活动发起部门id
+    public String DName;   // 活动发起部门名称
+    public String DAName;   //活动名称
+    public int DABeginTime; // 活动开始时间
+    public int DAEndTime;  //活动结束时间
+    public String DALocation; //部门活动地点
+    public double DAComprehensiveTest;  //参加本次活动可获得综测
+    public int DAEnergy;  //参加活动消耗的活力
+    public boolean DAIsJoinActivity;  //是否有参加本次活动
 
-    public int getCEachClassEnergy(){
-        return CEachClassEnergy;
-    }
+    public DepartmentActivities(){
 
-    public double getCCredit(){
-        return CCredit;
-    }
-
-    public double getCEachClassCredit(){
-        return CEachClassCredit;
     }
 
 }
-
