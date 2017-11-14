@@ -1,4 +1,4 @@
-package com.example.kobe.bachelor_road;
+package com.xueshizhilu.xueshizhilusql;
 
 /**
  * Created by Administrator on 2017/11/7.

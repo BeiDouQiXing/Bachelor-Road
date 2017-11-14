@@ -9,7 +9,7 @@
         android:id="@+id/main_big_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
+        android:layout_marginLeft="18dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="4dp"
         android:src="@drawable/bighead"/>
@@ -20,7 +20,7 @@
         android:layout_height="50sp"
         android:layout_marginStart="115dp"
         android:layout_marginTop="198dp"
-        android:layout_marginLeft="97dp"
+        android:layout_marginLeft="115dp"
         android:background="#00000000"/>
 
     <Button
@@ -29,7 +29,7 @@
         android:layout_height="50sp"
         android:layout_marginStart="525dp"
         android:layout_marginTop="170dp"
-        android:layout_marginLeft="97dp"
+        android:layout_marginLeft="525dp"
         android:background="#00000000"/>
 
     <Button
@@ -38,7 +38,7 @@
         android:layout_height="50sp"
         android:layout_marginStart="475dp"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="97dp"
+        android:layout_marginLeft="475dp"
         android:background="#00000000" />
 
     <TextView
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="151dp"
         android:layout_marginTop="9dp"
-        android:layout_marginLeft="97dp"
+        android:layout_marginLeft="151dp"
         android:text="陈涵"
         android:textColor="#f4f271"
         android:textSize="11sp"
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
         android:layout_marginTop="27dp"
-        android:layout_marginLeft="97dp"
+        android:layout_marginLeft="160dp"
         android:text="100/100"
         android:textStyle="bold"
         android:textColor="#f4f271"
@@ -69,7 +69,7 @@
         android:id="@+id/main_study_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
+        android:layout_marginLeft="160dp"
         android:layout_marginStart="160dp"
         android:layout_marginTop="47dp"
         android:text="100/100"
@@ -81,7 +81,7 @@
         android:id="@+id/main_activity_point"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
+        android:layout_marginLeft="150dp"
         android:layout_marginStart="150dp"
         android:layout_marginTop="67dp"
         android:text="50"
@@ -93,7 +93,7 @@
         android:id="@+id/main_which_week"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
+        android:layout_marginLeft="620dp"
         android:layout_marginStart="620dp"
         android:layout_marginTop="23dp"
         android:text="第一周"
@@ -104,7 +104,7 @@
         android:id="@+id/main_which_noon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
+        android:layout_marginLeft="627dp"
         android:layout_marginStart="627dp"
         android:layout_marginTop="50dp"
         android:text="上午"
@@ -115,7 +115,7 @@
         android:id="@+id/main_current_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
+        android:layout_marginLeft="625dp"
         android:layout_marginStart="625dp"
         android:layout_marginTop="75dp"
         android:text="8:20"
