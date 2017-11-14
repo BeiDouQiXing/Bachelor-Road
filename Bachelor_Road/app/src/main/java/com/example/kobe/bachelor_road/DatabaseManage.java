@@ -1,4 +1,4 @@
-package com.example.kobe.bachelor_road;
+package com.xueshizhilu.xueshizhilusql;
 
 /**
  * Created by Administrator on 2017/11/7.
@@ -311,21 +311,43 @@ public class DatabaseManage {
     public CharacterCourse[] queryCharacterCourse(int week){
         SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
         Cursor cursor = sQLiteDatabase.rawQuery("select * from CharacterCourse,Course where CharacterCourse.Cid = Course.Cid and CHCWeek=?",new String[]{String.valueOf(week)});
-        CharacterCourse[] characterCourse = new CharacterCourse[cursor.getCount()];
-        for (int i=0; cursor.moveToNext() == true; i++ ){
+        CharacterCourse[] characterCourse = new CharacterCourse[25];
+        int CHCSchooltimeWeek,CHCSchooltimeClass,i;
+        for (i=0;  cursor.moveToNext() == true; i++){
+            CHCSchooltimeWeek = cursor.getInt(cursor.getColumnIndex("CHCSchooltimeWeek"));
+            CHCSchooltimeClass = cursor.getInt(cursor.getColumnIndex("CHCSchooltimeClass"));
+            while( !(CHCSchooltimeWeek == (i/5+1) && CHCSchooltimeClass == (i%5+1)) ){
+                characterCourse[i] = new CharacterCourse();
+                characterCourse[i].CHCid = 0;
+                characterCourse[i].CHCWeek = 0;
+                characterCourse[i].Cid = 0;
+                characterCourse[i].CName = "";
+                characterCourse[i].CHCSchooltimeClass = 0;
+                characterCourse[i].CHCSchooltimeWeek = 0;
+                characterCourse[i].CHCClassLocation = "";
+                characterCourse[i].CHCIsAttendClass = false;
+                i++;
+                if(i == 25){
+                    sQLiteDatabase.close();
+                    return characterCourse;
+                }
+            }
             characterCourse[i] = new CharacterCourse();
             characterCourse[i].CHCid = cursor.getInt(cursor.getColumnIndex("CHCid"));
             characterCourse[i].CHCWeek = cursor.getInt(cursor.getColumnIndex("CHCWeek"));
             characterCourse[i].Cid = cursor.getInt(cursor.getColumnIndex("Cid"));
             characterCourse[i].CName = cursor.getString(cursor.getColumnIndex("CName"));
-            characterCourse[i].CHCSchooltimeClass = cursor.getInt(cursor.getColumnIndex("CHCSchooltimeClass"));
-            characterCourse[i].CHCSchooltimeWeek = cursor.getInt(cursor.getColumnIndex("CHCSchooltimeWeek"));
+            characterCourse[i].CHCSchooltimeClass = CHCSchooltimeClass;
+            characterCourse[i].CHCSchooltimeWeek = CHCSchooltimeWeek;
             characterCourse[i].CHCClassLocation = cursor.getString(cursor.getColumnIndex("CHCClassLocation"));
             String tempCHCIsAttendClass = cursor.getString(cursor.getColumnIndex("CHCIsAttendClass"));
             if(tempCHCIsAttendClass.equalsIgnoreCase("false"))
                 characterCourse[i].CHCIsAttendClass = false;
             else if(tempCHCIsAttendClass.equalsIgnoreCase("true"))
                 characterCourse[i].CHCIsAttendClass = true;
+        }
+        while( i < 25){
+            characterCourse[i++] = new CharacterCourse();
         }
         sQLiteDatabase.close();
         return characterCourse;
