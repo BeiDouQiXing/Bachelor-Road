@@ -353,6 +353,7 @@ public class DatabaseManage {
         return characterCourse;
     }
 
+
     //查询指定课程号的课程上课时间
     public CharacterCourse queryCHCidCharacterCourse(int CHCid){
         SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();

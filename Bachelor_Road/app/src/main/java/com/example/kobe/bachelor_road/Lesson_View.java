@@ -34,7 +34,7 @@ public class Lesson_View extends AppCompatActivity {
         first_lesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!first_lesson.getText().equals("1~2:")) {
+                if (!first_lesson.getText().equals("")) {
                     Intent intent = new Intent(Lesson_View.this, Classroom.class);
                     startActivity(intent);
                     finish();
@@ -47,7 +47,7 @@ public class Lesson_View extends AppCompatActivity {
         second_lesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!second_lesson.getText().equals("3~4:")) {
+                if (!second_lesson.getText().equals("")) {
                     Intent intent = new Intent(Lesson_View.this, Classroom.class);
                     startActivity(intent);
                     finish();
@@ -60,7 +60,7 @@ public class Lesson_View extends AppCompatActivity {
         third_lesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!third_lesson.getText().equals("5~6:")) {
+                if (!third_lesson.getText().equals("")) {
                     Intent intent = new Intent(Lesson_View.this, Classroom.class);
                     startActivity(intent);
                     finish();
@@ -73,7 +73,7 @@ public class Lesson_View extends AppCompatActivity {
         forth_lesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!forth_lesson.getText().equals("7~8:")) {
+                if (!forth_lesson.getText().equals("")) {
                     Intent intent = new Intent(Lesson_View.this, Classroom.class);
                     startActivity(intent);
                     finish();
@@ -82,11 +82,11 @@ public class Lesson_View extends AppCompatActivity {
         });
 
         final Button fifth_lesson = findViewById(R.id.fifth_lesson);
-        fifth_lesson.setText("晚自习");
+        fifth_lesson.setText(intent.getStringExtra("fifth_lesson"));
         fifth_lesson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!fifth_lesson.getText().equals("9~10:")) {
+                if (!fifth_lesson.getText().equals("")) {
                     Intent intent = new Intent(Lesson_View.this, Classroom.class);
                     startActivity(intent);
                     finish();

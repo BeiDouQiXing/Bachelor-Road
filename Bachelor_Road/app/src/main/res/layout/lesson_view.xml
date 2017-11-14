@@ -26,8 +26,9 @@
 
     <Button
         android:id="@+id/first_lesson"
-        android:layout_width="200sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:text="1~2 高等数学"
         android:textColor="#0de1ec"
         android:textSize="25sp"
@@ -38,8 +39,9 @@
 
     <Button
         android:id="@+id/second_lesson"
-        android:layout_width="200sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:text="3~4 高等数学"
         android:textColor="#0de1ec"
         android:textSize="25sp"
@@ -50,8 +52,9 @@
 
     <Button
         android:id="@+id/third_lesson"
-        android:layout_width="200sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:text="5~6 高等数学"
         android:textColor="#0de1ec"
         android:textSize="25sp"
@@ -62,11 +65,12 @@
 
     <Button
         android:id="@+id/forth_lesson"
-        android:layout_width="200sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="7~8 高等数学"
         android:textColor="#0de1ec"
         android:textSize="25sp"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="251dp"
         android:layout_marginTop="240dp"
         android:layout_marginLeft="251dp"
@@ -74,8 +78,9 @@
 
     <Button
         android:id="@+id/fifth_lesson"
-        android:layout_width="200sp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:text="9~11 高等数学"
         android:textColor="#0de1ec"
         android:textSize="25sp"
