@@ -19,7 +19,7 @@ public class MyDepartment extends AppCompatActivity  {
         setContentView(R.layout.my_department);
         TextView textView = findViewById(R.id.my_department_name);
         final DatabaseManage databaseManage =new DatabaseManage(this);
-            if(isAddmit(databaseManage)!=null )
+            if(isAddmit(databaseManage)==null )
                 textView.setText("您还没有选择部门");
             else
                 textView.setText(isAddmit(databaseManage).toString());

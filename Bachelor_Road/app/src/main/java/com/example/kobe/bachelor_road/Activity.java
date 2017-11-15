@@ -3,6 +3,7 @@ package com.example.kobe.bachelor_road;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,12 +21,12 @@ public class Activity extends AppCompatActivity {
 
             DatabaseManage databaseManage = new DatabaseManage(this);
             /*将一周的任务放到任务框中*/
-            TextView[] textView = new TextView[5];
-            textView[0] = (TextView)findViewById(R.id.activity_one);
-            textView[1] = (TextView)findViewById(R.id.activity_two);
-            textView[2] = (TextView)findViewById(R.id.activity_three);
-            textView[3] = (TextView)findViewById(R.id.activity_four);
-            textView[4] = (TextView)findViewById(R.id.activity_five);
+            Button[] textView = new Button[5];
+            textView[0] = (Button)findViewById(R.id.activity_one);
+            textView[1] = (Button)findViewById(R.id.activity_two);
+            textView[2] = (Button)findViewById(R.id.activity_three);
+            textView[3] = (Button)findViewById(R.id.activity_four);
+            textView[4] = (Button)findViewById(R.id.activity_five);
 
             /*从数据库中获取部门活动内容*/
             DepartmentActivities [] departmentActivities = new DepartmentActivities[500];
@@ -33,11 +34,12 @@ public class Activity extends AppCompatActivity {
                 departmentActivities[i] = new DepartmentActivities();
             }
             departmentActivities = databaseManage.queryJoinedDepartmentActivities();
-            textView[0].setText(departmentActivities[0].DAName);
-            textView[1].setText(departmentActivities[1].DAName);
-            textView[2].setText(departmentActivities[2].DAName);
-            textView[3].setText(departmentActivities[3].DAName);
-            textView[4].setText(departmentActivities[4].DAName);
+
+            textView[0].setText(TimeTranslate.timeIntToString(departmentActivities[0].DABeginTime) + "~"+ TimeTranslate.timeIntToString(departmentActivities[0].DAEndTime) + " " + departmentActivities[0].DAName);
+            textView[1].setText(TimeTranslate.timeIntToString(departmentActivities[1].DABeginTime) + "~"+ TimeTranslate.timeIntToString(departmentActivities[1].DAEndTime) + departmentActivities[1].DAName);
+            textView[2].setText(TimeTranslate.timeIntToString(departmentActivities[2].DABeginTime) + "~"+ TimeTranslate.timeIntToString(departmentActivities[2].DAEndTime) + departmentActivities[2].DAName);
+            textView[3].setText(TimeTranslate.timeIntToString(departmentActivities[3].DABeginTime) + "~"+ TimeTranslate.timeIntToString(departmentActivities[3].DAEndTime) + departmentActivities[3].DAName);
+            textView[4].setText(TimeTranslate.timeIntToString(departmentActivities[4].DABeginTime) + "~"+ TimeTranslate.timeIntToString(departmentActivities[4].DAEndTime) + departmentActivities[4].DAName);
 
 
 

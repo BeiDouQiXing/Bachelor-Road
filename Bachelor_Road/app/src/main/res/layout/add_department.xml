@@ -41,14 +41,10 @@
         android:textColor="#f7f5f5"
         android:textSize="30sp"
         android:layout_marginStart="300dp"
-<<<<<<< HEAD
-        android:layout_marginTop="99dp"
-        android:layout_marginLeft="300dp" />
-=======
+
         android:layout_marginTop="89dp"
         android:layout_marginLeft="300dp"
         android:background="#00000000"/>
->>>>>>> c8a7307d5a62a16232561dd291f020dd4b49e003
 
     <Button
         android:id="@+id/add_department_two"
@@ -59,15 +55,10 @@
         android:textColor="#f7f5f5"
         android:textSize="30sp"
         android:layout_marginStart="300dp"
-<<<<<<< HEAD
-        android:layout_marginTop="149dp"
-        android:layout_marginLeft="300dp" />
-=======
+
         android:layout_marginTop="134dp"
         android:layout_marginLeft="300dp"
         android:background="#00000000"/>
->>>>>>> c8a7307d5a62a16232561dd291f020dd4b49e003
-
     <Button
         android:id="@+id/add_department_three"
         android:layout_width="wrap_content"
@@ -77,14 +68,9 @@
         android:textColor="#f7f5f5"
         android:textSize="30sp"
         android:layout_marginStart="300dp"
-<<<<<<< HEAD
-        android:layout_marginTop="199dp"
-        android:layout_marginLeft="300dp" />
-=======
         android:layout_marginTop="179dp"
         android:layout_marginLeft="300dp"
         android:background="#00000000"/>
->>>>>>> c8a7307d5a62a16232561dd291f020dd4b49e003
 
     <Button
         android:id="@+id/add_department_four"
@@ -95,14 +81,9 @@
         android:textColor="#f7f5f5"
         android:textSize="30sp"
         android:layout_marginStart="300dp"
-<<<<<<< HEAD
-        android:layout_marginTop="249dp"
-        android:layout_marginLeft="300dp" />
-=======
         android:layout_marginTop="224dp"
         android:layout_marginLeft="300dp"
         android:background="#00000000"/>
->>>>>>> c8a7307d5a62a16232561dd291f020dd4b49e003
 
     <Button
         android:id="@+id/add_department_five"
@@ -113,15 +94,9 @@
         android:textColor="#f7f5f5"
         android:textSize="30sp"
         android:layout_marginStart="300dp"
-<<<<<<< HEAD
-        android:layout_marginTop="299dp"
-        android:layout_marginLeft="300dp" />
-=======
         android:layout_marginTop="269dp"
         android:layout_marginLeft="300dp"
         android:background="#00000000"/>
 
-
->>>>>>> c8a7307d5a62a16232561dd291f020dd4b49e003
 
 </RelativeLayout>
