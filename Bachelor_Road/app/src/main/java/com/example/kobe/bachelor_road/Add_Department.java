@@ -35,7 +35,11 @@ public class Add_Department extends AppCompatActivity {
               textView[3] = (TextView)findViewById(R.id.add_department_four);
               textView[4] = (TextView)findViewById(R.id.add_department_five);
 
-                DepartmentActivities [] departmentActivities = new DepartmentActivities[500]//databaseManage.queryJoinedDepartmentActivities();
+                DepartmentActivities [] departmentActivities = new DepartmentActivities[500];
+                for(int i = 0;i<500;i++) {
+                    departmentActivities[i] = new DepartmentActivities();
+                }
+                departmentActivities = databaseManage.queryJoinedDepartmentActivities();
 
 
         Button buttonToActivity =(Button)findViewById(R.id.add_department_activity);
@@ -73,7 +77,6 @@ public class Add_Department extends AppCompatActivity {
 
 
     }
-    public
 
 
 
