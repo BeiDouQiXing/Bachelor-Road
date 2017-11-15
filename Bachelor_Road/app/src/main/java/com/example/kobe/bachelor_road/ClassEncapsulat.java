@@ -1,4 +1,4 @@
-package com.example.kobe.bachelor_road;
+package com.xueshizhilu.xueshizhilusql;
 
 /**
  * Created by Administrator on 2017/11/6.
@@ -102,4 +102,17 @@ class DepartmentActivities{
 
     }
 
+}
+
+
+/****************** 问题类****************/
+class Questions{
+    public int Qid;             //问题id
+    public int QNo;             //问题编号
+    public int Cid;             //问题是哪个课程的
+    public boolean QIsAnswer;     //问题是否回答过了
+
+    public Questions(){
+
+    }
 }
