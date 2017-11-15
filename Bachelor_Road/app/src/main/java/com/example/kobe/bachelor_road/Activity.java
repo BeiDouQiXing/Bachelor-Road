@@ -74,8 +74,6 @@ public class Activity extends AppCompatActivity {
                                               }
             );
 
-
-
     }
     public int activitySize(DepartmentActivities [] departmentActivities) {
         int len = 0;
