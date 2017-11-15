@@ -24,6 +24,8 @@ public class Login extends AppCompatActivity {
 
         if(databaseManage.queryCHIsFirstLogin().equals("false")) {
             Intent intent = new Intent(Login.this, Map_Main.class);
+            Toast.makeText(Login.this,"欢迎回来！",
+                    Toast.LENGTH_SHORT).show();
             startActivity(intent);
             finish();
         }
@@ -54,14 +56,20 @@ public class Login extends AppCompatActivity {
 
         //获取登录界面的学生注册信息,点击确定按钮
         Button buttonConfirm = (Button)findViewById(R.id.queren);
-        final EditText editTextStuName = (EditText)findViewById(R.id.name);
-        final EditText editTextStuNum = (EditText)findViewById(R.id.student_number);
-        final EditText editTextStuClass = (EditText)findViewById(R.id.student_number);
-
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
 
             public void onClick(View v) {
+                EditText editTextStuName = (EditText)findViewById(R.id.name);
+                EditText editTextStuNum = (EditText)findViewById(R.id.student_number);
+                EditText editTextStuClass = (EditText)findViewById(R.id.student_number);
+
+                if(editTextStuName.length() == 0||editTextStuNum.length() == 0){
+
+                    Toast.makeText(Login.this,"请输入正确的姓名或学号",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String stuName = editTextStuName.getText().toString();
                 String stuNum = editTextStuNum.getText().toString();
                 int stuClass = Integer.valueOf(editTextStuClass.getText().toString());
@@ -80,15 +88,16 @@ public class Login extends AppCompatActivity {
                     //（待写入）存入数据库
                     Character character = new Character(1,stuName,stuNum,stuClass,boyOrGirl,100,100,0,0,480,1);
                     long results = databaseManage.insertCharacter(character);
-                   Toast.makeText(Login.this,"欢迎回来！",
-                           Toast.LENGTH_SHORT).show();
+
 
                     Intent intent = new Intent(Login.this, Map_Main.class);
                     startActivity(intent);
                     finish();
                     Toast.makeText(Login.this,"注册成功",
                             Toast.LENGTH_SHORT).show();
-
+                   Intent intent2 = new Intent(Login.this, Map_Main.class);
+                   startActivity(intent2);
+                   finish();
 
                 }
             }
