@@ -45,6 +45,7 @@ public class Classroom_Program_C_One extends AppCompatActivity {
                 dialog.show();
                 break;
             case R.id.return_blackboard:
+
                 dialog.dismiss();
                 break;
             case R.id.submit:
