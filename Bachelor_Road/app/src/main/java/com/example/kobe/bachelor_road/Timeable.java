@@ -1,10 +1,12 @@
 package com.example.kobe.bachelor_road;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class Timeable extends AppCompatActivity {
@@ -19,10 +21,25 @@ public class Timeable extends AppCompatActivity {
         databaseManage = new DatabaseManage(this);
 
         /*新生周数据尚未录入，修改当前周为第二周进行测试*/
-        //int i = databaseManage.updateCHCurrentWeek(2);
+        final int currentWeek = databaseManage.queryCHCurrentWeek();
+        if(currentWeek == 1) {
+            android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Timeable.this);
+            dialog.setTitle("提示");
+            dialog.setMessage("如果还未选择部门请慎重考虑");
+            dialog.setCancelable(false);
+            dialog.setNegativeButton("再去看看咯", new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog,int which) {}});
+
+               dialog.setPositiveButton("我打算从第二周开始！", new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog,int which){
+                                Toast.makeText(Timeable.this,"新生周已跳过~",Toast.LENGTH_SHORT).show();
+                                int i = databaseManage.updateCHCurrentWeek(2);
+                            }
+                        });
+                dialog.show();
+        }
 
         /*获取当前周数及相应课程*/
-        final int currentWeek = databaseManage.queryCHCurrentWeek();
         characterCourses = databaseManage.queryCharacterCourse(currentWeek);
 
         /*退出按钮点击事件*/

@@ -42,13 +42,21 @@ public class Map_Main extends AppCompatActivity {
         main_which_noon.setText(TimeTranslate.morningOrAfter(currentTime));
         TextView main_current_time = findViewById(R.id.main_current_time);
         main_current_time.setText(TimeTranslate.timeIntToString(currentTime));
+
         /*主界面部门按钮点击事件*/
         Button button_departmentButton = findViewById(R.id.main_department_button); //进入素拓，完成部门工作任务
         button_departmentButton.setOnClickListener(new View.OnClickListener() {
                                              @Override
                                              public void onClick(View v) {
-                                                 Intent intent = new Intent(Map_Main.this, Activity.class);
-                                                 startActivity(intent);
+                                                 if( databaseManage.queryCHCurrentWeek() == 1) {
+                                                     Intent intent = new Intent(Map_Main.this, Add_Department.class);
+                                                     startActivity(intent);
+                                                 }
+                                                 else
+                                                 {
+                                                     Intent intent = new Intent(Map_Main.this, Activity.class);
+                                                     startActivity(intent);
+                                                 }
                                              }
                                          }
         );

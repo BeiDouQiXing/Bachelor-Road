@@ -35,7 +35,7 @@ public class Lesson_View extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!first_lesson.getText().equals("")) {
-                    Intent intent = new Intent(Lesson_View.this, Classroom.class);
+                    Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
                     startActivity(intent);
                     finish();
                 }
@@ -48,7 +48,7 @@ public class Lesson_View extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!second_lesson.getText().equals("")) {
-                    Intent intent = new Intent(Lesson_View.this, Classroom.class);
+                    Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
                     startActivity(intent);
                     finish();
                 }
@@ -61,7 +61,7 @@ public class Lesson_View extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!third_lesson.getText().equals("")) {
-                    Intent intent = new Intent(Lesson_View.this, Classroom.class);
+                    Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
                     startActivity(intent);
                     finish();
                 }
@@ -74,7 +74,7 @@ public class Lesson_View extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!forth_lesson.getText().equals("")) {
-                    Intent intent = new Intent(Lesson_View.this, Classroom.class);
+                    Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
                     startActivity(intent);
                     finish();
                 }
@@ -87,7 +87,7 @@ public class Lesson_View extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!fifth_lesson.getText().equals("")) {
-                    Intent intent = new Intent(Lesson_View.this, Classroom.class);
+                    Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
                     startActivity(intent);
                     finish();
                 }

@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class Classroom extends AppCompatActivity {
+public class Classroom_Program_C_One extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class Classroom extends AppCompatActivity {
                 dialog = new Dialog(this);
                 View view_judge= LayoutInflater.from(this).inflate(R.layout.dialog_judge,null);
                 view_judge.findViewById(R.id.yes).setOnClickListener(this);
-                view_judge.findViewById(R.id.no).setOnClickListener(this);
+                view_judge.findViewById(R.id.no).·setOnClickListener(this);
                 dialog.setContentView(view_judge);
                 WindowManager.LayoutParams params_judge = dialog.getWindow().getAttributes();
                 params_judge.width = 1500;
@@ -63,10 +63,10 @@ public class Classroom extends AppCompatActivity {
                 //show之前设置返回键无效，触摸屏无效
                 dialog.setCancelable(false);
                 //显示对话框
-                dialog.show();
+                dialog.show(););
                 break;
             case R.id.yes:
-                dialog.dismiss();
+                dialog.dismiss(
                 break;
             case R.id.no:
                 dialog.dismiss();
