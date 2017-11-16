@@ -1,35 +1,79 @@
 package com.example.kobe.bachelor_road;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Timeable extends AppCompatActivity {
 
+    private int eneryForReturn;
+    private double creditForReturn;
+    private int timeForReturn;
+    private int currentWeek;
     private DatabaseManage databaseManage;
     private CharacterCourse[] characterCourses;
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra("enery", eneryForReturn);
+        intent.putExtra("credit", creditForReturn);
+        intent.putExtra("time", timeForReturn);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timeable);
 
+        /*更新当前周数*/
         databaseManage = new DatabaseManage(this);
+        currentWeek = databaseManage.queryCHCurrentWeek();
 
-        /*新生周数据尚未录入，修改当前周为第二周进行测试*/
-        //int i = databaseManage.updateCHCurrentWeek(2);
+        eneryForReturn = databaseManage.queryCHCurrentEnergy();
+        creditForReturn = databaseManage.queryCHCredit();
+        timeForReturn = databaseManage.queryCHCurrentTime();
 
-        /*获取当前周数及相应课程*/
-        final int currentWeek = databaseManage.queryCHCurrentWeek();
-        characterCourses = databaseManage.queryCharacterCourse(currentWeek);
+        if ( currentWeek == 1) {
+            android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Timeable.this);
+            dialog.setTitle("提示");
+            dialog.setMessage("只能在第一周选择部门，还未选择部门请慎重考虑");
+            dialog.setCancelable(false);
+            dialog.setNegativeButton("再去看看咯", new DialogInterface.OnClickListener(){
+                        public void onClick(DialogInterface dialog,int which) {
+                            Intent intent = new Intent(Timeable.this, Map_Main.class);
+                            startActivity(intent);
+                            finish();
+                        }
+            });
+
+               dialog.setPositiveButton("我打算从第二周开始！", new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog,int which){
+                                Toast.makeText(Timeable.this,"新生周已跳过~",Toast.LENGTH_SHORT).show();
+                                int i = databaseManage.updateCHCurrentWeek(2);
+                            }
+                        });
+                dialog.show();
+        }
 
         /*退出按钮点击事件*/
         Button timetable_run_out =findViewById(R.id.timetable_run_out);
         timetable_run_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("enery", eneryForReturn);
+                intent.putExtra("credit", creditForReturn);
+                intent.putExtra("time", timeForReturn);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });
@@ -42,6 +86,10 @@ public class Timeable extends AppCompatActivity {
                 String data = "Mon";
                 Intent intent = new Intent(Timeable.this, Lesson_View.class);
                 intent.putExtra("week", data);
+
+                /*更新当前周数及相应课程*/
+                currentWeek = databaseManage.queryCHCurrentWeek();
+                characterCourses = databaseManage.queryCharacterCourse(currentWeek);
 
                 /*传给Lesson_View当日课程信息*/
                 String first_lesson = characterCourses[0].CName;
@@ -79,7 +127,7 @@ public class Timeable extends AppCompatActivity {
                     intent.putExtra("fifth_lesson", fifth_lesson);
                 }
 
-                startActivity(intent);
+                startActivityForResult(intent, 2);
             }
         });
 
@@ -91,6 +139,10 @@ public class Timeable extends AppCompatActivity {
                 String data = "Tues";
                 Intent intent = new Intent(Timeable.this, Lesson_View.class);
                 intent.putExtra("week", data);
+
+                /*更新当前周数及相应课程*/
+                currentWeek = databaseManage.queryCHCurrentWeek();
+                characterCourses = databaseManage.queryCharacterCourse(currentWeek);
 
                 /*传给Lesson_View当日课程信息*/
                 String first_lesson = characterCourses[5].CName;
@@ -128,7 +180,7 @@ public class Timeable extends AppCompatActivity {
                     intent.putExtra("fifth_lesson", fifth_lesson);
                 }
 
-                startActivity(intent);
+                startActivityForResult(intent, 2);
             }
         });
 
@@ -140,6 +192,10 @@ public class Timeable extends AppCompatActivity {
                 String data = "Wed";
                 Intent intent = new Intent(Timeable.this, Lesson_View.class);
                 intent.putExtra("week", data);
+
+                /*更新当前周数及相应课程*/
+                currentWeek = databaseManage.queryCHCurrentWeek();
+                characterCourses = databaseManage.queryCharacterCourse(currentWeek);
 
                 /*传给Lesson_View当日课程信息*/
                 String first_lesson = characterCourses[10].CName;
@@ -177,7 +233,7 @@ public class Timeable extends AppCompatActivity {
                     intent.putExtra("fifth_lesson", fifth_lesson);
                 }
 
-                startActivity(intent);
+                startActivityForResult(intent, 2);
             }
         });
 
@@ -189,6 +245,10 @@ public class Timeable extends AppCompatActivity {
                 String data = "Thu";
                 Intent intent = new Intent(Timeable.this, Lesson_View.class);
                 intent.putExtra("week", data);
+
+                /*更新当前周数及相应课程*/
+                currentWeek = databaseManage.queryCHCurrentWeek();
+                characterCourses = databaseManage.queryCharacterCourse(currentWeek);
 
                 /*传给Lesson_View当日课程信息*/
                 String first_lesson = characterCourses[15].CName;
@@ -226,7 +286,7 @@ public class Timeable extends AppCompatActivity {
                     intent.putExtra("fifth_lesson", fifth_lesson);
                 }
 
-                startActivity(intent);
+                startActivityForResult(intent, 2);
             }
         });
 
@@ -238,6 +298,10 @@ public class Timeable extends AppCompatActivity {
                 String data = "Fri";
                 Intent intent = new Intent(Timeable.this, Lesson_View.class);
                 intent.putExtra("week", data);
+
+                /*更新当前周数及相应课程*/
+                currentWeek = databaseManage.queryCHCurrentWeek();
+                characterCourses = databaseManage.queryCharacterCourse(currentWeek);
 
                 /*传给Lesson_View当日课程信息*/
                 String first_lesson = characterCourses[20].CName;
@@ -275,8 +339,23 @@ public class Timeable extends AppCompatActivity {
                     intent.putExtra("fifth_lesson", fifth_lesson);
                 }
 
-                startActivity(intent);
+                startActivityForResult(intent, 2);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 2:
+                if (resultCode == RESULT_OK) {
+                    eneryForReturn = data.getIntExtra("enery", 0);
+                    creditForReturn = data.getDoubleExtra("credit", 0);
+                    timeForReturn = data.getIntExtra("time", 0);
+                }
+                break;
+            default:
+                break;
+        }
     }
 }

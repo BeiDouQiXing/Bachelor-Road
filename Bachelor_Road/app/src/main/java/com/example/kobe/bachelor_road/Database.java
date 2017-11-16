@@ -933,16 +933,35 @@ public class Database extends SQLiteOpenHelper {
         sQLiteDatabase.execSQL("insert into DepartmentActivities values(423, 18, 5, '前往学校领导汇报情况及申请资金', 3720, 3960, '辅导员办公室', '0.1', '10', 'false')");
         sQLiteDatabase.execSQL("insert into DepartmentActivities values(424, 18, 5, '部门联谊', 4020, 4140, '素拓', '0.1',  '10', 'false')");
         sQLiteDatabase.execSQL("insert into DepartmentActivities values(425, 18, 5, '学校某某讲座采访记录', 9780, 9900, '素拓', '0.1',  '10', 'false')");
-    }
 
+        /************** 创建问题表 **************************/
+        String createQuestionsSql = "create table Questions( " +
+                " Qid                 int not null," +       //问题id
+                " QNo                 int," +                //问题编号
+                " Cid                 int," +                //问题是哪个课程的
+                " QIsAnswer           varchar(20)," +        //问题是否已经回答过了
+                " primary key (Qid)" +
+                " );";
+        sQLiteDatabase.execSQL(createQuestionsSql);
 
+        /*********** 往问题表插入数据 *********************/
+        sQLiteDatabase.execSQL("insert into Questions values( 1, 1, 1,'false')");
+        sQLiteDatabase.execSQL("insert into Questions values( 2, 2, 1,'false')");
+        sQLiteDatabase.execSQL("insert into Questions values( 3, 3, 1,'false')");
+        sQLiteDatabase.execSQL("insert into Questions values( 4, 4, 1,'false')");
+        sQLiteDatabase.execSQL("insert into Questions values( 5, 5, 2,'false')");
+        sQLiteDatabase.execSQL("insert into Questions values( 6, 6, 2,'false')");
+        sQLiteDatabase.execSQL("insert into Questions values( 7, 7, 2,'false')");
+        sQLiteDatabase.execSQL("insert into Questions values( 8, 8, 2,'false')");
+        sQLiteDatabase.execSQL("insert into Questions values( 9, 9, 2,'false')");
+
+}
 
 
     //软件版本号发生改变时调用
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    public void onUpgrade(SQLiteDatabase sQLiteDatabase, int oldVersion, int newVersion) {
+
 
     }
-
-
 }
