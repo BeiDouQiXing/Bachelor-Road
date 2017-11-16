@@ -93,10 +93,6 @@ public class Login extends AppCompatActivity {
                     finish();
                     Toast.makeText(Login.this,"注册成功",
                             Toast.LENGTH_SHORT).show();
-                   Intent intent2 = new Intent(Login.this, Map_Main.class);
-                   startActivity(intent2);
-                   finish();
-
                 }
             }
         });

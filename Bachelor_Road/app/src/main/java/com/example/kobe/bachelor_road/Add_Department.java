@@ -23,13 +23,20 @@ public class Add_Department extends AppCompatActivity {
 
         /*当前周为第一周时，可以选择部门，否则不可以*/
         final DatabaseManage databaseManage = new DatabaseManage(this);
+
+        if(isAddmit(databaseManage) == false&&databaseManage.queryCHCurrentWeek() != 1) {
+            Toast.makeText(this, "您未加入任何部门",Toast.LENGTH_SHORT);
+            finish();
+        }
+
         if( databaseManage.queryCHCurrentWeek() != 1) {
             Toast.makeText(Add_Department.this,"当前时间不允许加入部门",Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(Add_Department.this,Activity.class);
             startActivity(intent);
             finish();
         }
-        if(isAddmit(databaseManage)==true) {
+
+        if(isAddmit(databaseManage)==true && databaseManage.queryCHCurrentWeek() == 1) {
             Toast.makeText(Add_Department.this,"您已经完成了选择，准备新生周后的生活吧！",Toast.LENGTH_SHORT).show();
         }
         /*几个部门的加入*/
@@ -94,7 +101,7 @@ public class Add_Department extends AppCompatActivity {
                     finish();
                 }
                 int need = databaseManage.updateDNameDIsJoinDepartment(buttonAddDept[0].getText().toString(), true);
-                if(need == 0) {
+                if(need == 1) {
                     Toast.makeText(Add_Department.this,"加入成功",Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
@@ -111,7 +118,7 @@ public class Add_Department extends AppCompatActivity {
                     finish();
                 }
                 int need = databaseManage.updateDNameDIsJoinDepartment(buttonAddDept[1].getText().toString(), true);
-                if(need >0) {
+                if(need == 1) {
                     Toast.makeText(Add_Department.this,"加入成功",Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
@@ -128,7 +135,7 @@ public class Add_Department extends AppCompatActivity {
                     finish();
                 }
                 int need = databaseManage.updateDNameDIsJoinDepartment(buttonAddDept[2].getText().toString(), true);
-                if(need > 0) {
+                if(need == 1) {
                     Toast.makeText(Add_Department.this,"加入成功",Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
@@ -145,7 +152,7 @@ public class Add_Department extends AppCompatActivity {
                     finish();
                 }
                 int need = databaseManage.updateDNameDIsJoinDepartment(buttonAddDept[3].getText().toString(), true);
-                if(need > 0) {
+                if(need == 1) {
                     Toast.makeText(Add_Department.this,"加入成功",Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
@@ -162,7 +169,7 @@ public class Add_Department extends AppCompatActivity {
                     finish();
                 }
                 int need = databaseManage.updateDNameDIsJoinDepartment(buttonAddDept[4].getText().toString(), true);
-                if(need > 0) {
+                if(need == 1) {
                     Toast.makeText(Add_Department.this,"加入成功",Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
@@ -172,7 +179,7 @@ public class Add_Department extends AppCompatActivity {
         });
     }
         /*查询部门是否有加入的部门*/
-    public boolean isAddmit(DatabaseManage databaseManage){
+    public static boolean isAddmit(DatabaseManage databaseManage){
         for(int i = 0;i<5;i++)
         {
             if(databaseManage.queryDidDIsJoinDepartment(i)==1)

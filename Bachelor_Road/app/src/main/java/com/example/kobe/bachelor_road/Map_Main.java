@@ -53,15 +53,23 @@ public class Map_Main extends AppCompatActivity {
         button_departmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if( databaseManage.queryCHCurrentWeek() == 1) {
-                    Intent intent = new Intent(Map_Main.this, Add_Department.class);
-                    startActivity(intent);
-                }
-                else
-                {
-                    Intent intent = new Intent(Map_Main.this, Activity.class);
-                    startActivity(intent);
-                }
+                android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Map_Main.this);
+                dialog.setTitle("提示");
+                dialog.setMessage("只能在第一周选择一个部门\n");
+                dialog.setCancelable(false);
+                dialog.setNegativeButton("", new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog,int which) {} });
+                dialog.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialog,int which) {
+                        if( databaseManage.queryCHCurrentWeek() == 1 && Add_Department.isAddmit(databaseManage) == false ) {
+                            Intent intent = new Intent(Map_Main.this, Add_Department.class);
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(Map_Main.this, Activity.class);
+                            startActivityForResult(intent, 2);
+                        }
+                    } });
+                dialog.show();
             }
         });
 
@@ -117,9 +125,28 @@ public class Map_Main extends AppCompatActivity {
                     main_current_time.setText(TimeTranslate.timeIntToString(time));
                 }
                 break;
+            case 2:
+                if (resultCode == RESULT_OK) {
+                    int enery = data.getIntExtra("enery", 0);
+                    double comprehensiveTest = data.getDoubleExtra("comprehensiveTest", 0);
+                    int time = data.getIntExtra("time", 0);
+
+                    TextView main_vitality_value = findViewById(R.id.main_vitality_value);
+                    main_vitality_value.setText(String.valueOf(enery));
+                    TextView main_activity_point = findViewById(R.id.main_activity_point);
+                    main_activity_point.setText(String.valueOf(df.format(comprehensiveTest)));
+
+                    TextView main_which_noon = findViewById(R.id.main_which_noon);
+                    main_which_noon.setText(TimeTranslate.morningOrAfter(time));
+                    TextView main_current_time = findViewById(R.id.main_current_time);
+                    main_current_time.setText(TimeTranslate.timeIntToString(time));
+                }
+                break;
             default:
                 break;
         }
 
     }
+
+
 }

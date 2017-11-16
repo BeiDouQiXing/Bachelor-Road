@@ -24,13 +24,6 @@ public class MyDepartment extends AppCompatActivity  {
             else
                 textView.setText(isAddmit(databaseManage).toString());
 
-
-
-
-
-
-
-
         Button buttonToAddDepartment =(Button)findViewById(R.id.my_department_add_department);//转入加入的部门
         buttonToAddDepartment.setOnClickListener(new View.OnClickListener() {
                                                      @Override
@@ -61,8 +54,6 @@ public class MyDepartment extends AppCompatActivity  {
                                               }
                                           }
         );
-
-
     }
     /*查询加入的部门*/
     public String isAddmit(DatabaseManage databaseManage){
