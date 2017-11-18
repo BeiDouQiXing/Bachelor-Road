@@ -27,6 +27,8 @@ public class Activity extends AppCompatActivity {
 
         final DatabaseManage databaseManage = new DatabaseManage(this);
 
+
+
         eneryForReturn = databaseManage.queryCHCurrentEnergy();
         comprehensiveTestForReturn = databaseManage.queryCHCredit();
         timeForReturn = databaseManage.queryCHCurrentTime();
@@ -44,14 +46,18 @@ public class Activity extends AppCompatActivity {
         for(int i = 0;i<500;i++) {
             departmentActivities[i] = new DepartmentActivities();
         }
-        departmentActivities = databaseManage.queryJoinedDepartmentActivities();
-
-        buttonActivity[0].setText(TimeTranslate.timeIntToString(departmentActivities[0].DABeginTime) + "~"+ TimeTranslate.timeIntToString(departmentActivities[0].DAEndTime) + " " + departmentActivities[0].DAName);
-        buttonActivity[1].setText(TimeTranslate.timeIntToString(departmentActivities[1].DABeginTime) + "~"+ TimeTranslate.timeIntToString(departmentActivities[1].DAEndTime) + departmentActivities[1].DAName);
-        buttonActivity[2].setText(TimeTranslate.timeIntToString(departmentActivities[2].DABeginTime) + "~"+ TimeTranslate.timeIntToString(departmentActivities[2].DAEndTime) + departmentActivities[2].DAName);
-        buttonActivity[3].setText(TimeTranslate.timeIntToString(departmentActivities[3].DABeginTime) + "~"+ TimeTranslate.timeIntToString(departmentActivities[3].DAEndTime) + departmentActivities[3].DAName);
-        buttonActivity[4].setText(TimeTranslate.timeIntToString(departmentActivities[4].DABeginTime) + "~"+ TimeTranslate.timeIntToString(departmentActivities[4].DAEndTime) + departmentActivities[4].DAName);
-
+        departmentActivities = databaseManage.queryJoinedDepartmentCurrentWeekActivities();
+        /*判定是否为空*/
+       if( departmentActivities.length == 0 ) {
+            Toast.makeText(Activity.this,"当前不存在部门工作，请查询是否加入部门",Toast.LENGTH_SHORT);
+            finish();
+        } else {
+           buttonActivity[0].setText(TimeTranslate.timeIntToString(departmentActivities[0].DABeginTime) + "~" + TimeTranslate.timeIntToString(departmentActivities[0].DAEndTime) + " " + departmentActivities[0].DAName);
+           buttonActivity[1].setText(TimeTranslate.timeIntToString(departmentActivities[1].DABeginTime) + "~" + TimeTranslate.timeIntToString(departmentActivities[1].DAEndTime) + " " + departmentActivities[1].DAName);
+           buttonActivity[2].setText(TimeTranslate.timeIntToString(departmentActivities[2].DABeginTime) + "~" + TimeTranslate.timeIntToString(departmentActivities[2].DAEndTime) + " " + departmentActivities[2].DAName);
+           buttonActivity[3].setText(TimeTranslate.timeIntToString(departmentActivities[3].DABeginTime) + "~" + TimeTranslate.timeIntToString(departmentActivities[3].DAEndTime) + " " + departmentActivities[3].DAName);
+           buttonActivity[4].setText(TimeTranslate.timeIntToString(departmentActivities[4].DABeginTime) + "~" + TimeTranslate.timeIntToString(departmentActivities[4].DAEndTime) + " " + departmentActivities[4].DAName);
+       }
 
         buttonActivity[0].setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +70,7 @@ public class Activity extends AppCompatActivity {
                     for(int i = 0;i<500;i++) {
                         departmentActivities[i] = new DepartmentActivities();
                     }
-                    departmentActivities = databaseManage.queryJoinedDepartmentActivities();
+                    departmentActivities = databaseManage.queryJoinedDepartmentCurrentWeekActivities();
                     /*判断当前时间能否进行该活动*/
                     if (currentTime >  departmentActivities[0].DABeginTime) {
                         android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Activity.this);
@@ -93,7 +99,7 @@ public class Activity extends AppCompatActivity {
                                 for(int i = 0;i<500;i++) {
                                     departmentActivities[i] = new DepartmentActivities();
                                 }
-                                departmentActivities = databaseManage.queryJoinedDepartmentActivities();
+                                departmentActivities = databaseManage.queryJoinedDepartmentCurrentWeekActivities();
                                 /*数据库数据更新*/
                                 int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - departmentActivities[0].DAEnergy);
                                 i = databaseManage.updateCHComprehensiveTest( CHComprehensiveTest + departmentActivities[0].DAComprehensiveTest);
@@ -159,7 +165,7 @@ public class Activity extends AppCompatActivity {
                                 for(int i = 0;i<500;i++) {
                                     departmentActivities[i] = new DepartmentActivities();
                                 }
-                                departmentActivities = databaseManage.queryJoinedDepartmentActivities();
+                                departmentActivities = databaseManage.queryJoinedDepartmentCurrentWeekActivities();
                                 /*数据库数据更新*/
                                 int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - departmentActivities[1].DAEnergy);
                                 i = databaseManage.updateCHComprehensiveTest( CHComprehensiveTest + departmentActivities[1].DAComprehensiveTest);
@@ -195,7 +201,7 @@ public class Activity extends AppCompatActivity {
                     for(int i = 0;i<500;i++) {
                         departmentActivities[i] = new DepartmentActivities();
                     }
-                    departmentActivities = databaseManage.queryJoinedDepartmentActivities();
+                    departmentActivities = databaseManage.queryJoinedDepartmentCurrentWeekActivities();
                     /*判断当前时间能否进行该活动*/
                     if (currentTime >  departmentActivities[2].DABeginTime) {
                         android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Activity.this);
@@ -224,7 +230,7 @@ public class Activity extends AppCompatActivity {
                                 for(int i = 0;i<500;i++) {
                                     departmentActivities[i] = new DepartmentActivities();
                                 }
-                                departmentActivities = databaseManage.queryJoinedDepartmentActivities();
+                                departmentActivities = databaseManage.queryJoinedDepartmentCurrentWeekActivities();
                                 /*数据库数据更新*/
                                 int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - departmentActivities[2].DAEnergy);
                                 i = databaseManage.updateCHComprehensiveTest( CHComprehensiveTest + departmentActivities[2].DAComprehensiveTest);
@@ -261,7 +267,7 @@ public class Activity extends AppCompatActivity {
                     for(int i = 0;i<500;i++) {
                         departmentActivities[i] = new DepartmentActivities();
                     }
-                    departmentActivities = databaseManage.queryJoinedDepartmentActivities();
+                    departmentActivities = databaseManage.queryJoinedDepartmentCurrentWeekActivities();
                     /*判断当前时间能否进行该活动*/
                     if (currentTime >  departmentActivities[3].DABeginTime) {
                         android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Activity.this);
@@ -290,7 +296,7 @@ public class Activity extends AppCompatActivity {
                                 for(int i = 0;i<500;i++) {
                                     departmentActivities[i] = new DepartmentActivities();
                                 }
-                                departmentActivities = databaseManage.queryJoinedDepartmentActivities();
+                                departmentActivities = databaseManage.queryJoinedDepartmentCurrentWeekActivities();
                                 /*数据库数据更新*/
                                 int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - departmentActivities[3].DAEnergy);
                                 i = databaseManage.updateCHComprehensiveTest( CHComprehensiveTest + departmentActivities[3].DAComprehensiveTest);
@@ -327,7 +333,7 @@ public class Activity extends AppCompatActivity {
                     for(int i = 0;i<500;i++) {
                         departmentActivities[i] = new DepartmentActivities();
                     }
-                    departmentActivities = databaseManage.queryJoinedDepartmentActivities();
+                    departmentActivities = databaseManage.queryJoinedDepartmentCurrentWeekActivities();
                     /*判断当前时间能否进行该活动*/
                     if (currentTime >  departmentActivities[4].DABeginTime) {
                         android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Activity.this);
@@ -356,7 +362,7 @@ public class Activity extends AppCompatActivity {
                                 for(int i = 0;i<500;i++) {
                                     departmentActivities[i] = new DepartmentActivities();
                                 }
-                                departmentActivities = databaseManage.queryJoinedDepartmentActivities();
+                                departmentActivities = databaseManage.queryJoinedDepartmentCurrentWeekActivities();
                                 /*数据库数据更新*/
                                 int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - departmentActivities[4].DAEnergy);
                                 i = databaseManage.updateCHComprehensiveTest( CHComprehensiveTest + departmentActivities[4].DAComprehensiveTest);

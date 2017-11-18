@@ -27,6 +27,7 @@ public class Lesson_View extends AppCompatActivity {
     private int eneryForReturn;
     private double creditForReturn;
     private int timeForReturn;
+    private int takeTimes = 0;
 
     @Override
     public void onBackPressed() {
@@ -42,6 +43,9 @@ public class Lesson_View extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lesson_view);
+
+
+
 
         final DecimalFormat df = new DecimalFormat("#0.000");
         databaseManage = new DatabaseManage(this);
@@ -110,7 +114,7 @@ public class Lesson_View extends AppCompatActivity {
                         if (CName.equals("高级语言程序设计")) {
                             //高级语言程序设计的课程编号为2
                             int[] questionNumber = databaseManage.queryCidQIsAnswerQuestionsQNo(2);
-                            if (questionNumber[0] == 1) {
+                                if (questionNumber[0] == 1) {
                                 databaseManage.updateQidQIsAnswer(0, true);
                                 Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
                                 startActivity(intent);
@@ -119,6 +123,20 @@ public class Lesson_View extends AppCompatActivity {
                                 Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
                                 startActivity(intent);
                             } else {
+                                databaseManage.updateQidQIsAnswer(2, true);
+                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
+                                startActivity(intent);
+                            }
+
+                            if(takeTimes == 0) {
+                                takeTimes++;
+                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
+                                startActivity(intent);
+                            } else if(takeTimes == 1) {
+                                databaseManage.updateQidQIsAnswer(1, true);
+                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
+                                startActivity(intent);
+                            } else if(takeTimes == 2) {
                                 databaseManage.updateQidQIsAnswer(2, true);
                                 Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
                                 startActivity(intent);
@@ -169,7 +187,6 @@ public class Lesson_View extends AppCompatActivity {
             public void onClick(View v) {
                 if (!second_lesson.getText().equals("")) {
                     currentTime = baseTime + (10 * 60) + 20;
-
                     if (currentTime < databaseManage.queryCHCurrentTime()) {
                         android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Lesson_View.this);
                         dialog.setTitle("提示");
@@ -185,8 +202,8 @@ public class Lesson_View extends AppCompatActivity {
                         eachClassCredit = databaseManage.queryCNameCEachClassCredit(CName);
                         eachClassEnergy = databaseManage.queryCNameCEachClassEnergy(CName);
                         //[TODO]特殊判断C语言课程
-Toast.makeText(Lesson_View.this,CName.toString(),Toast.LENGTH_SHORT).show();
                         if (CName.equals("高级语言程序设计")) {
+                            Toast.makeText(Lesson_View.this,CName.toString(),Toast.LENGTH_SHORT).show();
                             int[] questionNumber = databaseManage.queryCidQIsAnswerQuestionsQNo(2);
                             if (questionNumber[0] == 1) {
                                 databaseManage.updateQidQIsAnswer(0, true);
@@ -197,10 +214,12 @@ Toast.makeText(Lesson_View.this,CName.toString(),Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
                                 startActivity(intent);
                             } else {
+                                Toast.makeText(Lesson_View.this,"1",Toast.LENGTH_SHORT).show();
                                 databaseManage.updateQidQIsAnswer(2, true);
                                 Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
                                 startActivity(intent);
                             }
+
                         } else {
                             android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Lesson_View.this);
                             dialog.setTitle("提示");
@@ -352,6 +371,7 @@ Toast.makeText(Lesson_View.this,CName.toString(),Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
                                 startActivity(intent);
                             }
+
                         } else {
                             android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Lesson_View.this);
                             dialog.setTitle("提示");

@@ -1,11 +1,14 @@
 package com.example.kobe.bachelor_road;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,15 +16,17 @@ import android.widget.Toast;
  * Created by kobe on 2017/11/15.
  */
 
-public class Classroom_Program_C_Two extends AppCompatActivity {
+public class Classroom_Program_C_Two extends AppCompatActivity implements View.OnClickListener {
 
-private Dialog dialog = new Dialog(this);
+    private ImageView image = findViewById(R.id.c_program2);
+    private int imgTimes = 0;
+private Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.classroom_c_two);
-        findViewById(R.id.class_two_run_out).setOnClickListener((View.OnClickListener) this);
-        findViewById(R.id.test_two).setOnClickListener((View.OnClickListener) this);
+        findViewById(R.id.class_two_run_out).setOnClickListener(this);
+        findViewById(R.id.test_two).setOnClickListener(this);
 
 
 
@@ -30,13 +35,11 @@ private Dialog dialog = new Dialog(this);
 
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.class_one_run_out:
+            case R.id.class_two_run_out:
                 finish();
-
-           case R.id.test_two:
+            case R.id.test_two:
                 //创建对话框
-                dialog= new Dialog(this);
-                View view_fill_blank = LayoutInflater.from(this).inflate(R.layout.dialog_view,null);
+                View view_fill_blank = LayoutInflater.from(this).inflate(R.layout.dialog_view_one,null);
                 //给Dialog中的子view设置事件监听
                 view_fill_blank.findViewById(R.id.return_blackboard).setOnClickListener((View.OnClickListener) this);
                 view_fill_blank.findViewById(R.id.submit).setOnClickListener((View.OnClickListener) this);
@@ -57,19 +60,43 @@ private Dialog dialog = new Dialog(this);
             case R.id.submit:
                 TextView textViewGet = (TextView)findViewById(R.id.question_submit);
                 if(textViewGet.getText().toString().equals("30")==true) {
-                    Toast.makeText(this, "回答正确", Toast.LENGTH_SHORT);
+                    Toast.makeText(this, "回答正确", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
+                    Intent intent = new Intent(Classroom_Program_C_Two.this, Map_Main.class);
+                    startActivity(intent);
                     finish();
-                } else
-                dialog.dismiss();
-
-
+                } else {
+                    Toast.makeText(this, "再想想呗，回答不太对哦", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
                 //这里实现业务逻辑
                 break;
+             case R.id.left_button_two:
+                 if(imgTimes == 0) {
+                     Toast.makeText(Classroom_Program_C_Two.this, "已经是最前页了", Toast.LENGTH_SHORT).show();
+                     return;
+                 } else {
+                     imgTimes--;
+                     image.setImageResource(R.drawable.c_program2_2);
+                     Toast.makeText(Classroom_Program_C_Two.this, "切换成功", Toast.LENGTH_SHORT).show();
+                 }
+                break;
+            case R.id.right_button_two:
+                if(imgTimes == 1) {
+                    Toast.makeText(Classroom_Program_C_Two.this, "已经是最后页了", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    imgTimes++;
+                    image.setImageResource(R.drawable.c_program2_1);
+                    Toast.makeText(Classroom_Program_C_Two.this, "切换成功", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+
 
         /* case R.id.test_two:
                 dialog = new Dialog(this);
-                View view_judge= LayoutInflater.from(this).inflate(R.layout.dialog_judge,null);
+                View view_judge= LayoutInflater.from(this).inflate(R.layout.dialog_judge_one,null);
                 view_judge.findViewById(R.id.yes).setOnClickListener((View.OnClickListener) this);
                 view_judge.findViewById(R.id.no).setOnClickListener((View.OnClickListener) this);
                 dialog.setContentView(view_judge);

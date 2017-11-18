@@ -49,7 +49,9 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".Classroom_Program_C_One"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            />
+
         <activity android:name=".Dorm"
             android:screenOrientation="landscape"></activity>
         <activity
