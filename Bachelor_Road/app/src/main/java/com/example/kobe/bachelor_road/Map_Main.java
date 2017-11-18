@@ -98,7 +98,7 @@ public class Map_Main extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Map_Main.this, Dorm.class);
-                startActivity(intent);
+                startActivityForResult(intent, 3);
             }
         });
     }
@@ -141,6 +141,20 @@ public class Map_Main extends AppCompatActivity {
                     TextView main_current_time = findViewById(R.id.main_current_time);
                     main_current_time.setText(TimeTranslate.timeIntToString(time));
                 }
+                break;
+            case 3:
+                int week = data.getIntExtra("week", 0);
+                int time = data.getIntExtra("time", 0);
+                int enery = data.getIntExtra("enery", 0);
+
+                TextView main_vitality_value = findViewById(R.id.main_vitality_value);
+                main_vitality_value.setText(String.valueOf(enery));
+                TextView main_which_week = findViewById(R.id.main_which_week);
+                main_which_week.setText("第" + String.valueOf(week) + "周");
+                TextView main_which_noon = findViewById(R.id.main_which_noon);
+                main_which_noon.setText(TimeTranslate.morningOrAfter(time));
+                TextView main_current_time = findViewById(R.id.main_current_time);
+                main_current_time.setText(TimeTranslate.timeIntToString(time));
                 break;
             default:
                 break;

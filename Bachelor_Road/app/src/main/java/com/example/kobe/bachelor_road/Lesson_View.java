@@ -214,6 +214,7 @@ public class Lesson_View extends AppCompatActivity {
                                 Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
                                 startActivity(intent);
                             } else {
+                                Toast.makeText(Lesson_View.this,"1",Toast.LENGTH_SHORT).show();
                                 databaseManage.updateQidQIsAnswer(2, true);
                                 Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
                                 startActivity(intent);
