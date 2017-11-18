@@ -1,4 +1,4 @@
-package com.example.kobe.bachelor_road;
+package com.xueshizhilu.xueshizhilusql;
 
 /**
  * Created by Administrator on 2017/11/7.
@@ -393,13 +393,22 @@ public class DatabaseManage {
         return CHCIsAttendClass;
     }
 
-    //更新指定课程号的课程是否有参加
-    public int updateCHCidCHCIsAttendClass(int CHCid, boolean CHCIsAttendClass){
+    // 查询指定课程名上课次数
+    public int queryCNameAttendClassNumber(String CName){
         SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
+        Cursor cursor = sQLiteDatabase.rawQuery("select * from CharacterCourse,Course where CharacterCourse.Cid=Course.Cid and CName=? and CHCIsAttendClass=?",new String[]{CName , "true"});
+        int AttendClassNumber = cursor.getCount();
+        sQLiteDatabase.close();
+        return AttendClassNumber;
+    }
+
+    //更新指定课程号的课程是否有参加
+    public int updateCHCidCHCIsAttendClass(int CHCid, boolean CHCIsAttendClass) {
+        SQLiteDatabase sQLiteDatabase = database.getReadableDatabase();
         ContentValues values = new ContentValues();
         values.clear();
         values.put("CHCIsAttendClass", String.valueOf(CHCIsAttendClass));
-        int results = sQLiteDatabase.update("CharacterCourse", values, "CHCid = ?", new String[]{String.valueOf(CHCid)}) ;
+        int results = sQLiteDatabase.update("CharacterCourse", values, "CHCid = ?", new String[]{String.valueOf(CHCid)});
         sQLiteDatabase.close();
         return results;
     }
@@ -444,6 +453,25 @@ public class DatabaseManage {
         return department;
     }
 
+    //查询指定部门名称的部门的全属性：
+    public Department queryDNameDepartment(String DName){
+        SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
+        Cursor cursor = sQLiteDatabase.rawQuery("select * from Department where DName=?",new String[]{ DName });
+        Department department = new Department();
+        if( cursor.moveToNext() == true  ) {
+            department.Did = cursor.getInt(cursor.getColumnIndex("Did"));
+            department.DName = cursor.getString(cursor.getColumnIndex("DName"));
+            department.DFunctions = cursor.getString(cursor.getColumnIndex("DFunctions"));
+            String tempDIsJoinDepartment = cursor.getString(cursor.getColumnIndex("DIsJoinDepartment"));
+            if(tempDIsJoinDepartment.equalsIgnoreCase("false"))
+                department.DIsJoinDepartment = false;
+            else if(tempDIsJoinDepartment.equalsIgnoreCase("true"))
+                department.DIsJoinDepartment = true;
+        }
+        sQLiteDatabase.close();
+        return department;
+    }
+
     //查询指定部门号的部门是否加入
     public int queryDidDIsJoinDepartment(int Did){
         SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
@@ -460,24 +488,40 @@ public class DatabaseManage {
         return DIsJoinDepartment;
     }
 
-    //更新指定部门号的部门是否加入
-    public int updateDNameDIsJoinDepartment(String DName, boolean DIsJoinDepartment){
+    //查询指定部门名称的部门是否加入
+    public int queryDNameDIsJoinDepartment(String DName){
         SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
-        ContentValues values = new ContentValues();
-        values.clear();
-        values.put("DIsJoinDepartment", String.valueOf(DIsJoinDepartment));
-        int results = sQLiteDatabase.update("Department", values, "DName = ?", new String[]{ DName }) ;
+        Cursor cursor = sQLiteDatabase.rawQuery("select DIsJoinDepartment from Department where DName=?",new String[]{ DName });
+        int DIsJoinDepartment = -1;
+        if( cursor.moveToNext() == true  ) {
+            String tempDIsJoinDepartment = cursor.getString(cursor.getColumnIndex("DIsJoinDepartment"));
+            if(tempDIsJoinDepartment.equalsIgnoreCase("false"))
+                DIsJoinDepartment = 0;
+            else if(tempDIsJoinDepartment.equalsIgnoreCase("true"))
+                DIsJoinDepartment = 1;
+        }
         sQLiteDatabase.close();
-        return results;
+        return DIsJoinDepartment;
     }
 
-    //更新指定部门名称的部门是否加入
+    //更新指定部门号的部门是否加入
     public int updateDidDIsJoinDepartment(int Did, boolean DIsJoinDepartment){
         SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
         ContentValues values = new ContentValues();
         values.clear();
         values.put("DIsJoinDepartment", String.valueOf(DIsJoinDepartment));
         int results = sQLiteDatabase.update("Department", values, "Did = ?", new String[]{String.valueOf(Did)}) ;
+        sQLiteDatabase.close();
+        return results;
+    }
+
+     //更新指定部门名称的部门是否加入
+    public int updateDNameDIsJoinDepartment(String DName, boolean DIsJoinDepartment){
+        SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.clear();
+        values.put("DIsJoinDepartment", String.valueOf(DIsJoinDepartment));
+        int results = sQLiteDatabase.update("Department", values, "DName = ?", new String[]{ DName }) ;
         sQLiteDatabase.close();
         return results;
     }
@@ -511,7 +555,7 @@ public class DatabaseManage {
     }
 
     //查询人物已加入的部门的当前周的部门活动全属性
-    public DepartmentActivities[] queryJoinedDepartmentCurrentWeekActivities(){
+   /* public DepartmentActivities[] queryJoinedDepartmentCurrentWeekActivities(){
         SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
         Cursor cursor = sQLiteDatabase.query("Character",null,null,null,null,null,null);//查询并获得游标
         int CHCurrentWeek = -1;
@@ -519,6 +563,32 @@ public class DatabaseManage {
             CHCurrentWeek = cursor.getInt(cursor.getColumnIndex("CHCurrentWeek"));
         }
         cursor = sQLiteDatabase.rawQuery("select * from Department,DepartmentActivities where Department.Did=DepartmentActivities.Did and DAWeek=? and DIsJoinDepartment=?",new String[]{String.valueOf(CHCurrentWeek),"true"});
+        DepartmentActivities[] departmentActivities = new DepartmentActivities[cursor.getCount()];
+        for (int i=0; cursor.moveToNext() == true; i++ ){
+            departmentActivities[i] = new DepartmentActivities();
+            departmentActivities[i].DAid = cursor.getInt(cursor.getColumnIndex("DAid"));
+            departmentActivities[i].DAWeek = cursor.getInt(cursor.getColumnIndex("DAWeek"));
+            departmentActivities[i].Did = cursor.getInt(cursor.getColumnIndex("Did"));
+            departmentActivities[i].DName = cursor.getString(cursor.getColumnIndex("DName"));
+            departmentActivities[i].DAName = cursor.getString(cursor.getColumnIndex("DAName"));
+            departmentActivities[i].DABeginTime = cursor.getInt(cursor.getColumnIndex("DABeginTime"));
+            departmentActivities[i].DAEndTime = cursor.getInt(cursor.getColumnIndex("DAEndTime"));
+            departmentActivities[i].DALocation = cursor.getString(cursor.getColumnIndex("DALocation"));
+            departmentActivities[i].DAComprehensiveTest = Double.valueOf(cursor.getString(cursor.getColumnIndex("DAComprehensiveTest")));
+            departmentActivities[i].DAEnergy = Integer.valueOf(cursor.getString(cursor.getColumnIndex("DAEnergy")));
+            String tempDAIsJoinActivity = cursor.getString(cursor.getColumnIndex("DAIsJoinActivity"));
+            if(tempDAIsJoinActivity.equalsIgnoreCase("false"))
+                departmentActivities[i].DAIsJoinActivity = false;
+            else if(tempDAIsJoinActivity.equalsIgnoreCase("true"))
+                departmentActivities[i].DAIsJoinActivity = true;
+        }
+        sQLiteDatabase.close();
+        return departmentActivities;
+    }*/
+
+    public DepartmentActivities[] queryJoinedDepartmentWeekActivities(int Week){
+        SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
+        Cursor cursor = sQLiteDatabase.rawQuery("select * from Department,DepartmentActivities where Department.Did=DepartmentActivities.Did and DAWeek=? and DIsJoinDepartment=?",new String[]{String.valueOf(Week),"true"});
         DepartmentActivities[] departmentActivities = new DepartmentActivities[cursor.getCount()];
         for (int i=0; cursor.moveToNext() == true; i++ ){
             departmentActivities[i] = new DepartmentActivities();
@@ -596,7 +666,7 @@ public class DatabaseManage {
     }
 
     /************* 对 Questions 表的操作 **************/
-    // 查询指定课程的还未回答过的问题
+    // 查询指定课程号的还未回答过的问题
     public Questions[] queryCidQIsAnswerQuestions(int Cid) {
         SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
         Cursor cursor = sQLiteDatabase.rawQuery("select * from Questions where Cid=? and QIsAnswer=?",new String[]{String.valueOf(Cid),"false"});
@@ -616,10 +686,42 @@ public class DatabaseManage {
         return questions;
     }
 
-    // 查询指定课程的还未回答过的问题编号
+    //查询属于指定课程名的且还未回答过的问题
+    public Questions[] queryCNameQIsAnswerQid(String CName){
+        SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
+        Cursor cursor = sQLiteDatabase.rawQuery("select * from Questions where CName=? and QIsAnswer=?",new String[]{ CName , "false" });
+        Questions[] questions = new Questions[cursor.getCount()];
+        for (int i=0; cursor.moveToNext() == true  ; i++ ) {
+            questions[i] = new Questions();
+            questions[i].Qid = cursor.getInt(cursor.getColumnIndex("Qid"));
+            questions[i].Cid = cursor.getInt(cursor.getColumnIndex("Cid"));
+            questions[i].QNo = cursor.getInt(cursor.getColumnIndex("QNo"));
+            String tempQIsAnswer = cursor.getString(cursor.getColumnIndex("QIsAnswer"));
+            if(tempQIsAnswer.equalsIgnoreCase("false"))
+                questions[i].QIsAnswer = false;
+            else if(tempQIsAnswer.equalsIgnoreCase("true"))
+                questions[i].QIsAnswer = true;
+        }
+        sQLiteDatabase.close();
+        return questions;
+    }
+
+    // 查询指定课程号的还未回答过的问题编号
     public int[] queryCidQIsAnswerQuestionsQNo(int Cid) {
         SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
         Cursor cursor = sQLiteDatabase.rawQuery("select QNo from Questions where Cid=? and QIsAnswer=?",new String[]{String.valueOf(Cid),"false"});
+        int[] QNo = new int[cursor.getCount()];
+        for (int i=0; cursor.moveToNext() == true  ; i++ ) {
+            QNo[i] = cursor.getInt(cursor.getColumnIndex("QNo"));
+        }
+        sQLiteDatabase.close();
+        return QNo;
+    }
+
+    //查询属于指定课程名的且还未回答过的问题的编号
+    public int[] queryCNameQIsAnswerQuestionsQNo(String CName){
+        SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
+        Cursor cursor = sQLiteDatabase.rawQuery("select QNo from Questions where CName=? and QIsAnswer=?",new String[]{ CName , "false" });
         int[] QNo = new int[cursor.getCount()];
         for (int i=0; cursor.moveToNext() == true  ; i++ ) {
             QNo[i] = cursor.getInt(cursor.getColumnIndex("QNo"));
@@ -635,6 +737,17 @@ public class DatabaseManage {
         values.clear();
         values.put("QIsAnswer", String.valueOf(QIsAnswer));
         int results = sQLiteDatabase.update("Questions", values, "Qid = ?", new String[]{String.valueOf(Qid)}) ;
+        sQLiteDatabase.close();
+        return results;
+    }
+
+    //更新指定问题编号的是否回答过
+    public int updateQNoQIsAnswer(int QNo, boolean QIsAnswer){
+        SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.clear();
+        values.put("QIsAnswer", String.valueOf(QIsAnswer));
+        int results = sQLiteDatabase.update("Questions", values, "QNo = ?", new String[]{String.valueOf(QNo)}) ;
         sQLiteDatabase.close();
         return results;
     }
