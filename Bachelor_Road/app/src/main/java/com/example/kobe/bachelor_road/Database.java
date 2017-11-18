@@ -1,4 +1,4 @@
-package com.example.kobe.bachelor_road;
+package com.xueshizhilu.xueshizhilusql;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
