@@ -1,6 +1,7 @@
 package com.example.kobe.bachelor_road;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -69,6 +70,8 @@ public class Classroom_Program_C_One extends AppCompatActivity implements View.O
             case R.id.yes:
                 Toast.makeText(this,"回答正确",Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
+                Intent intent = new Intent(Classroom_Program_C_One.this, Map_Main.class);
+                startActivity(intent);
                 finish();
                 break;
             case R.id.no:
@@ -77,6 +80,8 @@ public class Classroom_Program_C_One extends AppCompatActivity implements View.O
                 //这里实现业务逻辑
                 break;
             case R.id.class_one_run_out:
+                Intent intent2 = new Intent(Classroom_Program_C_One.this, Map_Main.class);
+                startActivity(intent2);
                 finish();
 
         }

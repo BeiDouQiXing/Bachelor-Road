@@ -22,12 +22,12 @@
         android:id="@+id/sleep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignLeft="@+id/dorm_run_out"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="156dp"
-        android:layout_marginRight="156dp"
-        android:layout_marginTop="11dp"
+        android:layout_alignStart="@+id/dorm_run_out"
+        android:layout_marginLeft="114dp"
+        android:layout_marginStart="114dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/shuijiao" />
 
     <Button

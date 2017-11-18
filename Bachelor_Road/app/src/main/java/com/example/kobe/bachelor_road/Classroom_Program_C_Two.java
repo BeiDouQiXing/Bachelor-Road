@@ -1,6 +1,7 @@
 package com.example.kobe.bachelor_road;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -61,6 +62,8 @@ private Dialog dialog;
                 if(textViewGet.getText().toString().equals("30")==true) {
                     Toast.makeText(this, "回答正确", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
+                    Intent intent = new Intent(Classroom_Program_C_Two.this, Map_Main.class);
+                    startActivity(intent);
                     finish();
                 } else {
                     Toast.makeText(this, "再想想呗，回答不太对哦", Toast.LENGTH_SHORT).show();
