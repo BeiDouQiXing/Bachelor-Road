@@ -2,6 +2,7 @@ package com.example.kobe.bachelor_road;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +29,24 @@ public class Lesson_View extends AppCompatActivity {
     private double creditForReturn;
     private int timeForReturn;
     private int takeTimes = 0;
+
+    public int getCHid(int currentWeek, String week, int cnt) {
+        int CHid = (currentWeek - 2) * 20;
+
+        if (week.equals("Mon")) {
+            CHid += 0 * 4;
+        } else if (week.equals("Tues")) {
+            CHid += 1 * 4;
+        } else if (week.equals("Wed")) {
+            CHid += 2 * 4;
+        } else if (week.equals("Thu")) {
+            CHid += 3 * 4;
+        } else {
+            CHid += 4 * 4;
+        }
+
+        return  CHid + cnt;
+    }
 
     @Override
     public void onBackPressed() {
@@ -112,35 +131,47 @@ public class Lesson_View extends AppCompatActivity {
                         eachClassEnergy = databaseManage.queryCNameCEachClassEnergy(CName);
                         //特殊判断C语言课程
                         if (CName.equals("高级语言程序设计")) {
-                            //高级语言程序设计的课程编号为2
-                            int[] questionNumber = databaseManage.queryCidQIsAnswerQuestionsQNo(2);
-                                if (questionNumber[0] == 1) {
-                                databaseManage.updateQidQIsAnswer(0, true);
-                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
-                                startActivity(intent);
-                            } else if (questionNumber[1] == 1) {
-                                databaseManage.updateQidQIsAnswer(1, true);
-                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
-                                startActivity(intent);
-                            } else {
-                                databaseManage.updateQidQIsAnswer(2, true);
-                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
-                                startActivity(intent);
+                           int cnt = databaseManage.queryCNameAttendClassNumber(CName);
+                           int CHid = getCHid(databaseManage.queryCHCurrentWeek(), week, 1);
+
+                            int flg = databaseManage.updateCHCidCHCIsAttendClass(CHid, true);
+                            if (flg != 1) {
+                                Toast.makeText(Lesson_View.this, "调出课程失败！", Toast.LENGTH_SHORT).show();
                             }
 
-                            if(takeTimes == 0) {
-                                takeTimes++;
-                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
-                                startActivity(intent);
-                            } else if(takeTimes == 1) {
-                                databaseManage.updateQidQIsAnswer(1, true);
-                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
-                                startActivity(intent);
-                            } else if(takeTimes == 2) {
-                                databaseManage.updateQidQIsAnswer(2, true);
-                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
-                                startActivity(intent);
-                            }
+                           switch (cnt) {
+                               case 0 :
+                                   Intent intent1 = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
+                                   startActivity(intent1);
+                                   break;
+                               case 1 :
+                                   Intent intent2 = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
+                                   startActivity(intent2);
+                                   break;
+                               case 2 :
+                                   Intent intent3 = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
+                                   startActivity(intent3);
+                                   break;
+                               case 3:
+                                   break;
+                           }
+
+
+                           /*直接在Lesson_View界面消耗活力值并获得学分*/
+                            int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
+                            i = databaseManage.updateCHCredit(CHCredit + eachClassCredit);
+                            i = databaseManage.updateCHCurrentTime(baseTime + (10 * 60));
+
+                            eneryForReturn = databaseManage.queryCHCurrentEnergy();
+                            creditForReturn = databaseManage.queryCHCredit();
+                            timeForReturn = databaseManage.queryCHCurrentTime();
+                            Intent intent = new Intent();
+                            intent.putExtra("enery", eneryForReturn);
+                            intent.putExtra("credit", creditForReturn);
+                            intent.putExtra("time", timeForReturn);
+                            setResult(RESULT_OK, intent);
+
+                            finish();
                         } else {
                             android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Lesson_View.this);
                             dialog.setTitle("提示");
@@ -154,7 +185,7 @@ public class Lesson_View extends AppCompatActivity {
                                     CHCurrentEnergy = databaseManage.queryCHCurrentEnergy();
                                     CHCredit = databaseManage.queryCHCredit();
 
-                                /*数据库数据更新*/
+                                    /*数据库数据更新*/
                                     int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
                                     i = databaseManage.updateCHCredit(CHCredit + eachClassCredit);
                                     i = databaseManage.updateCHCurrentTime(baseTime + (10 * 60));
@@ -201,25 +232,49 @@ public class Lesson_View extends AppCompatActivity {
                         CName = second_lesson.getText().toString();
                         eachClassCredit = databaseManage.queryCNameCEachClassCredit(CName);
                         eachClassEnergy = databaseManage.queryCNameCEachClassEnergy(CName);
-                        //[TODO]特殊判断C语言课程
+                        //特殊判断C语言课程
                         if (CName.equals("高级语言程序设计")) {
-                            Toast.makeText(Lesson_View.this,CName.toString(),Toast.LENGTH_SHORT).show();
-                            int[] questionNumber = databaseManage.queryCidQIsAnswerQuestionsQNo(2);
-                            if (questionNumber[0] == 1) {
-                                databaseManage.updateQidQIsAnswer(0, true);
-                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
-                                startActivity(intent);
-                            } else if (questionNumber[1] == 1) {
-                                databaseManage.updateQidQIsAnswer(1, true);
-                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(Lesson_View.this,"1",Toast.LENGTH_SHORT).show();
-                                databaseManage.updateQidQIsAnswer(2, true);
-                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
-                                startActivity(intent);
+                            int cnt = databaseManage.queryCNameAttendClassNumber(CName);
+                            int CHid = getCHid(databaseManage.queryCHCurrentWeek(), week, 2);
+
+                            int flg = databaseManage.updateCHCidCHCIsAttendClass(CHid, true);
+                            if (flg != 1) {
+                                Toast.makeText(Lesson_View.this, "调出课程失败！", Toast.LENGTH_SHORT).show();
+                            }
+                            
+                            switch (cnt) {
+                                case 0 :
+                                    Intent intent1 = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
+                                    startActivity(intent1);
+                                    break;
+                                case 1 :
+                                    Intent intent2 = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
+                                    startActivity(intent2);
+                                    break;
+                                case 2 :
+                                    Intent intent3 = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
+                                    startActivity(intent3);
+                                    break;
+                                case 3:
+                                    break;
                             }
 
+
+                           /*直接在Lesson_View界面消耗活力值并获得学分*/
+                            int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
+                            i = databaseManage.updateCHCredit(CHCredit + eachClassCredit);
+                            i = databaseManage.updateCHCurrentTime(baseTime + (10 * 60));
+
+                            eneryForReturn = databaseManage.queryCHCurrentEnergy();
+                            creditForReturn = databaseManage.queryCHCredit();
+                            timeForReturn = databaseManage.queryCHCurrentTime();
+                            Intent intent = new Intent();
+                            intent.putExtra("enery", eneryForReturn);
+                            intent.putExtra("credit", creditForReturn);
+                            intent.putExtra("time", timeForReturn);
+                            setResult(RESULT_OK, intent);
+
+                            finish();
                         } else {
                             android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Lesson_View.this);
                             dialog.setTitle("提示");
@@ -233,7 +288,7 @@ public class Lesson_View extends AppCompatActivity {
                                     CHCurrentEnergy = databaseManage.queryCHCurrentEnergy();
                                     CHCredit = databaseManage.queryCHCredit();
 
-                                /*数据库数据更新*/
+                                    /*数据库数据更新*/
                                     int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
                                     i = databaseManage.updateCHCredit(CHCredit + eachClassCredit);
                                     i = databaseManage.updateCHCurrentTime(baseTime + (12 * 60));
@@ -280,22 +335,49 @@ public class Lesson_View extends AppCompatActivity {
                         CName = third_lesson.getText().toString();
                         eachClassCredit = databaseManage.queryCNameCEachClassCredit(CName);
                         eachClassEnergy = databaseManage.queryCNameCEachClassEnergy(CName);
-                        //[TODO]特殊判断C语言课程
+                        //特殊判断C语言课程
                         if (CName.equals("高级语言程序设计")) {
-                            int[] questionNumber = databaseManage.queryCidQIsAnswerQuestionsQNo(2);
-                            if (questionNumber[0] == 1) {
-                                databaseManage.updateQidQIsAnswer(0, true);
-                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
-                                startActivity(intent);
-                            } else if (questionNumber[1] == 1) {
-                                databaseManage.updateQidQIsAnswer(1, true);
-                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
-                                startActivity(intent);
-                            } else {
-                                databaseManage.updateQidQIsAnswer(2, true);
-                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
-                                startActivity(intent);
+                            int cnt = databaseManage.queryCNameAttendClassNumber(CName);
+                            int CHid = getCHid(databaseManage.queryCHCurrentWeek(), week, 3);
+
+                            int flg = databaseManage.updateCHCidCHCIsAttendClass(CHid, true);
+                            if (flg != 1) {
+                                Toast.makeText(Lesson_View.this, "调出课程失败！", Toast.LENGTH_SHORT).show();
                             }
+
+                            switch (cnt) {
+                                case 0 :
+                                    Intent intent1 = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
+                                    startActivity(intent1);
+                                    break;
+                                case 1 :
+                                    Intent intent2 = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
+                                    startActivity(intent2);
+                                    break;
+                                case 2 :
+                                    Intent intent3 = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
+                                    startActivity(intent3);
+                                    break;
+                                case 3:
+                                    break;
+                            }
+
+
+                           /*直接在Lesson_View界面消耗活力值并获得学分*/
+                            int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
+                            i = databaseManage.updateCHCredit(CHCredit + eachClassCredit);
+                            i = databaseManage.updateCHCurrentTime(baseTime + (10 * 60));
+
+                            eneryForReturn = databaseManage.queryCHCurrentEnergy();
+                            creditForReturn = databaseManage.queryCHCredit();
+                            timeForReturn = databaseManage.queryCHCurrentTime();
+                            Intent intent = new Intent();
+                            intent.putExtra("enery", eneryForReturn);
+                            intent.putExtra("credit", creditForReturn);
+                            intent.putExtra("time", timeForReturn);
+                            setResult(RESULT_OK, intent);
+
+                            finish();
                         } else {
                             android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Lesson_View.this);
                             dialog.setTitle("提示");
@@ -355,23 +437,49 @@ public class Lesson_View extends AppCompatActivity {
                         CName = forth_lesson.getText().toString();
                         eachClassCredit = databaseManage.queryCNameCEachClassCredit(CName);
                         eachClassEnergy = databaseManage.queryCNameCEachClassEnergy(CName);
-                        //[TODO]特殊判断C语言课程
+                        //特殊判断C语言课程
                         if (CName.equals("高级语言程序设计")) {
-                            int[] questionNumber = databaseManage.queryCidQIsAnswerQuestionsQNo(2);
-                            if (questionNumber[0] == 1) {
-                                databaseManage.updateQidQIsAnswer(0, true);
-                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
-                                startActivity(intent);
-                            } else if (questionNumber[1] == 1) {
-                                databaseManage.updateQidQIsAnswer(1, true);
-                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
-                                startActivity(intent);
-                            } else {
-                                databaseManage.updateQidQIsAnswer(2, true);
-                                Intent intent = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
-                                startActivity(intent);
+                            int cnt = databaseManage.queryCNameAttendClassNumber(CName);
+                            int CHid = getCHid(databaseManage.queryCHCurrentWeek(), week, 4);
+
+                            int flg = databaseManage.updateCHCidCHCIsAttendClass(CHid, true);
+                            if (flg != 1) {
+                                Toast.makeText(Lesson_View.this, "调出课程失败！", Toast.LENGTH_SHORT).show();
                             }
 
+                            switch (cnt) {
+                                case 0 :
+                                    Intent intent1 = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
+                                    startActivity(intent1);
+                                    break;
+                                case 1 :
+                                    Intent intent2 = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
+                                    startActivity(intent2);
+                                    break;
+                                case 2 :
+                                    Intent intent3 = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
+                                    startActivity(intent3);
+                                    break;
+                                case 3:
+                                    break;
+                            }
+
+
+                           /*直接在Lesson_View界面消耗活力值并获得学分*/
+                            int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
+                            i = databaseManage.updateCHCredit(CHCredit + eachClassCredit);
+                            i = databaseManage.updateCHCurrentTime(baseTime + (10 * 60));
+
+                            eneryForReturn = databaseManage.queryCHCurrentEnergy();
+                            creditForReturn = databaseManage.queryCHCredit();
+                            timeForReturn = databaseManage.queryCHCurrentTime();
+                            Intent intent = new Intent();
+                            intent.putExtra("enery", eneryForReturn);
+                            intent.putExtra("credit", creditForReturn);
+                            intent.putExtra("time", timeForReturn);
+                            setResult(RESULT_OK, intent);
+
+                            finish();
                         } else {
                             android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Lesson_View.this);
                             dialog.setTitle("提示");
@@ -385,7 +493,7 @@ public class Lesson_View extends AppCompatActivity {
                                     CHCurrentEnergy = databaseManage.queryCHCurrentEnergy();
                                     CHCredit = databaseManage.queryCHCredit();
 
-                                /*数据库更新*/
+                                    /*数据库更新*/
                                     int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
                                     i = databaseManage.updateCHCredit(CHCredit + eachClassCredit);
                                     i = databaseManage.updateCHCurrentTime(baseTime + (17 * 60) + 30);

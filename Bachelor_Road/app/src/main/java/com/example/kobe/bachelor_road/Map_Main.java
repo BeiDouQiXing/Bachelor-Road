@@ -119,6 +119,8 @@ public class Map_Main extends AppCompatActivity {
                     main_vitality_value.setText(String.valueOf(enery));
                     TextView main_study_value = findViewById(R.id.main_study_value);
                     main_study_value.setText(String.valueOf(df.format(credit)));
+                    TextView main_which_week = findViewById(R.id.main_which_week);
+                    main_which_week.setText("第" + String.valueOf(databaseManage.queryCHCurrentWeek()) + "周");
                     TextView main_which_noon = findViewById(R.id.main_which_noon);
                     main_which_noon.setText(TimeTranslate.morningOrAfter(time));
                     TextView main_current_time = findViewById(R.id.main_current_time);
