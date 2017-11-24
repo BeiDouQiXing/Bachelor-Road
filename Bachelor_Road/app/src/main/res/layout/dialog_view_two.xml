@@ -10,7 +10,7 @@
         android:background="#ff0000"/>
 
     <TextView
-        android:id="@+id/question_submit"
+        android:id="@+id/question_submit_view_two"
         android:layout_width="267dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -27,6 +27,7 @@
         android:hint="请输入答案"
         android:textColor="#000"
         android:textSize="16sp"
+        android:id="@+id/view_two_answer"
         />
 
     <TextView
@@ -38,8 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal">
-        <TextView
-            android:id="@+id/return_blackboard"
+        <Button
+            android:id="@+id/return_blackboard_view_two"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -47,13 +48,14 @@
             android:paddingBottom="15dp"
             android:paddingTop="15dp"
             android:gravity="center"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:background="#00000000"/>
         <TextView
             android:layout_width="1px"
             android:layout_height="match_parent"
             android:background="#969696"/>
-        <TextView
-            android:id="@+id/submit"
+        <Button
+            android:id="@+id/view_two_submit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -62,7 +64,8 @@
             android:paddingTop="15dp"
             android:gravity="center"
             android:textColor="#ff00"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:background="#00000000"/>
 
     </LinearLayout>
 </LinearLayout>
