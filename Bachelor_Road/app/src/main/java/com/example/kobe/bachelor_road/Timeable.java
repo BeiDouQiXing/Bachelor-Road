@@ -42,6 +42,14 @@ public class Timeable extends AppCompatActivity {
         creditForReturn = databaseManage.queryCHCredit();
         timeForReturn = databaseManage.queryCHCurrentTime();
 
+        /*时间信息显示*/
+        TextView main_which_week = findViewById(R.id.main_which_week);
+        main_which_week.setText("第" + String.valueOf(currentWeek) + "周");
+        TextView main_which_noon = findViewById(R.id.main_which_noon);
+        main_which_noon.setText(TimeTranslate.morningOrAfter(timeForReturn));
+        TextView main_current_time = findViewById(R.id.main_current_time);
+        main_current_time.setText(TimeTranslate.timeIntToString(timeForReturn));
+
         if ( currentWeek == 1) {
             android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Timeable.this);
             dialog.setTitle("提示");
@@ -352,6 +360,11 @@ public class Timeable extends AppCompatActivity {
                     eneryForReturn = data.getIntExtra("enery", 0);
                     creditForReturn = data.getDoubleExtra("credit", 0);
                     timeForReturn = data.getIntExtra("time", 0);
+
+                    TextView main_which_noon = findViewById(R.id.main_which_noon);
+                    main_which_noon.setText(TimeTranslate.morningOrAfter(timeForReturn));
+                    TextView main_current_time = findViewById(R.id.main_current_time);
+                    main_current_time.setText(TimeTranslate.timeIntToString(timeForReturn));
                 }
                 break;
             default:

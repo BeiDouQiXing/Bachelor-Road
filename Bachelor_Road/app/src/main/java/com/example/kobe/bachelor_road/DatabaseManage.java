@@ -1,4 +1,4 @@
-package com.xueshizhilu.xueshizhilusql;
+package com.example.kobe.bachelor_road;
 
 /**
  * Created by Administrator on 2017/11/7.
@@ -555,7 +555,7 @@ public class DatabaseManage {
     }
 
     //查询人物已加入的部门的当前周的部门活动全属性
-   /* public DepartmentActivities[] queryJoinedDepartmentCurrentWeekActivities(){
+    public DepartmentActivities[] queryJoinedDepartmentCurrentWeekActivities(){
         SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
         Cursor cursor = sQLiteDatabase.query("Character",null,null,null,null,null,null);//查询并获得游标
         int CHCurrentWeek = -1;
@@ -584,7 +584,7 @@ public class DatabaseManage {
         }
         sQLiteDatabase.close();
         return departmentActivities;
-    }*/
+    }
 
     public DepartmentActivities[] queryJoinedDepartmentWeekActivities(int Week){
         SQLiteDatabase sQLiteDatabase=database.getReadableDatabase();
