@@ -55,8 +55,8 @@ public class Classroom_Program_C_One extends AppCompatActivity implements View.O
            case R.id.test_one:
                 dialog = new Dialog(this);
                 View view_judge= LayoutInflater.from(this).inflate(R.layout.dialog_judge_one,null);
-                view_judge.findViewById(R.id.yes).setOnClickListener(this);
-                view_judge.findViewById(R.id.no).setOnClickListener(this);
+                view_judge.findViewById(R.id.yes_judge_one).setOnClickListener(this);
+                view_judge.findViewById(R.id.no_judge_one).setOnClickListener(this);
                 dialog.setContentView(view_judge);
                 WindowManager.LayoutParams params_judge = dialog.getWindow().getAttributes();
                 params_judge.width = 1500;
@@ -67,22 +67,18 @@ public class Classroom_Program_C_One extends AppCompatActivity implements View.O
                 //显示对话框
                 dialog.show();
                 break;
-            case R.id.yes:
+            case R.id.yes_judge_one:
                 Toast.makeText(this,"回答正确",Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
-                Intent intent = new Intent(Classroom_Program_C_One.this, Map_Main.class);
-                startActivity(intent);
                 finish();
                 break;
-            case R.id.no:
+            case R.id.no_judge_one:
                 Toast.makeText(this,"再想想呗，好像不太对哦",Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
                 //这里实现业务逻辑
                 break;
             case R.id.class_one_run_out:
-                Intent intent2 = new Intent(Classroom_Program_C_One.this, Map_Main.class);
-                startActivity(intent2);
-                finish();
+               finish();
 
         }
     }

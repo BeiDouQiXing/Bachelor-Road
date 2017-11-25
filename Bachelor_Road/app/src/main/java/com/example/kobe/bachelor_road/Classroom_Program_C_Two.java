@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,16 +19,17 @@ import android.widget.Toast;
 
 public class Classroom_Program_C_Two extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageView image = findViewById(R.id.c_program2);
     private int imgTimes = 0;
 private Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ImageView image = findViewById(R.id.c_program2);
         setContentView(R.layout.classroom_c_two);
         findViewById(R.id.class_two_run_out).setOnClickListener(this);
         findViewById(R.id.test_two).setOnClickListener(this);
-
+        findViewById(R.id.left_button_two).setOnClickListener(this);
+        findViewById(R.id.right_button_two).setOnClickListener(this);
 
 
 
@@ -39,10 +41,11 @@ private Dialog dialog;
                 finish();
             case R.id.test_two:
                 //创建对话框
+                dialog= new Dialog(this);
                 View view_fill_blank = LayoutInflater.from(this).inflate(R.layout.dialog_view_one,null);
                 //给Dialog中的子view设置事件监听
-                view_fill_blank.findViewById(R.id.return_blackboard).setOnClickListener((View.OnClickListener) this);
-                view_fill_blank.findViewById(R.id.submit).setOnClickListener((View.OnClickListener) this);
+                view_fill_blank.findViewById(R.id.return_blackboard_view_one).setOnClickListener((View.OnClickListener) this);
+                view_fill_blank.findViewById(R.id.view_one_submit).setOnClickListener((View.OnClickListener) this);
                 dialog.setContentView(view_fill_blank);
                 //自定义宽高（高度一般不用调整，在xml调整好就可以了，这里我只调整了宽度）
                 WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
@@ -50,20 +53,18 @@ private Dialog dialog;
                 dialog.getWindow().setAttributes(params);
                 //show之前设置返回键无效，触摸屏无效
                 dialog.setCancelable(false);
-               TextView textView = (TextView)findViewById(R.id.question_submit);
+               TextView textView = (TextView)findViewById(R.id.question_submit_view_one);
                 //显示对话框
                 dialog.show();
                 break;
-            case R.id.return_blackboard:
+            case R.id.return_blackboard_view_one:
                 dialog.dismiss();
                 break;
-            case R.id.submit:
-                TextView textViewGet = (TextView)findViewById(R.id.question_submit);
-                if(textViewGet.getText().toString().equals("30")==true) {
+            case R.id.view_one_submit:
+                EditText editText = (EditText) dialog.findViewById(R.id.view_two_answer);
+                if( Integer.valueOf(editText.getText().toString()) == 30) {
                     Toast.makeText(this, "回答正确", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
-                    Intent intent = new Intent(Classroom_Program_C_Two.this, Map_Main.class);
-                    startActivity(intent);
                     finish();
                 } else {
                     Toast.makeText(this, "再想想呗，回答不太对哦", Toast.LENGTH_SHORT).show();
@@ -77,7 +78,8 @@ private Dialog dialog;
                      return;
                  } else {
                      imgTimes--;
-                     image.setImageResource(R.drawable.c_program2_2);
+                     ImageView image = findViewById(R.id.c_program2);
+                     image.setImageResource(R.drawable.c_program2_1);
                      Toast.makeText(Classroom_Program_C_Two.this, "切换成功", Toast.LENGTH_SHORT).show();
                  }
                 break;
@@ -87,7 +89,8 @@ private Dialog dialog;
                     return;
                 } else {
                     imgTimes++;
-                    image.setImageResource(R.drawable.c_program2_1);
+                    ImageView image = findViewById(R.id.c_program2);
+                    image.setImageResource(R.drawable.c_program2_2);
                     Toast.makeText(Classroom_Program_C_Two.this, "切换成功", Toast.LENGTH_SHORT).show();
                 }
                 break;
