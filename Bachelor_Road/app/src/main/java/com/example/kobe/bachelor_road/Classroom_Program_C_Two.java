@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,14 +32,20 @@ private Dialog dialog;
         findViewById(R.id.left_button_two).setOnClickListener(this);
         findViewById(R.id.right_button_two).setOnClickListener(this);
 
+        Button class_run_out = findViewById(R.id.class_two_run_out);
+        class_run_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
     }
 
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.class_two_run_out:
-                finish();
             case R.id.test_two:
                 //创建对话框
                 dialog= new Dialog(this);
