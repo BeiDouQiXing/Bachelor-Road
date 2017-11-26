@@ -158,28 +158,28 @@ public class Lesson_View extends AppCompatActivity {
                                 });
                                 errorDialog.show();
                             } else {
-                                int cnt = databaseManage.queryCNameAttendClassNumber(CName);
-                                int CHid = getCHid(databaseManage.queryCHCurrentWeek(), week, 1);
-
+                                int CHid = getCHid(databaseManage.queryCHCurrentWeek(), week, 1) + 1;
                                 int flg = databaseManage.updateCHCidCHCIsAttendClass(CHid, true);
                                 if (flg != 1) {
                                     Toast.makeText(Lesson_View.this, "调出课程失败！", Toast.LENGTH_SHORT).show();
                                 }
+                                int cnt = databaseManage.queryCNameAttendClassNumber(CName);
 
                                 switch (cnt) {
-                                    case 0 :
+                                    case 1 :
                                         Intent intent1 = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
                                         startActivity(intent1);
                                         break;
-                                    case 1 :
+                                    case 2 :
                                         Intent intent2 = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
                                         startActivity(intent2);
                                         break;
-                                    case 2 :
+                                    case 3 :
                                         Intent intent3 = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
                                         startActivity(intent3);
                                         break;
-                                    case 3:
+                                    default:
+                                        Toast.makeText(Lesson_View.this, "题目做完啦~", Toast.LENGTH_SHORT).show();
                                         break;
                                 }
 
@@ -307,28 +307,28 @@ public class Lesson_View extends AppCompatActivity {
                                 });
                                 errorDialog.show();
                             } else {
-                                int cnt = databaseManage.queryCNameAttendClassNumber(CName);
                                 int CHid = getCHid(databaseManage.queryCHCurrentWeek(), week, 2);
-
                                 int flg = databaseManage.updateCHCidCHCIsAttendClass(CHid, true);
                                 if (flg != 1) {
                                     Toast.makeText(Lesson_View.this, "调出课程失败！", Toast.LENGTH_SHORT).show();
                                 }
+                                int cnt = databaseManage.queryCNameAttendClassNumber(CName);
 
                                 switch (cnt) {
-                                    case 0 :
+                                    case 1 :
                                         Intent intent1 = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
                                         startActivity(intent1);
                                         break;
-                                    case 1 :
+                                    case 2 :
                                         Intent intent2 = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
                                         startActivity(intent2);
                                         break;
-                                    case 2 :
+                                    case 3 :
                                         Intent intent3 = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
                                         startActivity(intent3);
                                         break;
-                                    case 3:
+                                    default:
+                                        Toast.makeText(Lesson_View.this, "题目做完啦~", Toast.LENGTH_SHORT).show();
                                         break;
                                 }
 
@@ -456,28 +456,31 @@ public class Lesson_View extends AppCompatActivity {
                                 });
                                 errorDialog.show();
                             } else {
-                                int cnt = databaseManage.queryCNameAttendClassNumber(CName);
-                                int CHid = getCHid(databaseManage.queryCHCurrentWeek(), week, 3);
 
+                                int CHid = getCHid(databaseManage.queryCHCurrentWeek(), week, 3);
                                 int flg = databaseManage.updateCHCidCHCIsAttendClass(CHid, true);
                                 if (flg != 1) {
                                     Toast.makeText(Lesson_View.this, "调出课程失败！", Toast.LENGTH_SHORT).show();
                                 }
 
+                                int cnt = databaseManage.queryCNameAttendClassNumber(CName);
+
+
                                 switch (cnt) {
-                                    case 0 :
+                                    case 1 :
                                         Intent intent1 = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
                                         startActivity(intent1);
                                         break;
-                                    case 1 :
+                                    case 2 :
                                         Intent intent2 = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
                                         startActivity(intent2);
                                         break;
-                                    case 2 :
+                                    case 3 :
                                         Intent intent3 = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
                                         startActivity(intent3);
                                         break;
-                                    case 3:
+                                    default:
+                                        Toast.makeText(Lesson_View.this, "题目做完啦~", Toast.LENGTH_SHORT).show();
                                         break;
                                 }
 
@@ -605,28 +608,30 @@ public class Lesson_View extends AppCompatActivity {
                                 });
                                 errorDialog.show();
                             } else {
-                                int cnt = databaseManage.queryCNameAttendClassNumber(CName);
                                 int CHid = getCHid(databaseManage.queryCHCurrentWeek(), week, 4);
-
                                 int flg = databaseManage.updateCHCidCHCIsAttendClass(CHid, true);
                                 if (flg != 1) {
                                     Toast.makeText(Lesson_View.this, "调出课程失败！", Toast.LENGTH_SHORT).show();
                                 }
 
+                                int cnt = databaseManage.queryCNameAttendClassNumber(CName);
+
+                                
                                 switch (cnt) {
-                                    case 0 :
+                                    case 1 :
                                         Intent intent1 = new Intent(Lesson_View.this, Classroom_Program_C_One.class);
                                         startActivity(intent1);
                                         break;
-                                    case 1 :
+                                    case 2 :
                                         Intent intent2 = new Intent(Lesson_View.this, Classroom_Program_C_Two.class);
                                         startActivity(intent2);
                                         break;
-                                    case 2 :
+                                    case 3 :
                                         Intent intent3 = new Intent(Lesson_View.this, Classroom_Program_C_Three.class);
                                         startActivity(intent3);
                                         break;
-                                    case 3:
+                                    default:
+                                        Toast.makeText(Lesson_View.this, "题目做完啦~", Toast.LENGTH_SHORT).show();
                                         break;
                                 }
 
