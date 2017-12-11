@@ -9,6 +9,7 @@
         android:layout_height="5dp"
         android:background="#ff0000"/>
 
+
     <TextView
         android:id="@+id/question_submit_view_one"
         android:layout_width="259dp"
