@@ -16,6 +16,14 @@ public class Dorm extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        /*主界面背景音乐播放*/
+        Intent intentMusic1 = new Intent(Dorm.this, MyService1.class);
+        startService(intentMusic1);
+
+        /*宿舍背景音乐停止*/
+        Intent intentMusic3 = new Intent(Dorm.this, MyService3.class);
+        stopService(intentMusic3);
+
         Intent intent = new Intent();
         intent.putExtra("week", weekForReturn);
         intent.putExtra("time", timeForReturn);
@@ -32,10 +40,22 @@ public class Dorm extends AppCompatActivity {
         weekForReturn = databaseManage.queryCHCurrentWeek();
         eneryForReturn = databaseManage.queryCHCurrentEnergy();
 
+        /*课程背景音乐播放*/
+        Intent intentMusic3 = new Intent(Dorm.this, MyService3.class);
+        startService(intentMusic3);
+
         Button dorm_run_out = findViewById(R.id.dorm_run_out);
         dorm_run_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*主界面背景音乐播放*/
+                Intent intentMusic1 = new Intent(Dorm.this, MyService1.class);
+                startService(intentMusic1);
+
+                /*宿舍背景音乐停止*/
+                Intent intentMusic3 = new Intent(Dorm.this, MyService3.class);
+                stopService(intentMusic3);
+
                 Intent intent = new Intent();
                 intent.putExtra("week", weekForReturn);
                 intent.putExtra("time", timeForReturn);
