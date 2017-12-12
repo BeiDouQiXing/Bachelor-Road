@@ -2,23 +2,36 @@ package com.example.kobe.bachelor_road;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Timeable extends AppCompatActivity {
 
-    private int eneryForReturn;
-    private double creditForReturn;
-    private int timeForReturn;
     private int currentWeek;
     private DatabaseManage databaseManage;
     private CharacterCourse[] characterCourses;
+    private int currentTime ;
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        /*更新当前周数*/
+        databaseManage = new DatabaseManage(this);
+        currentWeek = databaseManage.queryCHCurrentWeek();
+        currentTime = databaseManage.queryCHCurrentTime();
+
+        /*时间信息显示*/
+        TextView main_which_week = findViewById(R.id.main_which_week);
+        main_which_week.setText("第" + String.valueOf(currentWeek) + "周");
+        TextView main_which_noon = findViewById(R.id.main_which_noon);
+        main_which_noon.setText(TimeTranslate.morningOrAfter(currentTime));
+        TextView main_current_time = findViewById(R.id.main_current_time);
+        main_current_time.setText(TimeTranslate.timeIntToString(currentTime));
+    }
     @Override
     public void onBackPressed() {
         /*主界面背景音乐播放*/
@@ -29,11 +42,6 @@ public class Timeable extends AppCompatActivity {
         Intent intentMusic2 = new Intent(Timeable.this, MyService2.class);
         stopService(intentMusic2);
 
-        Intent intent = new Intent();
-        intent.putExtra("enery", eneryForReturn);
-        intent.putExtra("credit", creditForReturn);
-        intent.putExtra("time", timeForReturn);
-        setResult(RESULT_OK, intent);
         finish();
     }
 
@@ -46,22 +54,6 @@ public class Timeable extends AppCompatActivity {
         Intent intent = new Intent(Timeable.this, MyService2.class);
         startService(intent);
 
-        /*更新当前周数*/
-        databaseManage = new DatabaseManage(this);
-        currentWeek = databaseManage.queryCHCurrentWeek();
-
-        eneryForReturn = databaseManage.queryCHCurrentEnergy();
-        creditForReturn = databaseManage.queryCHCredit();
-        timeForReturn = databaseManage.queryCHCurrentTime();
-
-        /*时间信息显示*/
-        TextView main_which_week = findViewById(R.id.main_which_week);
-        main_which_week.setText("第" + String.valueOf(currentWeek) + "周");
-        TextView main_which_noon = findViewById(R.id.main_which_noon);
-        main_which_noon.setText(TimeTranslate.morningOrAfter(timeForReturn));
-        TextView main_current_time = findViewById(R.id.main_current_time);
-        main_current_time.setText(TimeTranslate.timeIntToString(timeForReturn));
-
         if ( currentWeek == 1) {
             android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Timeable.this);
             dialog.setTitle("提示");
@@ -69,8 +61,6 @@ public class Timeable extends AppCompatActivity {
             dialog.setCancelable(false);
             dialog.setNegativeButton("再去看看咯", new DialogInterface.OnClickListener(){
                         public void onClick(DialogInterface dialog,int which) {
-                            Intent intent = new Intent(Timeable.this, Map_Main.class);
-                            startActivity(intent);
                             finish();
                         }
             });
@@ -97,11 +87,6 @@ public class Timeable extends AppCompatActivity {
                 Intent intentMusic2 = new Intent(Timeable.this, MyService2.class);
                 stopService(intentMusic2);
 
-                Intent intent = new Intent();
-                intent.putExtra("enery", eneryForReturn);
-                intent.putExtra("credit", creditForReturn);
-                intent.putExtra("time", timeForReturn);
-                setResult(RESULT_OK, intent);
                 finish();
             }
         });
@@ -155,7 +140,7 @@ public class Timeable extends AppCompatActivity {
                     intent.putExtra("fifth_lesson", fifth_lesson);
                 }
 
-                startActivityForResult(intent, 2);
+                startActivity(intent);
             }
         });
 
@@ -208,7 +193,7 @@ public class Timeable extends AppCompatActivity {
                     intent.putExtra("fifth_lesson", fifth_lesson);
                 }
 
-                startActivityForResult(intent, 2);
+                startActivity(intent);
             }
         });
 
@@ -261,7 +246,7 @@ public class Timeable extends AppCompatActivity {
                     intent.putExtra("fifth_lesson", fifth_lesson);
                 }
 
-                startActivityForResult(intent, 2);
+                startActivity(intent);
             }
         });
 
@@ -314,7 +299,7 @@ public class Timeable extends AppCompatActivity {
                     intent.putExtra("fifth_lesson", fifth_lesson);
                 }
 
-                startActivityForResult(intent, 2);
+                startActivity(intent);
             }
         });
 
@@ -367,28 +352,8 @@ public class Timeable extends AppCompatActivity {
                     intent.putExtra("fifth_lesson", fifth_lesson);
                 }
 
-                startActivityForResult(intent, 2);
+                startActivity(intent);
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 2:
-                if (resultCode == RESULT_OK) {
-                    eneryForReturn = data.getIntExtra("enery", 0);
-                    creditForReturn = data.getDoubleExtra("credit", 0);
-                    timeForReturn = data.getIntExtra("time", 0);
-
-                    TextView main_which_noon = findViewById(R.id.main_which_noon);
-                    main_which_noon.setText(TimeTranslate.morningOrAfter(timeForReturn));
-                    TextView main_current_time = findViewById(R.id.main_current_time);
-                    main_current_time.setText(TimeTranslate.timeIntToString(timeForReturn));
-                }
-                break;
-            default:
-                break;
-        }
     }
 }

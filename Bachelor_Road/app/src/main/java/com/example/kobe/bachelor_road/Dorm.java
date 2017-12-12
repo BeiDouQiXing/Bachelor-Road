@@ -9,9 +9,6 @@ import android.widget.Toast;
 
 public class Dorm extends AppCompatActivity {
 
-    private int timeForReturn;
-    private int weekForReturn;
-    private int eneryForReturn;
     final DatabaseManage databaseManage = new DatabaseManage(this);
 
     @Override
@@ -24,21 +21,12 @@ public class Dorm extends AppCompatActivity {
         Intent intentMusic3 = new Intent(Dorm.this, MyService3.class);
         stopService(intentMusic3);
 
-        Intent intent = new Intent();
-        intent.putExtra("week", weekForReturn);
-        intent.putExtra("time", timeForReturn);
-        intent.putExtra("enery", eneryForReturn);
-        setResult(RESULT_OK, intent);
         finish();
     }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dorm);
-
-        timeForReturn = databaseManage.queryCHCurrentTime();
-        weekForReturn = databaseManage.queryCHCurrentWeek();
-        eneryForReturn = databaseManage.queryCHCurrentEnergy();
 
         /*课程背景音乐播放*/
         Intent intentMusic3 = new Intent(Dorm.this, MyService3.class);
@@ -56,11 +44,6 @@ public class Dorm extends AppCompatActivity {
                 Intent intentMusic3 = new Intent(Dorm.this, MyService3.class);
                 stopService(intentMusic3);
 
-                Intent intent = new Intent();
-                intent.putExtra("week", weekForReturn);
-                intent.putExtra("time", timeForReturn);
-                intent.putExtra("enery", eneryForReturn);
-                setResult(RESULT_OK, intent);
                 finish();
             }
         });
@@ -72,10 +55,6 @@ public class Dorm extends AppCompatActivity {
                 } else {
                     databaseManage.updateCHCurrentTime(8 * 60);
                     databaseManage.updateCHCurrentEnergy(100);
-
-                    timeForReturn = databaseManage.queryCHCurrentTime();
-                    weekForReturn = databaseManage.queryCHCurrentWeek();
-                    eneryForReturn = databaseManage.queryCHCurrentEnergy();
 
                     Toast.makeText(Dorm.this, "现在是第" + String.valueOf(databaseManage.queryCHCurrentWeek()) + "周", Toast.LENGTH_SHORT).show();
                 }
