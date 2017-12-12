@@ -1,17 +1,30 @@
 package com.example.kobe.bachelor_road;
 
+import android.Manifest;
+import android.annotation.TargetApi;
+import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import com.bumptech.glide.Glide;
 
 import java.text.DecimalFormat;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by kobe on 2017/11/6.
@@ -28,7 +41,8 @@ public class Map_Main extends AppCompatActivity {
     }
 
     private DatabaseManage databaseManage;
-
+    private static final int CHOOSE_PHOTO = 13;
+    private CircleImageView bigHead;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,7 +127,34 @@ public class Map_Main extends AppCompatActivity {
                 startActivityForResult(intent, 3);
             }
         });
+
+        /*头像监听事件*/
+        bigHead = findViewById(R.id.main_big_head);
+        bigHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //查看权限
+                if (ContextCompat.checkSelfPermission(Map_Main.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                        PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(Map_Main.this, new String[]{
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                } else {
+                    openAlbum();
+                }
+            }
+        });
+/*
+        if () {
+            // 如果头像路径为空，则使用默认头像
+            Glide.with(this).load(R.drawable.boy)
+                    .into(bigHead);
+        } else {
+            Glide.with(this).load(userBean.getAvatarPath())
+                    .into(circleImageView);
+        }*/
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -170,11 +211,101 @@ public class Map_Main extends AppCompatActivity {
                 TextView main_current_time = findViewById(R.id.main_current_time);
                 main_current_time.setText(TimeTranslate.timeIntToString(time));
                 break;
+            case CHOOSE_PHOTO:
+                // 判断手机系统版本号
+                if (resultCode == RESULT_OK) {
+                    if (Build.VERSION.SDK_INT >= 19) {
+                        // 手机系统在4.4及以上的才能使用这个方法处理图片
+                        handleImageOnKitKat(data);
+                    } else {
+                        // 手机系统在4.4以下的使用这个方法处理图片
+                        handleImageBeforeKitKat(data);
+                    }
+                }
+                break;
             default:
                 break;
         }
 
     }
 
+    private String getImagePath(Uri uri, String selection) {
+        String path = null;
+        // 通过Uri和selection来获取真实的图片路径
+        Cursor cursor = getContentResolver().query(uri, null, selection, null, null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+                cursor.close();
+            }
+        }
+        return path;
+    }
 
+
+    @Override
+    // 申请用户权限
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.
+                        PERMISSION_GRANTED) {
+                    openAlbum();
+                } else {
+                    // 用户拒绝授权
+                    Toast.makeText(this, "You denied the permission",
+                            Toast.LENGTH_SHORT).show();
+                }
+                break;
+            default:
+        }
+    }
+
+
+    @TargetApi(19)
+    private void handleImageOnKitKat(Intent data) {
+        Uri uri = data.getData();
+        String imagePath = null;
+        // 如果是document类型的Uri，，则通过document id处理
+        if (DocumentsContract.isDocumentUri(this, uri)) {
+            String docId = DocumentsContract.getDocumentId(uri);
+            if ("com.android.providers.media.documents".equals(uri.getAuthority())) {
+                // 解析出数字格式的id
+                String id = docId.split(":")[1];
+                String selection = MediaStore.Images.Media._ID + "=" + id;
+                imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        selection);
+            } else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())) {
+                Uri contentUri = ContentUris.withAppendedId(Uri.parse("content:" +
+                        "//downloads/public_downloads"), Long.valueOf(docId));
+                imagePath = getImagePath(contentUri, null);
+            }
+        } else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            // 如果是file类型的Uri，直接获取图片路径
+            imagePath = uri.getPath();
+        } else if ("content".equalsIgnoreCase(uri.getScheme())) {
+            // 如果是content类型的Uri，使用普通方式处理
+            imagePath = getImagePath(uri, null);
+        }
+
+        // 根据图片路径显示头像
+        Glide.with(this).load(imagePath)
+                .into(bigHead);
+    }
+
+    private void handleImageBeforeKitKat(Intent data) {
+        Uri uri = data.getData();
+        String imagePath = getImagePath(uri, null);
+        // 根据图片路径显示头像
+        Glide.with(this).load(imagePath)
+                .into(bigHead);
+    }
+
+    private void openAlbum() {
+        Intent intent = new Intent("android.intent.action.GET_CONTENT");
+        intent.setType("image/*");
+        // 打开相册
+        startActivityForResult(intent, CHOOSE_PHOTO);
+    }
 }
