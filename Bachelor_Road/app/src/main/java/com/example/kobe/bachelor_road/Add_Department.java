@@ -13,6 +13,18 @@ import android.widget.Toast;
 
 //加入部门界面
 public class Add_Department extends AppCompatActivity {
+    @Override
+    public void onBackPressed() {
+        /*主界面背景音乐播放*/
+        Intent intentMusic1 = new Intent(Add_Department.this, MyService1.class);
+        startService(intentMusic1);
+
+        /*部门背景音乐停止*/
+        Intent intentMusic4 = new Intent(Add_Department.this, MyService4.class);
+        stopService(intentMusic4);
+
+        finish();
+    }
 
     final DatabaseManage databaseManage = new DatabaseManage(this);
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +49,11 @@ public class Add_Department extends AppCompatActivity {
         if(isAdmit(databaseManage)==true && databaseManage.queryCHCurrentWeek() == 1) {
             Toast.makeText(Add_Department.this,"您已经完成了选择，准备新生周后的生活吧！",Toast.LENGTH_SHORT).show();
         }
+
+        /*部门背景音乐播放*/
+        Intent intentMusic4 = new Intent(Add_Department.this, MyService4.class);
+        startService(intentMusic4);
+
         /*几个部门的加入*/
         final Button [] buttonAddDept = new Button[5];
         buttonAddDept[0] =  findViewById(R.id.add_department_one);
@@ -81,11 +98,19 @@ public class Add_Department extends AppCompatActivity {
                                             }
         );
 
-
+        /*离开按钮点击事件*/
         Button buttonBackMain = findViewById(R.id.add_department_run_out);
         buttonBackMain.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
+                                                    /*主界面背景音乐播放*/
+                                                    Intent intentMusic1 = new Intent(Add_Department.this, MyService1.class);
+                                                    startService(intentMusic1);
+
+                                                    /*部门背景音乐停止*/
+                                                    Intent intentMusic4 = new Intent(Add_Department.this, MyService4.class);
+                                                    stopService(intentMusic4);
+
                                                     finish();
                                                 }
                                             }
@@ -96,12 +121,30 @@ public class Add_Department extends AppCompatActivity {
             public void onClick(View view) {
                 if(isAdmit(databaseManage) == true) {
                     Toast.makeText(Add_Department.this,"您已经完成了选择，准备新生周后的生活吧！",Toast.LENGTH_SHORT).show();
+
+                    /*主界面背景音乐播放*/
+                    Intent intentMusic1 = new Intent(Add_Department.this, MyService1.class);
+                    startService(intentMusic1);
+
+                    /*部门背景音乐停止*/
+                    Intent intentMusic4 = new Intent(Add_Department.this, MyService4.class);
+                    stopService(intentMusic4);
+
                     finish();
                 }
                 int need = databaseManage.updateDNameDIsJoinDepartment(buttonAddDept[0].getText().toString(), true);
                 if(need == 1) {
                     Toast.makeText(Add_Department.this,"加入成功",Toast.LENGTH_SHORT).show();
                     updateWeek();
+
+                    /*主界面背景音乐播放*/
+                    Intent intentMusic1 = new Intent(Add_Department.this, MyService1.class);
+                    startService(intentMusic1);
+
+                    /*部门背景音乐停止*/
+                    Intent intentMusic4 = new Intent(Add_Department.this, MyService4.class);
+                    stopService(intentMusic4);
+
                     finish();
                 } else {
                     Toast.makeText(Add_Department.this,"加入失败",Toast.LENGTH_SHORT).show();
@@ -114,12 +157,30 @@ public class Add_Department extends AppCompatActivity {
             public void onClick(View view) {
                 if(isAdmit(databaseManage)==true) {
                     Toast.makeText(Add_Department.this,"您已经完成了选择，准备新生周后的生活吧！",Toast.LENGTH_SHORT).show();
+
+                    /*主界面背景音乐播放*/
+                    Intent intentMusic1 = new Intent(Add_Department.this, MyService1.class);
+                    startService(intentMusic1);
+
+                    /*部门背景音乐停止*/
+                    Intent intentMusic4 = new Intent(Add_Department.this, MyService4.class);
+                    stopService(intentMusic4);
+
                     finish();
                 }
                 int need = databaseManage.updateDNameDIsJoinDepartment(buttonAddDept[1].getText().toString(), true);
                 if(need == 1) {
                     Toast.makeText(Add_Department.this,"加入成功",Toast.LENGTH_SHORT).show();
                     updateWeek();
+
+                    /*主界面背景音乐播放*/
+                    Intent intentMusic1 = new Intent(Add_Department.this, MyService1.class);
+                    startService(intentMusic1);
+
+                    /*部门背景音乐停止*/
+                    Intent intentMusic4 = new Intent(Add_Department.this, MyService4.class);
+                    stopService(intentMusic4);
+
                     finish();
                 } else {
                     Toast.makeText(Add_Department.this,"加入失败",Toast.LENGTH_SHORT).show();
@@ -132,12 +193,30 @@ public class Add_Department extends AppCompatActivity {
             public void onClick(View view) {
                 if(isAdmit(databaseManage)==true) {
                     Toast.makeText(Add_Department.this,"您已经完成了选择，准备新生周后的生活吧！",Toast.LENGTH_SHORT).show();
+
+                    /*主界面背景音乐播放*/
+                    Intent intentMusic1 = new Intent(Add_Department.this, MyService1.class);
+                    startService(intentMusic1);
+
+                    /*部门背景音乐停止*/
+                    Intent intentMusic4 = new Intent(Add_Department.this, MyService4.class);
+                    stopService(intentMusic4);
+
                     finish();
                 }
                 int need = databaseManage.updateDNameDIsJoinDepartment(buttonAddDept[2].getText().toString(), true);
                 if(need == 1) {
                     Toast.makeText(Add_Department.this,"加入成功",Toast.LENGTH_SHORT).show();
                     updateWeek();
+
+                    /*主界面背景音乐播放*/
+                    Intent intentMusic1 = new Intent(Add_Department.this, MyService1.class);
+                    startService(intentMusic1);
+
+                    /*部门背景音乐停止*/
+                    Intent intentMusic4 = new Intent(Add_Department.this, MyService4.class);
+                    stopService(intentMusic4);
+
                     finish();
                 } else {
                     Toast.makeText(Add_Department.this,"加入失败",Toast.LENGTH_SHORT).show();
@@ -150,12 +229,31 @@ public class Add_Department extends AppCompatActivity {
             public void onClick(View view) {
                 if(isAdmit(databaseManage)==true) {
                     Toast.makeText(Add_Department.this,"您已经完成了选择，准备新生周后的生活吧！",Toast.LENGTH_SHORT).show();
+
+                    /*主界面背景音乐播放*/
+                    Intent intentMusic1 = new Intent(Add_Department.this, MyService1.class);
+                    startService(intentMusic1);
+
+                    /*部门背景音乐停止*/
+                    Intent intentMusic4 = new Intent(Add_Department.this, MyService4.class);
+                    stopService(intentMusic4);
+
                     finish();
                 }
                 int need = databaseManage.updateDNameDIsJoinDepartment(buttonAddDept[3].getText().toString(), true);
                 if(need == 1) {
                     Toast.makeText(Add_Department.this,"加入成功",Toast.LENGTH_SHORT).show();
+
                     updateWeek();
+
+                    /*主界面背景音乐播放*/
+                    Intent intentMusic1 = new Intent(Add_Department.this, MyService1.class);
+                    startService(intentMusic1);
+
+                    /*部门背景音乐停止*/
+                    Intent intentMusic4 = new Intent(Add_Department.this, MyService4.class);
+                    stopService(intentMusic4);
+
                     finish();
                 } else {
                     Toast.makeText(Add_Department.this,"加入失败",Toast.LENGTH_SHORT).show();
@@ -168,12 +266,31 @@ public class Add_Department extends AppCompatActivity {
             public void onClick(View view) {
                 if(isAdmit(databaseManage)==true) {
                     Toast.makeText(Add_Department.this,"您已经完成了选择，准备新生周后的生活吧！",Toast.LENGTH_SHORT).show();
+
+                    /*主界面背景音乐播放*/
+                    Intent intentMusic1 = new Intent(Add_Department.this, MyService1.class);
+                    startService(intentMusic1);
+
+                    /*部门背景音乐停止*/
+                    Intent intentMusic4 = new Intent(Add_Department.this, MyService4.class);
+                    stopService(intentMusic4);
+
                     finish();
                 }
                 int need = databaseManage.updateDNameDIsJoinDepartment(buttonAddDept[4].getText().toString(), true);
                 if(need == 1) {
                     Toast.makeText(Add_Department.this,"加入成功",Toast.LENGTH_SHORT).show();
+
                     updateWeek();
+
+                    /*主界面背景音乐播放*/
+                    Intent intentMusic1 = new Intent(Add_Department.this, MyService1.class);
+                    startService(intentMusic1);
+
+                    /*部门背景音乐停止*/
+                    Intent intentMusic4 = new Intent(Add_Department.this, MyService4.class);
+                    stopService(intentMusic4);
+
                     finish();
                 } else {
                     Toast.makeText(Add_Department.this,"加入失败",Toast.LENGTH_SHORT).show();
@@ -181,6 +298,7 @@ public class Add_Department extends AppCompatActivity {
             }
         });
     }
+
         /*查询部门是否有加入的部门*/
     public static boolean isAdmit(DatabaseManage databaseManage){
         for(int i = 0;i<5;i++)

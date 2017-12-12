@@ -13,6 +13,18 @@ import android.widget.Toast;
  */
 
 public class MyDepartment extends AppCompatActivity  {
+    @Override
+    public void onBackPressed() {
+        /*主界面背景音乐播放*/
+        Intent intentMusic1 = new Intent(MyDepartment.this, MyService1.class);
+        startService(intentMusic1);
+
+        /*部门背景音乐停止*/
+        Intent intentMusic4 = new Intent(MyDepartment.this, MyService4.class);
+        stopService(intentMusic4);
+
+        finish();
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +62,14 @@ public class MyDepartment extends AppCompatActivity  {
         buttonBackMain.setOnClickListener(new View.OnClickListener() {
                                               @Override
                                               public void onClick(View v) {
+                                                  /*主界面背景音乐播放*/
+                                                  Intent intentMusic1 = new Intent(MyDepartment.this, MyService1.class);
+                                                  startService(intentMusic1);
+
+                                                    /*部门背景音乐停止*/
+                                                  Intent intentMusic4 = new Intent(MyDepartment.this, MyService4.class);
+                                                  stopService(intentMusic4);
+
                                                   finish();
                                               }
                                           }

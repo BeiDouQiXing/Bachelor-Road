@@ -15,9 +15,26 @@ import android.widget.Toast;
 public class Activity extends AppCompatActivity {
 
     @Override
+    public void onBackPressed() {
+        /*主界面背景音乐播放*/
+        Intent intentMusic1 = new Intent(Activity.this, MyService1.class);
+        startService(intentMusic1);
+
+        /*部门背景音乐停止*/
+        Intent intentMusic4 = new Intent(Activity.this, MyService4.class);
+        stopService(intentMusic4);
+
+        finish();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity);
+
+        /*部门背景音乐播放*/
+        Intent intentMusic4 = new Intent(Activity.this, MyService4.class);
+        startService(intentMusic4);
 
         final DatabaseManage databaseManage = new DatabaseManage(this);
 
@@ -96,6 +113,7 @@ public class Activity extends AppCompatActivity {
                                 /*主界面活力值综测及时间更新*/
                                 Toast.makeText(Activity.this, "活动已完成~", Toast.LENGTH_SHORT).show();
                                 finish();
+
                                 } });
                             dialog.show();
                         }
@@ -153,7 +171,6 @@ public class Activity extends AppCompatActivity {
 
                                 Toast.makeText(Activity.this, "活动已完成~", Toast.LENGTH_SHORT).show();
 
-                                finish();
                             } });
                         dialog.show();
                     }
@@ -272,7 +289,7 @@ public class Activity extends AppCompatActivity {
 
                                 Toast.makeText(Activity.this, "活动已完成~", Toast.LENGTH_SHORT).show();
 
-                                finish();
+
                             } });
                         dialog.show();
                     }
@@ -328,8 +345,7 @@ public class Activity extends AppCompatActivity {
 
                                 /*主界面活力值综测及时间更新*/
                                 Toast.makeText(Activity.this, "活动已完成~", Toast.LENGTH_SHORT).show();
-
-                                finish();
+                                
                             } });
                         dialog.show();
                     }
@@ -362,6 +378,14 @@ public class Activity extends AppCompatActivity {
         buttonBackMain.setOnClickListener(new View.OnClickListener() {
                                                   @Override
                                                   public void onClick(View v) {
+                                                      /*主界面背景音乐播放*/
+                                                      Intent intentMusic1 = new Intent(Activity.this, MyService1.class);
+                                                      startService(intentMusic1);
+
+                                                      /*部门背景音乐停止*/
+                                                      Intent intentMusic4 = new Intent(Activity.this, MyService4.class);
+                                                      stopService(intentMusic4);
+
                                                       finish();
                                                   }
                                               });

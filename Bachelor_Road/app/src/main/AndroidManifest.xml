@@ -84,6 +84,13 @@
             android:exported="true"
             android:process=":remote">
         </service>
+        <service
+            android:name=".MyService4"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+        </service>
+
     </application>
 
 </manifest>
