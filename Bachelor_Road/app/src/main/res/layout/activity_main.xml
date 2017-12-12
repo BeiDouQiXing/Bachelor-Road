@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/map">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/main_big_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
