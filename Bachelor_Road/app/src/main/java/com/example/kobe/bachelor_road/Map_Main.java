@@ -32,6 +32,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Map_Main extends AppCompatActivity {
 
+    @Override
+    protected void onStop() {
+
+        Intent intent = new Intent(Map_Main.this, MyService1.class);
+        stopService(intent);
+        super.onStop();
+    }
+
     private DatabaseManage databaseManage;
     private static final int CHOOSE_PHOTO = 13;
     private CircleImageView bigHead;
@@ -39,6 +47,10 @@ public class Map_Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*背景音乐播放*/
+        Intent intent = new Intent(Map_Main.this, MyService1.class);
+        startService(intent);
 
         databaseManage = new DatabaseManage(this);
         final int currentWeek = databaseManage.queryCHCurrentWeek();
