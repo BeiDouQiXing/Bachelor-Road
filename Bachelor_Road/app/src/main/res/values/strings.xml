@@ -3,6 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="input_name">请输入姓名</string>
     <string name="input_student_number">请输入学号</string>
-    <string name="question_one">当若有这样一行printf("Team ,Dipper");时输出的内容是:"Team ,Dipper"吗</string>
+    <string name="question_one">当若有这样一行printf(\"Team ,Dipper\");时输出的内容是:\"Team ,Dipper\"吗</string>
     <string name="question_two">程序输出的结果是多少?</string>
 </resources>

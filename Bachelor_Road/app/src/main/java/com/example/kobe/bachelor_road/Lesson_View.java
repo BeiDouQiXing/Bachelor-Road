@@ -616,7 +616,7 @@ public class Lesson_View extends AppCompatActivity {
 
                                 int cnt = databaseManage.queryCNameAttendClassNumber(CName);
 
-                                
+
                                 switch (cnt) {
                                     case 1 :
                                         Intent intent1 = new Intent(Lesson_View.this, Classroom_Program_C_One.class);

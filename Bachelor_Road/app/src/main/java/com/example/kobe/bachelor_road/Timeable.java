@@ -21,6 +21,14 @@ public class Timeable extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        /*主界面背景音乐播放*/
+        Intent intentMusic1 = new Intent(Timeable.this, MyService1.class);
+        startService(intentMusic1);
+
+        /*课程背景音乐停止*/
+        Intent intentMusic2 = new Intent(Timeable.this, MyService2.class);
+        stopService(intentMusic2);
+
         Intent intent = new Intent();
         intent.putExtra("enery", eneryForReturn);
         intent.putExtra("credit", creditForReturn);
@@ -33,6 +41,10 @@ public class Timeable extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timeable);
+
+        /*课程背景音乐播放*/
+        Intent intent = new Intent(Timeable.this, MyService2.class);
+        startService(intent);
 
         /*更新当前周数*/
         databaseManage = new DatabaseManage(this);
@@ -77,6 +89,14 @@ public class Timeable extends AppCompatActivity {
         timetable_run_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*主界面背景音乐播放*/
+                Intent intentMusic1 = new Intent(Timeable.this, MyService1.class);
+                startService(intentMusic1);
+
+                /*课程背景音乐停止*/
+                Intent intentMusic2 = new Intent(Timeable.this, MyService2.class);
+                stopService(intentMusic2);
+
                 Intent intent = new Intent();
                 intent.putExtra("enery", eneryForReturn);
                 intent.putExtra("credit", creditForReturn);

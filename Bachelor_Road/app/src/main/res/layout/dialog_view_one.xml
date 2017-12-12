@@ -3,11 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="#ff0000"/>
+    android:orientation="vertical"
+    android:background="@drawable/testbiankuang">
 
     <TextView
         android:id="@+id/question_submit_view_one"
@@ -20,7 +17,7 @@
         android:textColor="#000"
         android:textSize="23sp" />
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
         android:paddingBottom="20dp"
         android:paddingTop="20dp"
@@ -28,6 +25,13 @@
         android:textColor="#000"
         android:textSize="16sp"
         android:id="@+id/view_two_answer"
+        />
+
+    <TextView
+        android:layout_height="10dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         />
 
     <TextView
@@ -44,28 +48,26 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="20dp"
             android:text="再看看教程"
             android:paddingBottom="15dp"
             android:paddingTop="15dp"
             android:gravity="center"
             android:textSize="16sp"
-            android:background="#00000000"/>
-        <TextView
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="#969696"/>
+            android:background="@drawable/anniubeijing1"/>
         <Button
             android:id="@+id/view_one_submit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginRight="20dp"
             android:text="提交"
             android:paddingBottom="15dp"
             android:paddingTop="15dp"
             android:gravity="center"
             android:textColor="#ff00"
             android:textSize="16sp"
-            android:background="#00000000"/>
+            android:background="@drawable/anniubeijing1"/>
 
     </LinearLayout>
 </LinearLayout>
