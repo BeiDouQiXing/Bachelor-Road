@@ -2,9 +2,8 @@ package com.example.kobe.bachelor_road;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.VisibleForTesting;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -24,11 +23,6 @@ public class Lesson_View extends AppCompatActivity {
     private int eachClassEnergy;
     private double eachClassCredit;
     private DatabaseManage databaseManage;
-
-    private int eneryForReturn;
-    private double creditForReturn;
-    private int timeForReturn;
-    private int takeTimes = 0;
 
     public int getCHid(int currentWeek, String week, int cnt) {
         int CHid = (currentWeek - 2) * 20;
@@ -50,11 +44,7 @@ public class Lesson_View extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent();
-        intent.putExtra("enery", eneryForReturn);
-        intent.putExtra("credit", creditForReturn);
-        intent.putExtra("time", timeForReturn);
-        setResult(RESULT_OK, intent);
+
         finish();
     }
 
@@ -63,15 +53,8 @@ public class Lesson_View extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lesson_view);
 
-
-
-
         final DecimalFormat df = new DecimalFormat("#0.000");
         databaseManage = new DatabaseManage(this);
-
-        eneryForReturn = databaseManage.queryCHCurrentEnergy();
-        creditForReturn = databaseManage.queryCHCredit();
-        timeForReturn = databaseManage.queryCHCurrentTime();
 
         Intent intent = getIntent();
         /*确定当前是周几*/
@@ -96,11 +79,6 @@ public class Lesson_View extends AppCompatActivity {
         lesson_view_run_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putExtra("enery", eneryForReturn);
-                intent.putExtra("credit", creditForReturn);
-                intent.putExtra("time", timeForReturn);
-                setResult(RESULT_OK, intent);
                 finish();
             }
         });
@@ -147,12 +125,6 @@ public class Lesson_View extends AppCompatActivity {
                                 });
                                 errorDialog.setPositiveButton("确定", new DialogInterface.OnClickListener(){
                                     public void onClick(DialogInterface dialog,int which) {
-                                        Intent intent = new Intent();
-                                        intent.putExtra("enery", eneryForReturn);
-                                        intent.putExtra("credit", creditForReturn);
-                                        intent.putExtra("time", timeForReturn);
-                                        setResult(RESULT_OK, intent);
-
                                         finish();
                                     }
                                 });
@@ -183,18 +155,9 @@ public class Lesson_View extends AppCompatActivity {
                                         break;
                                 }
 
-                                int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
-                                i = databaseManage.updateCHCredit(CHCredit + eachClassCredit);
-                                i = databaseManage.updateCHCurrentTime(baseTime + (10 * 60));
-
-                                eneryForReturn = databaseManage.queryCHCurrentEnergy();
-                                creditForReturn = databaseManage.queryCHCredit();
-                                timeForReturn = databaseManage.queryCHCurrentTime();
-                                Intent intent = new Intent();
-                                intent.putExtra("enery", eneryForReturn);
-                                intent.putExtra("credit", creditForReturn);
-                                intent.putExtra("time", timeForReturn);
-                                setResult(RESULT_OK, intent);
+                                databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
+                                databaseManage.updateCHCredit(CHCredit + eachClassCredit);
+                                databaseManage.updateCHCurrentTime(baseTime + (10 * 60));
                             }
 
                         } else {
@@ -221,30 +184,15 @@ public class Lesson_View extends AppCompatActivity {
                                             public void onClick(DialogInterface dialog,int which) {} });
                                         errorDialog.setPositiveButton("确定", new DialogInterface.OnClickListener(){
                                             public void onClick(DialogInterface dialog,int which) {
-                                                Intent intent = new Intent();
-                                                intent.putExtra("enery", eneryForReturn);
-                                                intent.putExtra("credit", creditForReturn);
-                                                intent.putExtra("time", timeForReturn);
-                                                setResult(RESULT_OK, intent);
-
                                                 finish();
                                             }
                                         });
                                         errorDialog.show();
                                     } else {
                                         /*数据库数据更新*/
-                                        int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
-                                        i = databaseManage.updateCHCredit(CHCredit + eachClassCredit);
-                                        i = databaseManage.updateCHCurrentTime(baseTime + (10 * 60));
-
-                                        eneryForReturn = databaseManage.queryCHCurrentEnergy();
-                                        creditForReturn = databaseManage.queryCHCredit();
-                                        timeForReturn = databaseManage.queryCHCurrentTime();
-                                        Intent intent = new Intent();
-                                        intent.putExtra("enery", eneryForReturn);
-                                        intent.putExtra("credit", creditForReturn);
-                                        intent.putExtra("time", timeForReturn);
-                                        setResult(RESULT_OK, intent);
+                                        databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
+                                        databaseManage.updateCHCredit(CHCredit + eachClassCredit);
+                                        databaseManage.updateCHCurrentTime(baseTime + (10 * 60));
 
                                         Toast.makeText(Lesson_View.this, "课程已完成~", Toast.LENGTH_SHORT).show();
                                     }
@@ -296,12 +244,6 @@ public class Lesson_View extends AppCompatActivity {
                                 });
                                 errorDialog.setPositiveButton("确定", new DialogInterface.OnClickListener(){
                                     public void onClick(DialogInterface dialog,int which) {
-                                        Intent intent = new Intent();
-                                        intent.putExtra("enery", eneryForReturn);
-                                        intent.putExtra("credit", creditForReturn);
-                                        intent.putExtra("time", timeForReturn);
-                                        setResult(RESULT_OK, intent);
-
                                         finish();
                                     }
                                 });
@@ -332,18 +274,9 @@ public class Lesson_View extends AppCompatActivity {
                                         break;
                                 }
 
-                                int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
-                                i = databaseManage.updateCHCredit(CHCredit + eachClassCredit);
-                                i = databaseManage.updateCHCurrentTime(baseTime + (12 * 60));
-
-                                eneryForReturn = databaseManage.queryCHCurrentEnergy();
-                                creditForReturn = databaseManage.queryCHCredit();
-                                timeForReturn = databaseManage.queryCHCurrentTime();
-                                Intent intent = new Intent();
-                                intent.putExtra("enery", eneryForReturn);
-                                intent.putExtra("credit", creditForReturn);
-                                intent.putExtra("time", timeForReturn);
-                                setResult(RESULT_OK, intent);
+                                databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
+                                databaseManage.updateCHCredit(CHCredit + eachClassCredit);
+                                databaseManage.updateCHCurrentTime(baseTime + (12 * 60));
                             }
 
                         } else {
@@ -370,30 +303,15 @@ public class Lesson_View extends AppCompatActivity {
                                             public void onClick(DialogInterface dialog,int which) {} });
                                         errorDialog.setPositiveButton("确定", new DialogInterface.OnClickListener(){
                                             public void onClick(DialogInterface dialog,int which) {
-                                                Intent intent = new Intent();
-                                                intent.putExtra("enery", eneryForReturn);
-                                                intent.putExtra("credit", creditForReturn);
-                                                intent.putExtra("time", timeForReturn);
-                                                setResult(RESULT_OK, intent);
-
                                                 finish();
                                             }
                                         });
                                         errorDialog.show();
                                     } else {
                                         /*数据库数据更新*/
-                                        int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
-                                        i = databaseManage.updateCHCredit(CHCredit + eachClassCredit);
-                                        i = databaseManage.updateCHCurrentTime(baseTime + (12 * 60));
-
-                                        eneryForReturn = databaseManage.queryCHCurrentEnergy();
-                                        creditForReturn = databaseManage.queryCHCredit();
-                                        timeForReturn = databaseManage.queryCHCurrentTime();
-                                        Intent intent = new Intent();
-                                        intent.putExtra("enery", eneryForReturn);
-                                        intent.putExtra("credit", creditForReturn);
-                                        intent.putExtra("time", timeForReturn);
-                                        setResult(RESULT_OK, intent);
+                                        databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
+                                        databaseManage.updateCHCredit(CHCredit + eachClassCredit);
+                                        databaseManage.updateCHCurrentTime(baseTime + (12 * 60));
 
                                         Toast.makeText(Lesson_View.this, "课程已完成~", Toast.LENGTH_SHORT).show();
                                     }
@@ -445,12 +363,6 @@ public class Lesson_View extends AppCompatActivity {
                                 });
                                 errorDialog.setPositiveButton("确定", new DialogInterface.OnClickListener(){
                                     public void onClick(DialogInterface dialog,int which) {
-                                        Intent intent = new Intent();
-                                        intent.putExtra("enery", eneryForReturn);
-                                        intent.putExtra("credit", creditForReturn);
-                                        intent.putExtra("time", timeForReturn);
-                                        setResult(RESULT_OK, intent);
-
                                         finish();
                                     }
                                 });
@@ -484,18 +396,10 @@ public class Lesson_View extends AppCompatActivity {
                                         break;
                                 }
 
-                                int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
-                                i = databaseManage.updateCHCredit(CHCredit + eachClassCredit);
-                                i = databaseManage.updateCHCurrentTime(baseTime + (15 * 60) + 40);
+                                databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
+                                databaseManage.updateCHCredit(CHCredit + eachClassCredit);
+                                databaseManage.updateCHCurrentTime(baseTime + (15 * 60) + 40);
 
-                                eneryForReturn = databaseManage.queryCHCurrentEnergy();
-                                creditForReturn = databaseManage.queryCHCredit();
-                                timeForReturn = databaseManage.queryCHCurrentTime();
-                                Intent intent = new Intent();
-                                intent.putExtra("enery", eneryForReturn);
-                                intent.putExtra("credit", creditForReturn);
-                                intent.putExtra("time", timeForReturn);
-                                setResult(RESULT_OK, intent);
                             }
 
                         } else {
@@ -522,30 +426,15 @@ public class Lesson_View extends AppCompatActivity {
                                             public void onClick(DialogInterface dialog,int which) {} });
                                         errorDialog.setPositiveButton("确定", new DialogInterface.OnClickListener(){
                                             public void onClick(DialogInterface dialog,int which) {
-                                                Intent intent = new Intent();
-                                                intent.putExtra("enery", eneryForReturn);
-                                                intent.putExtra("credit", creditForReturn);
-                                                intent.putExtra("time", timeForReturn);
-                                                setResult(RESULT_OK, intent);
-
                                                 finish();
                                             }
                                         });
                                         errorDialog.show();
                                     } else {
                                         /*数据库数据更新*/
-                                        int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
-                                        i = databaseManage.updateCHCredit(CHCredit + eachClassCredit);
-                                        i = databaseManage.updateCHCurrentTime(baseTime + (15 * 60) + 40);
-
-                                        eneryForReturn = databaseManage.queryCHCurrentEnergy();
-                                        creditForReturn = databaseManage.queryCHCredit();
-                                        timeForReturn = databaseManage.queryCHCurrentTime();
-                                        Intent intent = new Intent();
-                                        intent.putExtra("enery", eneryForReturn);
-                                        intent.putExtra("credit", creditForReturn);
-                                        intent.putExtra("time", timeForReturn);
-                                        setResult(RESULT_OK, intent);
+                                        databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
+                                        databaseManage.updateCHCredit(CHCredit + eachClassCredit);
+                                        databaseManage.updateCHCurrentTime(baseTime + (15 * 60) + 40);
 
                                         Toast.makeText(Lesson_View.this, "课程已完成~", Toast.LENGTH_SHORT).show();
                                     }
@@ -597,12 +486,6 @@ public class Lesson_View extends AppCompatActivity {
                                 });
                                 errorDialog.setPositiveButton("确定", new DialogInterface.OnClickListener(){
                                     public void onClick(DialogInterface dialog,int which) {
-                                        Intent intent = new Intent();
-                                        intent.putExtra("enery", eneryForReturn);
-                                        intent.putExtra("credit", creditForReturn);
-                                        intent.putExtra("time", timeForReturn);
-                                        setResult(RESULT_OK, intent);
-
                                         finish();
                                     }
                                 });
@@ -635,18 +518,9 @@ public class Lesson_View extends AppCompatActivity {
                                         break;
                                 }
 
-                                int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
-                                i = databaseManage.updateCHCredit(CHCredit + eachClassCredit);
-                                i = databaseManage.updateCHCurrentTime(baseTime + (17 * 60) + 30);
-
-                                eneryForReturn = databaseManage.queryCHCurrentEnergy();
-                                creditForReturn = databaseManage.queryCHCredit();
-                                timeForReturn = databaseManage.queryCHCurrentTime();
-                                Intent intent = new Intent();
-                                intent.putExtra("enery", eneryForReturn);
-                                intent.putExtra("credit", creditForReturn);
-                                intent.putExtra("time", timeForReturn);
-                                setResult(RESULT_OK, intent);
+                                databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
+                                databaseManage.updateCHCredit(CHCredit + eachClassCredit);
+                                databaseManage.updateCHCurrentTime(baseTime + (17 * 60) + 30);
                             }
 
                         } else {
@@ -673,30 +547,15 @@ public class Lesson_View extends AppCompatActivity {
                                             public void onClick(DialogInterface dialog,int which) {} });
                                         errorDialog.setPositiveButton("确定", new DialogInterface.OnClickListener(){
                                             public void onClick(DialogInterface dialog,int which) {
-                                                Intent intent = new Intent();
-                                                intent.putExtra("enery", eneryForReturn);
-                                                intent.putExtra("credit", creditForReturn);
-                                                intent.putExtra("time", timeForReturn);
-                                                setResult(RESULT_OK, intent);
-
                                                 finish();
                                             }
                                         });
                                         errorDialog.show();
                                     } else {
                                         /*数据库数据更新*/
-                                        int i = databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
-                                        i = databaseManage.updateCHCredit(CHCredit + eachClassCredit);
-                                        i = databaseManage.updateCHCurrentTime(baseTime + (17 * 60) + 30);
-
-                                        eneryForReturn = databaseManage.queryCHCurrentEnergy();
-                                        creditForReturn = databaseManage.queryCHCredit();
-                                        timeForReturn = databaseManage.queryCHCurrentTime();
-                                        Intent intent = new Intent();
-                                        intent.putExtra("enery", eneryForReturn);
-                                        intent.putExtra("credit", creditForReturn);
-                                        intent.putExtra("time", timeForReturn);
-                                        setResult(RESULT_OK, intent);
+                                        databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
+                                        databaseManage.updateCHCredit(CHCredit + eachClassCredit);
+                                        databaseManage.updateCHCurrentTime(baseTime + (17 * 60) + 30);
 
                                         Toast.makeText(Lesson_View.this, "课程已完成~", Toast.LENGTH_SHORT).show();
                                     }

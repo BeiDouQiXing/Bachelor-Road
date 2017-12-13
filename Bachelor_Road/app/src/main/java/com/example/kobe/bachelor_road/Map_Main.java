@@ -31,6 +31,31 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class Map_Main extends AppCompatActivity {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        databaseManage = new DatabaseManage(this);
+        final int currentWeek = databaseManage.queryCHCurrentWeek();
+        final int currentTime = databaseManage.queryCHCurrentTime();
+        DecimalFormat df = new DecimalFormat("#0.000");
+
+         /*主界面人物信息显示*/
+        TextView main_name = findViewById(R.id.main_name);
+        main_name.setText(databaseManage.queryCHName());
+        TextView main_vitality_value = findViewById(R.id.main_vitality_value);
+        main_vitality_value.setText(String.valueOf(databaseManage.queryCHCurrentEnergy()));
+        TextView main_study_value = findViewById(R.id.main_study_value);
+        main_study_value.setText(String.valueOf(df.format(databaseManage.queryCHCredit())));
+        TextView main_activity_point = findViewById(R.id.main_activity_point);
+        main_activity_point.setText(String.valueOf(df.format(databaseManage.queryCHComprehensiveTest())));
+        /*主界面时间信息显示*/
+        TextView main_which_week = findViewById(R.id.main_which_week);
+        main_which_week.setText("第" + String.valueOf(currentWeek) + "周");
+        TextView main_which_noon = findViewById(R.id.main_which_noon);
+        main_which_noon.setText(TimeTranslate.morningOrAfter(currentTime));
+        TextView main_current_time = findViewById(R.id.main_current_time);
+        main_current_time.setText(TimeTranslate.timeIntToString(currentTime));
+    }
 
     @Override
     protected void onStop() {
@@ -52,28 +77,6 @@ public class Map_Main extends AppCompatActivity {
         Intent intent = new Intent(Map_Main.this, MyService1.class);
         startService(intent);
 
-        databaseManage = new DatabaseManage(this);
-        final int currentWeek = databaseManage.queryCHCurrentWeek();
-        final int currentTime = databaseManage.queryCHCurrentTime();
-        DecimalFormat df = new DecimalFormat("#0.000");
-
-        /*主界面人物信息显示*/
-        TextView main_name = findViewById(R.id.main_name);
-        main_name.setText(databaseManage.queryCHName());
-        TextView main_vitality_value = findViewById(R.id.main_vitality_value);
-        main_vitality_value.setText(String.valueOf(databaseManage.queryCHCurrentEnergy()));
-        TextView main_study_value = findViewById(R.id.main_study_value);
-        main_study_value.setText(String.valueOf(df.format(databaseManage.queryCHCredit())));
-        TextView main_activity_point = findViewById(R.id.main_activity_point);
-        main_activity_point.setText(String.valueOf(df.format(databaseManage.queryCHComprehensiveTest())));
-        /*主界面时间信息显示*/
-        TextView main_which_week = findViewById(R.id.main_which_week);
-        main_which_week.setText("第" + String.valueOf(currentWeek) + "周");
-        TextView main_which_noon = findViewById(R.id.main_which_noon);
-        main_which_noon.setText(TimeTranslate.morningOrAfter(currentTime));
-        TextView main_current_time = findViewById(R.id.main_current_time);
-        main_current_time.setText(TimeTranslate.timeIntToString(currentTime));
-
         /*主界面部门按钮点击事件*/
         Button button_departmentButton = findViewById(R.id.main_department_button); //进入素拓，完成部门工作任务
         button_departmentButton.setOnClickListener(new View.OnClickListener() {
@@ -87,12 +90,12 @@ public class Map_Main extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,int which) {} });
                 dialog.setPositiveButton("确定", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog,int which) {
-                        if( databaseManage.queryCHCurrentWeek() == 1 && Add_Department.isAddmit(databaseManage) == false ) {
+                        if( databaseManage.queryCHCurrentWeek() == 1 && Add_Department.isAdmit(databaseManage) == false ) {
                             Intent intent = new Intent(Map_Main.this, Add_Department.class);
                             startActivity(intent);
                         } else {
                             Intent intent = new Intent(Map_Main.this, Activity.class);
-                            startActivityForResult(intent, 2);
+                            startActivity(intent);
                         }
                     } });
                 dialog.show();
@@ -113,18 +116,19 @@ public class Map_Main extends AppCompatActivity {
                 dialog.setPositiveButton("确定", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog,int which) {
                         Intent intent = new Intent(Map_Main.this, Timeable.class);
-                        startActivityForResult(intent, 1);
+                        startActivity(intent);
                     } });
                 dialog.show();
             }
         });
+
         /*主界面宿舍按钮点击事件*/
         Button main_dormitory_button = findViewById(R.id.main_dormitory_button);
         main_dormitory_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Map_Main.this, Dorm.class);
-                startActivityForResult(intent, 3);
+                startActivity(intent);
             }
         });
 
@@ -158,59 +162,9 @@ public class Map_Main extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        DecimalFormat df = new DecimalFormat("#0.000");
         databaseManage = new DatabaseManage(this);
 
         switch (requestCode) {
-            case 1:
-                if (resultCode == RESULT_OK) {
-                    int enery = data.getIntExtra("enery", 0);
-                    double credit = data.getDoubleExtra("credit", 0);
-                    int time = data.getIntExtra("time", 0);
-
-                    TextView main_vitality_value = findViewById(R.id.main_vitality_value);
-                    main_vitality_value.setText(String.valueOf(enery));
-                    TextView main_study_value = findViewById(R.id.main_study_value);
-                    main_study_value.setText(String.valueOf(df.format(credit)));
-                    TextView main_which_week = findViewById(R.id.main_which_week);
-                    main_which_week.setText("第" + String.valueOf(databaseManage.queryCHCurrentWeek()) + "周");
-                    TextView main_which_noon = findViewById(R.id.main_which_noon);
-                    main_which_noon.setText(TimeTranslate.morningOrAfter(time));
-                    TextView main_current_time = findViewById(R.id.main_current_time);
-                    main_current_time.setText(TimeTranslate.timeIntToString(time));
-                }
-                break;
-            case 2:
-                if (resultCode == RESULT_OK) {
-                    int enery = data.getIntExtra("enery", 0);
-                    double comprehensiveTest = data.getDoubleExtra("comprehensiveTest", 0);
-                    int time = data.getIntExtra("time", 0);
-
-                    TextView main_vitality_value = findViewById(R.id.main_vitality_value);
-                    main_vitality_value.setText(String.valueOf(enery));
-                    TextView main_activity_point = findViewById(R.id.main_activity_point);
-                    main_activity_point.setText(String.valueOf(df.format(comprehensiveTest)));
-
-                    TextView main_which_noon = findViewById(R.id.main_which_noon);
-                    main_which_noon.setText(TimeTranslate.morningOrAfter(time));
-                    TextView main_current_time = findViewById(R.id.main_current_time);
-                    main_current_time.setText(TimeTranslate.timeIntToString(time));
-                }
-                break;
-            case 3:
-                int week = data.getIntExtra("week", 0);
-                int time = data.getIntExtra("time", 0);
-                int enery = data.getIntExtra("enery", 0);
-
-                TextView main_vitality_value = findViewById(R.id.main_vitality_value);
-                main_vitality_value.setText(String.valueOf(enery));
-                TextView main_which_week = findViewById(R.id.main_which_week);
-                main_which_week.setText("第" + String.valueOf(week) + "周");
-                TextView main_which_noon = findViewById(R.id.main_which_noon);
-                main_which_noon.setText(TimeTranslate.morningOrAfter(time));
-                TextView main_current_time = findViewById(R.id.main_current_time);
-                main_current_time.setText(TimeTranslate.timeIntToString(time));
-                break;
             case CHOOSE_PHOTO:
                 // 判断手机系统版本号
                 if (resultCode == RESULT_OK) {
