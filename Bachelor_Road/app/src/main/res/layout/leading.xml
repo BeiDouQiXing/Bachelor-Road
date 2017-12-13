@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     >
     <ImageView
+        android:id="@+id/leading_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/leading_1"/>
@@ -26,7 +27,7 @@
         android:background="#00000000"
         />
     <Button
-        android:id="@+id/leadiing_back"
+        android:id="@+id/leading_back"
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginLeft="42dp"
