@@ -158,6 +158,8 @@ public class Map_Main extends AppCompatActivity {
         } else if(databaseManage.queryCHGender().equals("female")){
             Glide.with(this).load(R.drawable.girl)
                     .into(bigHead);
+        }else{
+            getBigHead();
         }
     }
 
@@ -248,11 +250,8 @@ public class Map_Main extends AppCompatActivity {
         saveBigHead(imagePath);
 
         // 从数据库获取头像
-        byte[] image=getBigHead();
+        getBigHead();
 
-        // 根据二进制流显示头像
-        Glide.with(this).load(image)
-                .into(bigHead);
     }
 
     private void handleImageBeforeKitKat(Intent data) {
@@ -263,11 +262,8 @@ public class Map_Main extends AppCompatActivity {
         saveBigHead(imagePath);
 
         // 从数据库获取头像
-        byte[] image=getBigHead();
+        getBigHead();
 
-        // 根据二进制流显示头像
-        Glide.with(this).load(image)
-                .into(bigHead);
     }
 
     private void openAlbum() {
@@ -277,24 +273,47 @@ public class Map_Main extends AppCompatActivity {
         startActivityForResult(intent, CHOOSE_PHOTO);
     }
 
+    // 将图片以二进制的形式存进数据库
     private void saveBigHead(String imagePath){
-        // 把图片转为bitmap
-        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+        // 图片压缩
+        BitmapFactory.Options options = new BitmapFactory.Options();// 解析位图的附加条件
+        options.inJustDecodeBounds = true;    // 不去解析位图，只获取位图头文件信息
+        Bitmap bitmap= BitmapFactory.decodeFile(imagePath,options);
+        bigHead.setImageBitmap(bitmap);
+        int btwidth = options.outWidth;     // 获取图片的宽度
+        int btheight = options.outHeight;   //获取图片的高度
+
+        int dx = btwidth/100;    // 获取水平方向的缩放比例
+        int dy = btheight/100;    // 获取垂直方向的缩放比例
+
+        int sampleSize = 1; // 设置默认缩放比例
+
+        // 如果是水平方向
+        if (dx>dy&&dy>1) {
+            sampleSize = dx;
+        }
+
+        //如果是垂直方向
+        if (dy>dx&&dx>1) {
+            sampleSize = dy;
+        }
+        options.inSampleSize = sampleSize;       // 设置图片缩放比例
+        options.inJustDecodeBounds = false;     // 真正解析位图
+        // 把图片的解析条件options在创建的时候带上
+        bitmap = BitmapFactory.decodeFile(imagePath, options);
+
         ByteArrayOutputStream BAOStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, BAOStream);// (0-100)压缩文件
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, BAOStream);// (0-100)压缩文件
         byte[] image = BAOStream.toByteArray();
-        Long result=databaseManage.updateCharacterCHCImagebyte(image);
+        databaseManage.updateCharacterCHCImageByte(image);
     }
 
-    private byte[] getBigHead(){
+    private Bitmap getBigHead(){
         //从数据库调取头像
-        byte[] image=null;
         Character character = databaseManage.queryCharacter();
         // 把图片转为bitmap
         Bitmap bitmap = BitmapFactory.decodeByteArray(character.CHCImagebyte, 0, character.CHCImagebyte.length);
-        ByteArrayOutputStream BAOStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, BAOStream);// (0-100)压缩文件
-        image = BAOStream.toByteArray();
-        return image;
+        bigHead.setImageBitmap(bitmap);
+        return bitmap;
     }
 }

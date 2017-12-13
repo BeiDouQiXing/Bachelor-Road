@@ -770,11 +770,12 @@ public class DatabaseManage {
     }
 
     //插入人物头像
-    public long updateCharacterCHCImagebyte(byte[] CHCImagebyte){
+    public long updateCharacterCHCImageByte(byte[] CHCImagebyte){
         SQLiteDatabase sQLiteDatabase=database.getReadableDatabase(); //以读写方式打开数据库
         ContentValues values = new ContentValues();
         values.clear();
         values.put("CHCImagebyte",CHCImagebyte);
+        values.put("CHGender","");
         int results = sQLiteDatabase.update("Character", values, null, null);
         sQLiteDatabase.close();
         return results;
