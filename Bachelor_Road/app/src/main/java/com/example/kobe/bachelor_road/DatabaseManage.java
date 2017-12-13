@@ -3,11 +3,12 @@ package com.example.kobe.bachelor_road;
 /**
  * Created by Administrator on 2017/11/7.
  */
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import java.lang.*;
+import android.util.Log;
 
 public class DatabaseManage {
 
@@ -35,18 +36,20 @@ public class DatabaseManage {
             values.put("CHName", character.CHName);
             values.put("CHNo", character.CHNo);
             values.put("CHClass", character.CHClass);
-            values.put("CHImage", character.CHImage);
+            values.put("CHGender", character.CHGender);
             values.put("CHCurrentEnergy", String.valueOf(character.CHCurrentEnergy) );
             values.put("CHMaximumEnergy", String.valueOf(character.CHMaximumEnergy) );
             values.put("CHCredit", String.valueOf(character.CHCredit) );
             values.put("CHComprehensiveTest", String.valueOf(character.CHComprehensiveTest) );
             values.put("CHCurrentTime", String.valueOf(character.CHCurrentTime));
             values.put("CHCurrentWeek", character.CHCurrentWeek);
+            values.put("CHCImagebyte", character.CHCImagebyte);
             results = sQLiteDatabase.insert("Character", null, values);
         }
         sQLiteDatabase.close();
         return results;
     }
+
 
     //查询人物全属性
     public Character queryCharacter(){
@@ -58,17 +61,19 @@ public class DatabaseManage {
             character.CHName = cursor.getString(cursor.getColumnIndex("CHName"));
             character.CHNo = cursor.getString(cursor.getColumnIndex("CHNo"));
             character.CHClass = cursor.getInt(cursor.getColumnIndex("CHClass"));
-            character.CHImage = cursor.getInt(cursor.getColumnIndex("CHImage"));
+            character.CHGender = cursor.getString(cursor.getColumnIndex("CHGender"));
             character.CHCurrentEnergy = Integer.valueOf(cursor.getString(cursor.getColumnIndex("CHCurrentEnergy")));
             character.CHMaximumEnergy = Integer.valueOf(cursor.getString(cursor.getColumnIndex("CHMaximumEnergy")));
             character.CHCredit = Double.parseDouble(cursor.getString(cursor.getColumnIndex("CHCredit")));
             character.CHComprehensiveTest =  Double.parseDouble(cursor.getString(cursor.getColumnIndex("CHComprehensiveTest")));
             character.CHCurrentTime = cursor.getInt(cursor.getColumnIndex("CHCurrentTime"));
             character.CHCurrentWeek = cursor.getInt(cursor.getColumnIndex("CHCurrentWeek"));
+            character.CHCImagebyte = cursor.getBlob(cursor.getColumnIndex("CHCImagebyte"));
         }
         sQLiteDatabase.close();
         return character;
     }
+
 
     //查询姓名
     public String queryCHName(){
@@ -752,8 +757,27 @@ public class DatabaseManage {
         return results;
     }
 
+    //查询性别
+    public String queryCHGender(){
+        SQLiteDatabase sQLiteDatabase=database.getReadableDatabase(); //以读写方式打开数据库
+        Cursor cursor = sQLiteDatabase.query("Character",null,null,null,null,null,null);//查询并获得游标
+        String CHGender = "";
+        if(cursor.moveToNext()) {
+            CHGender = cursor.getString(cursor.getColumnIndex("CHGender"));
+        }
+        sQLiteDatabase.close();
+        return CHGender;
+    }
 
-
-
+    //插入人物头像
+    public long updateCharacterCHCImagebyte(byte[] CHCImagebyte){
+        SQLiteDatabase sQLiteDatabase=database.getReadableDatabase(); //以读写方式打开数据库
+        ContentValues values = new ContentValues();
+        values.clear();
+        values.put("CHCImagebyte",CHCImagebyte);
+        int results = sQLiteDatabase.update("Character", values, null, null);
+        sQLiteDatabase.close();
+        return results;
+    }
 
 }

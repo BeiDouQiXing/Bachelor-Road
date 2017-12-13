@@ -20,19 +20,21 @@ public class Database extends SQLiteOpenHelper {
 
         /**********建人物表**********/
         String createCharacterSql = "create table Character (" +
-                                        "CHid                 int not null," +   //人物id
-                                        "CHName               varchar(50)," +    //人物名
-                                        "CHNo                 varchar(20)," +
-                                        "CHClass              int," +
-                                        "CHImage              int," +
-                                        "CHCurrentEnergy      varchar(20)," +   //人物活力值
-                                        "CHMaximumEnergy      varchar(20)," +   //人物活力值上限
-                                        "CHCredit             varchar(20)," +   //学分
-                                        "CHComprehensiveTest  varchar(20)," +   //综测
-                                        "CHCurrentTime        int," +           //当前时间
-                                        "CHCurrentWeek        int," +           //当前周
-                                        "primary key (CHid) );";
+                "CHid                 int not null," +   //人物id
+                "CHName               varchar(50)," +    //人物名
+                "CHNo                 varchar(20)," +
+                "CHClass              int," +
+                "CHGender             varchar(20)," +
+                "CHCurrentEnergy      varchar(20)," +   //人物活力值
+                "CHMaximumEnergy      varchar(20)," +   //人物活力值上限
+                "CHCredit             varchar(20)," +   //学分
+                "CHComprehensiveTest  varchar(20)," +   //综测
+                "CHCurrentTime        int," +           //当前时间
+                "CHCurrentWeek        int," +           //当前周
+                "CHCImagebyte         blob," +
+                "primary key (CHid) );";
         sQLiteDatabase.execSQL(createCharacterSql);
+
 
         /**************建课程表*********/
         String createCouseSql = "create table Course (" +

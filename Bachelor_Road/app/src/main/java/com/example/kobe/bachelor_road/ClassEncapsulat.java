@@ -14,31 +14,32 @@ class Character{
     public String CHName;		//姓名
     public String CHNo;			//学号
     public int    CHClass;		//班级
-    public int    CHImage;		//头像
+    public String CHGender;    //性别
     public int    CHCurrentEnergy;		//活力值，int型
     public int 	  CHMaximumEnergy;		//活力值上限，int型
     public double CHCredit;				//学分，double型
     public double CHComprehensiveTest;	//综测，double型
     public int 	  CHCurrentTime;      	//从周一算起当前时间，以分钟计，int型
     public int 	  CHCurrentWeek;       	//当前第几周，int型
-
+    public byte[] CHCImagebyte;         //头像
     public Character(){
 
     }
 
-    public Character(int CHid, String CHName, String CHNo, int CHClass, int CHImage, int CHCurrentEnergy,
-                     int CHMaximumEnergy,double CHCredit,double CHComprehensiveTest,int CHCurrentTime,int CHCurrentWeek ){
+    public Character(int CHid, String CHName, String CHNo, int CHClass, String CHGender,int CHCurrentEnergy,int CHMaximumEnergy,
+                     double CHCredit,double CHComprehensiveTest,int CHCurrentTime,int CHCurrentWeek, byte[] CHCImagebyte ){
         this.CHid = CHid;
         this.CHName = CHName;
         this.CHNo  = CHNo;
         this.CHClass = CHClass;
-        this.CHImage = CHImage;
+        this.CHGender = CHGender;
         this.CHCurrentEnergy = CHCurrentEnergy;
         this.CHMaximumEnergy = CHMaximumEnergy;
         this.CHCredit = CHCredit;
         this.CHComprehensiveTest = CHComprehensiveTest;
         this.CHCurrentTime = CHCurrentTime;
         this.CHCurrentWeek = CHCurrentWeek;
+        this.CHCImagebyte = CHCImagebyte;
     }
 }
 
