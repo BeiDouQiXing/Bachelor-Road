@@ -80,7 +80,6 @@ public class Map_Main extends AppCompatActivity {
         Intent intent = new Intent(Map_Main.this, MyService1.class);
         startService(intent);
 
-
         /*主界面部门按钮点击事件*/
         Button button_departmentButton = findViewById(R.id.main_department_button); //进入素拓，完成部门工作任务
         button_departmentButton.setOnClickListener(new View.OnClickListener() {
@@ -125,6 +124,7 @@ public class Map_Main extends AppCompatActivity {
                 dialog.show();
             }
         });
+
         /*主界面宿舍按钮点击事件*/
         Button main_dormitory_button = findViewById(R.id.main_dormitory_button);
         main_dormitory_button.setOnClickListener(new View.OnClickListener() {
