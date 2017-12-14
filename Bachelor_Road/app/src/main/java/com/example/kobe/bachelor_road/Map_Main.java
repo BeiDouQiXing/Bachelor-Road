@@ -43,6 +43,10 @@ public class Map_Main extends AppCompatActivity {
         final int currentTime = databaseManage.queryCHCurrentTime();
         DecimalFormat df = new DecimalFormat("#0.000");
 
+         /*背景音乐播放*/
+        Intent intent = new Intent(Map_Main.this, MyService1.class);
+        startService(intent);
+
          /*主界面人物信息显示*/
         TextView main_name = findViewById(R.id.main_name);
         main_name.setText(databaseManage.queryCHName());
@@ -80,6 +84,7 @@ public class Map_Main extends AppCompatActivity {
         /*背景音乐播放*/
         Intent intent = new Intent(Map_Main.this, MyService1.class);
         startService(intent);
+
 
         /*主界面部门按钮点击事件*/
         Button button_departmentButton = findViewById(R.id.main_department_button); //进入素拓，完成部门工作任务
@@ -125,7 +130,6 @@ public class Map_Main extends AppCompatActivity {
                 dialog.show();
             }
         });
-
         /*主界面宿舍按钮点击事件*/
         Button main_dormitory_button = findViewById(R.id.main_dormitory_button);
         main_dormitory_button.setOnClickListener(new View.OnClickListener() {

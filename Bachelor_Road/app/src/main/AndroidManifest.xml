@@ -22,16 +22,16 @@
         </activity>
         <activity
             android:name=".Map_Main"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".Activity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".Add_Department"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".MyDepartment"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".Timeable"
             android:screenOrientation="landscape" />
@@ -50,31 +50,29 @@
         <activity
             android:name=".Classroom_Program_C_Three"
             android:screenOrientation="landscape" />
-        <activity
-            android:name=".Leading"
-            android:screenOrientation="landscape"/>
 
         <service
             android:name=".MyService1"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote" />
+            android:process=":remote"></service>
         <service
             android:name=".MyService2"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote" />
+            android:process=":remote"></service>
         <service
             android:name=".MyService3"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote" />
+            android:process=":remote"></service>
         <service
             android:name=".MyService4"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote" />
+            android:process=":remote"></service>
 
+        <activity android:name=".Leading"></activity>
     </application>
 
 </manifest>

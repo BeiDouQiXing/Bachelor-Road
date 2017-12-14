@@ -56,7 +56,7 @@ public class Classroom_Program_C_Three extends AppCompatActivity implements View
                 dialog.getWindow().setAttributes(params);
                 //show之前设置返回键无效，触摸屏无效
                 dialog.setCancelable(false);
-                TextView textView = findViewById(R.id.question_submit_view_two);
+                TextView textView = (TextView)findViewById(R.id.question_submit_view_two);
 
                 //显示对话框
                 dialog.show();
@@ -65,7 +65,7 @@ public class Classroom_Program_C_Three extends AppCompatActivity implements View
                 dialog.dismiss();
                 break;
             case R.id.view_two_submit:
-                EditText editText = dialog.findViewById(R.id.view_two_answer);
+                EditText editText = (EditText) dialog.findViewById(R.id.view_two_answer);
                 if( Integer.valueOf(editText.getText().toString()) == 30) {
                     Toast.makeText(this, "回答正确", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
@@ -75,7 +75,6 @@ public class Classroom_Program_C_Three extends AppCompatActivity implements View
                     dialog.dismiss();
                 }
                 break;
-            /*左*/
             case R.id.left_button_three:
                 if(imgTimes == 0) {
                     Toast.makeText(Classroom_Program_C_Three.this, "已经是最前页了", Toast.LENGTH_SHORT).show();
@@ -92,7 +91,6 @@ public class Classroom_Program_C_Three extends AppCompatActivity implements View
                     Toast.makeText(Classroom_Program_C_Three.this, "切换成功", Toast.LENGTH_SHORT).show();
                 }
                 break;
-            /*右*/
             case R.id.right_button_three:
                  if(imgTimes == 2){
                     imgTimes++;
