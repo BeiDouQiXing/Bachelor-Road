@@ -52,7 +52,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".Leading"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
 
         <service
             android:name=".MyService1"
@@ -75,6 +75,7 @@
             android:exported="true"
             android:process=":remote" />
 
+        <activity android:name=".GraduationActivity"></activity>
     </application>
 
 </manifest>

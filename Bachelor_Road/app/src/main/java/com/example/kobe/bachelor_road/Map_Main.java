@@ -51,9 +51,15 @@ public class Map_Main extends AppCompatActivity {
         main_study_value.setText(String.valueOf(df.format(databaseManage.queryCHCredit())));
         TextView main_activity_point = findViewById(R.id.main_activity_point);
         main_activity_point.setText(String.valueOf(df.format(databaseManage.queryCHComprehensiveTest())));
+
         /*主界面时间信息显示*/
         TextView main_which_week = findViewById(R.id.main_which_week);
         main_which_week.setText("第" + String.valueOf(currentWeek) + "周");
+
+        if (currentWeek==21){
+            graduate(databaseManage.queryCHCredit());
+        }
+
         TextView main_which_noon = findViewById(R.id.main_which_noon);
         main_which_noon.setText(TimeTranslate.morningOrAfter(currentTime));
         TextView main_current_time = findViewById(R.id.main_current_time);
@@ -316,4 +322,9 @@ public class Map_Main extends AppCompatActivity {
         bigHead.setImageBitmap(bitmap);
         return bitmap;
     }
+
+    private void graduate(double credit){
+        if(credit)
+    }
+
 }
