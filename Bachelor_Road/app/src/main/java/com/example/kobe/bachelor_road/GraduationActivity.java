@@ -34,7 +34,7 @@ public class GraduationActivity extends AppCompatActivity {
         final double credit = databaseManage.queryCHCredit();
 
         if(credit>){
-            
+
         }
     }
 }
