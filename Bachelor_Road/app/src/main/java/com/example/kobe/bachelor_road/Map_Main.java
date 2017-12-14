@@ -34,6 +34,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class Map_Main extends AppCompatActivity {
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -41,6 +42,10 @@ public class Map_Main extends AppCompatActivity {
         final int currentWeek = databaseManage.queryCHCurrentWeek();
         final int currentTime = databaseManage.queryCHCurrentTime();
         DecimalFormat df = new DecimalFormat("#0.000");
+
+         /*背景音乐播放*/
+        Intent intent = new Intent(Map_Main.this, MyService1.class);
+        startService(intent);
 
          /*主界面人物信息显示*/
         TextView main_name = findViewById(R.id.main_name);
@@ -86,6 +91,7 @@ public class Map_Main extends AppCompatActivity {
         Intent intent = new Intent(Map_Main.this, MyService1.class);
         startService(intent);
 
+
         /*主界面部门按钮点击事件*/
         Button button_departmentButton = findViewById(R.id.main_department_button); //进入素拓，完成部门工作任务
         button_departmentButton.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +136,6 @@ public class Map_Main extends AppCompatActivity {
                 dialog.show();
             }
         });
-
         /*主界面宿舍按钮点击事件*/
         Button main_dormitory_button = findViewById(R.id.main_dormitory_button);
         main_dormitory_button.setOnClickListener(new View.OnClickListener() {
@@ -335,6 +340,19 @@ public class Map_Main extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        /*主界面背景音乐播放*/
+        Intent intentMusic1 = new Intent(Map_Main.this, MyService1.class);
+        startService(intentMusic1);
+
+        /*课程背景音乐停止*/
+        Intent intentMusic2 = new Intent(Map_Main.this, MyService2.class);
+        stopService(intentMusic2);
+
+        finish();
     }
 
 }
