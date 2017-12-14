@@ -84,7 +84,7 @@ public class Login extends AppCompatActivity {
                     Log.i("hujunqin",boyOrGirl);
                     databaseManage.insertCharacter(character);
 
-                    Intent intent = new Intent(Login.this, Map_Main.class);
+                    Intent intent = new Intent(Login.this, Leading.class);
                     startActivity(intent);
                     finish();
                     Toast.makeText(Login.this,"注册成功",

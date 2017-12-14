@@ -34,6 +34,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class Map_Main extends AppCompatActivity {
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -315,5 +316,18 @@ public class Map_Main extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeByteArray(character.CHCImagebyte, 0, character.CHCImagebyte.length);
         bigHead.setImageBitmap(bitmap);
         return bitmap;
+    }
+
+    @Override
+    public void onBackPressed() {
+        /*主界面背景音乐播放*/
+        Intent intentMusic1 = new Intent(Map_Main.this, MyService1.class);
+        startService(intentMusic1);
+
+        /*课程背景音乐停止*/
+        Intent intentMusic2 = new Intent(Map_Main.this, MyService2.class);
+        stopService(intentMusic2);
+
+        finish();
     }
 }
