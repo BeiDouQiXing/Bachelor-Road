@@ -51,28 +51,37 @@
             android:name=".Classroom_Program_C_Three"
             android:screenOrientation="landscape" />
 
+        <activity
+            android:name=".Leading"
+            android:screenOrientation="landscape" />
+
         <service
             android:name=".MyService1"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote"></service>
+            android:process=":remote"/>
         <service
             android:name=".MyService2"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote"></service>
+            android:process=":remote"/>
         <service
             android:name=".MyService3"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote"></service>
+            android:process=":remote"/>
         <service
             android:name=".MyService4"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote"></service>
+            android:process=":remote"/>
 
-        <activity android:name=".Leading"></activity>
+        <activity android:name=".GraduationActivity"
+            android:screenOrientation="landscape"/>
+
+        <activity android:name=".FailedActivity"
+            android:screenOrientation="landscape"/>
+
     </application>
 
 </manifest>

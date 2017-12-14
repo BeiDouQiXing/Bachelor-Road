@@ -56,9 +56,15 @@ public class Map_Main extends AppCompatActivity {
         main_study_value.setText(String.valueOf(df.format(databaseManage.queryCHCredit())));
         TextView main_activity_point = findViewById(R.id.main_activity_point);
         main_activity_point.setText(String.valueOf(df.format(databaseManage.queryCHComprehensiveTest())));
+
         /*主界面时间信息显示*/
         TextView main_which_week = findViewById(R.id.main_which_week);
         main_which_week.setText("第" + String.valueOf(currentWeek) + "周");
+
+        if (currentWeek==21){
+            graduate(databaseManage.queryCHCredit());
+        }
+
         TextView main_which_noon = findViewById(R.id.main_which_noon);
         main_which_noon.setText(TimeTranslate.morningOrAfter(currentTime));
         TextView main_current_time = findViewById(R.id.main_current_time);
@@ -322,6 +328,20 @@ public class Map_Main extends AppCompatActivity {
         return bitmap;
     }
 
+    private void graduate(double credit){
+        final double activityPoint=databaseManage.queryCHComprehensiveTest();
+        double result=credit*0.8+activityPoint*0.2;
+        if(result>10.5){
+            Intent intent = new Intent(Map_Main.this, GraduationActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            Intent intent = new Intent(Map_Main.this, FailedActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
     @Override
     public void onBackPressed() {
         /*主界面背景音乐播放*/
@@ -334,4 +354,5 @@ public class Map_Main extends AppCompatActivity {
 
         finish();
     }
+
 }
