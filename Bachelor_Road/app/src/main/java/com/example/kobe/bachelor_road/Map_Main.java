@@ -324,7 +324,17 @@ public class Map_Main extends AppCompatActivity {
     }
 
     private void graduate(double credit){
-        if(credit)
+        final double activityPoint=databaseManage.queryCHComprehensiveTest();
+        double result=credit*0.8+activityPoint*0.2;
+        if(result>10.5){
+            Intent intent = new Intent(Map_Main.this, GraduationActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            Intent intent = new Intent(Map_Main.this, FailedActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
 }

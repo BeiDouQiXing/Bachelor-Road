@@ -75,7 +75,11 @@
             android:exported="true"
             android:process=":remote" />
 
-        <activity android:name=".GraduationActivity"></activity>
+        <activity android:name=".GraduationActivity"
+            android:screenOrientation="landscape"/>
+
+        <activity android:name=".FailedActivity"
+            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>
