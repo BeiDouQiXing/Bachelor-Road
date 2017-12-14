@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -65,7 +68,7 @@ public class Map_Main extends AppCompatActivity {
         super.onStop();
     }
 
-    private DatabaseManage databaseManage;
+    private DatabaseManage databaseManage=new DatabaseManage(this);
     private static final int CHOOSE_PHOTO = 13;
     private CircleImageView bigHead;
     @Override
@@ -148,17 +151,17 @@ public class Map_Main extends AppCompatActivity {
                 }
             }
         });
-/*
-        if () {
-            // 如果头像路径为空，则使用默认头像
+
+        if (databaseManage.queryCHGender().equals("male")) {
             Glide.with(this).load(R.drawable.boy)
                     .into(bigHead);
-        } else {
-            Glide.with(this).load(userBean.getAvatarPath())
-                    .into(circleImageView);
-        }*/
+        } else if(databaseManage.queryCHGender().equals("female")){
+            Glide.with(this).load(R.drawable.girl)
+                    .into(bigHead);
+        }else{
+            getBigHead();
+        }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -243,17 +246,24 @@ public class Map_Main extends AppCompatActivity {
             imagePath = getImagePath(uri, null);
         }
 
-        // 根据图片路径显示头像
-        Glide.with(this).load(imagePath)
-                .into(bigHead);
+        // 将图片以二进制形式存进数据库
+        saveBigHead(imagePath);
+
+        // 从数据库获取头像
+        getBigHead();
+
     }
 
     private void handleImageBeforeKitKat(Intent data) {
         Uri uri = data.getData();
         String imagePath = getImagePath(uri, null);
-        // 根据图片路径显示头像
-        Glide.with(this).load(imagePath)
-                .into(bigHead);
+
+        // 将图片以二进制形式存进数据库
+        saveBigHead(imagePath);
+
+        // 从数据库获取头像
+        getBigHead();
+
     }
 
     private void openAlbum() {
@@ -261,5 +271,49 @@ public class Map_Main extends AppCompatActivity {
         intent.setType("image/*");
         // 打开相册
         startActivityForResult(intent, CHOOSE_PHOTO);
+    }
+
+    // 将图片以二进制的形式存进数据库
+    private void saveBigHead(String imagePath){
+        // 图片压缩
+        BitmapFactory.Options options = new BitmapFactory.Options();// 解析位图的附加条件
+        options.inJustDecodeBounds = true;    // 不去解析位图，只获取位图头文件信息
+        Bitmap bitmap= BitmapFactory.decodeFile(imagePath,options);
+        bigHead.setImageBitmap(bitmap);
+        int btwidth = options.outWidth;     // 获取图片的宽度
+        int btheight = options.outHeight;   //获取图片的高度
+
+        int dx = btwidth/100;    // 获取水平方向的缩放比例
+        int dy = btheight/100;    // 获取垂直方向的缩放比例
+
+        int sampleSize = 1; // 设置默认缩放比例
+
+        // 如果是水平方向
+        if (dx>dy&&dy>1) {
+            sampleSize = dx;
+        }
+
+        //如果是垂直方向
+        if (dy>dx&&dx>1) {
+            sampleSize = dy;
+        }
+        options.inSampleSize = sampleSize;       // 设置图片缩放比例
+        options.inJustDecodeBounds = false;     // 真正解析位图
+        // 把图片的解析条件options在创建的时候带上
+        bitmap = BitmapFactory.decodeFile(imagePath, options);
+
+        ByteArrayOutputStream BAOStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, BAOStream);// (0-100)压缩文件
+        byte[] image = BAOStream.toByteArray();
+        databaseManage.updateCharacterCHCImageByte(image);
+    }
+
+    private Bitmap getBigHead(){
+        //从数据库调取头像
+        Character character = databaseManage.queryCharacter();
+        // 把图片转为bitmap
+        Bitmap bitmap = BitmapFactory.decodeByteArray(character.CHCImagebyte, 0, character.CHCImagebyte.length);
+        bigHead.setImageBitmap(bitmap);
+        return bitmap;
     }
 }

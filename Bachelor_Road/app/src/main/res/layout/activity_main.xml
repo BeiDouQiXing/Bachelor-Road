@@ -7,11 +7,10 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/main_big_head"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="18dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="5dp"
         android:src="@drawable/bighead"/>
 
     <Button

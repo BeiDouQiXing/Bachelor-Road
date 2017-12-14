@@ -1,19 +1,17 @@
 package com.example.kobe.bachelor_road;
 
 import android.content.Intent;
-import android.provider.CalendarContract;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.time.Instant;
-
 public class Login extends AppCompatActivity {
     private DatabaseManage databaseManage;
-    private  int boyOrGirl = 0;
+    private  String boyOrGirl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +33,7 @@ public class Login extends AppCompatActivity {
         buttonHeadBoy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boyOrGirl = 1;
+                boyOrGirl = "male";
                 Toast.makeText(Login.this,"您选择为男生",
                         Toast.LENGTH_SHORT).show();
             }
@@ -43,7 +41,7 @@ public class Login extends AppCompatActivity {
         buttonHeadGirl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boyOrGirl = 2;
+                boyOrGirl = "female";
                 Toast.makeText(Login.this,"您选择为女生",
                         Toast.LENGTH_SHORT).show();
             }
@@ -76,21 +74,22 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this,"请输入正确的姓名或学号",
                             Toast.LENGTH_SHORT).show();
                     return;
-                } else if (boyOrGirl == 0) {
+                } else if(boyOrGirl == ""){
                     Toast.makeText(Login.this, "请选择正确的头像",
                             Toast.LENGTH_SHORT).show();
-                   return;
-               } else if (isOk(stuName, stuNum) == true) {
-                   //（待写入）存入数据库
-                   Character character = new Character(1, stuName, stuNum, stuClass, boyOrGirl, 100, 100, 0, 0, 480, 1);
-                   databaseManage.insertCharacter(character);
+                    return;
+                } else if(isOk(stuName, stuNum)==true) {
+                    //（待写入）存入数据库
+                    Character character = new Character(1,stuName,stuNum,stuClass,boyOrGirl,100,100,0,0,480,1,null);
+                    Log.i("hujunqin",boyOrGirl);
+                    databaseManage.insertCharacter(character);
 
-                   Intent intent = new Intent(Login.this, Leading.class);
-                   startActivity(intent);
-                   finish();
-
-                   Toast.makeText(Login.this, "注册成功", Toast.LENGTH_SHORT).show();
-               }
+                    Intent intent = new Intent(Login.this, Map_Main.class);
+                    startActivity(intent);
+                    finish();
+                    Toast.makeText(Login.this,"注册成功",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
