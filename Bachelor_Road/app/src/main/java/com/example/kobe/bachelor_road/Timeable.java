@@ -12,7 +12,7 @@ import android.widget.Toast;
 public class Timeable extends AppCompatActivity {
 
     private int currentWeek;
-    private DatabaseManage databaseManage;
+    private DatabaseManage databaseManage = new DatabaseManage(this);
     private CharacterCourse[] characterCourses;
     private int currentTime ;
 
@@ -54,6 +54,7 @@ public class Timeable extends AppCompatActivity {
         Intent intent = new Intent(Timeable.this, MyService2.class);
         startService(intent);
 
+        currentWeek = databaseManage.queryCHCurrentWeek();
         if ( currentWeek == 1) {
             android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Timeable.this);
             dialog.setTitle("提示");
@@ -61,6 +62,14 @@ public class Timeable extends AppCompatActivity {
             dialog.setCancelable(false);
             dialog.setNegativeButton("再去看看咯", new DialogInterface.OnClickListener(){
                         public void onClick(DialogInterface dialog,int which) {
+                            /*主界面背景音乐播放*/
+                            Intent intentMusic1 = new Intent(Timeable.this, MyService1.class);
+                            startService(intentMusic1);
+
+                            /*课程背景音乐停止*/
+                            Intent intentMusic2 = new Intent(Timeable.this, MyService2.class);
+                            stopService(intentMusic2);
+
                             finish();
                         }
             });
@@ -68,7 +77,7 @@ public class Timeable extends AppCompatActivity {
                dialog.setPositiveButton("我打算从第二周开始！", new DialogInterface.OnClickListener(){
                             public void onClick(DialogInterface dialog,int which){
                                 Toast.makeText(Timeable.this,"新生周已跳过~",Toast.LENGTH_SHORT).show();
-                                int i = databaseManage.updateCHCurrentWeek(2);
+                                databaseManage.updateCHCurrentWeek(2);
                             }
                         });
                 dialog.show();

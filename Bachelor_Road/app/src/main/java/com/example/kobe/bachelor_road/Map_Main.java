@@ -34,6 +34,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class Map_Main extends AppCompatActivity {
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -41,6 +42,10 @@ public class Map_Main extends AppCompatActivity {
         final int currentWeek = databaseManage.queryCHCurrentWeek();
         final int currentTime = databaseManage.queryCHCurrentTime();
         DecimalFormat df = new DecimalFormat("#0.000");
+
+         /*背景音乐播放*/
+        Intent intent = new Intent(Map_Main.this, MyService1.class);
+        startService(intent);
 
          /*主界面人物信息显示*/
         TextView main_name = findViewById(R.id.main_name);
@@ -51,9 +56,15 @@ public class Map_Main extends AppCompatActivity {
         main_study_value.setText(String.valueOf(df.format(databaseManage.queryCHCredit())));
         TextView main_activity_point = findViewById(R.id.main_activity_point);
         main_activity_point.setText(String.valueOf(df.format(databaseManage.queryCHComprehensiveTest())));
+
         /*主界面时间信息显示*/
         TextView main_which_week = findViewById(R.id.main_which_week);
         main_which_week.setText("第" + String.valueOf(currentWeek) + "周");
+
+        if (currentWeek==21){
+            graduate(databaseManage.queryCHCredit());
+        }
+
         TextView main_which_noon = findViewById(R.id.main_which_noon);
         main_which_noon.setText(TimeTranslate.morningOrAfter(currentTime));
         TextView main_current_time = findViewById(R.id.main_current_time);
@@ -79,6 +90,7 @@ public class Map_Main extends AppCompatActivity {
         /*背景音乐播放*/
         Intent intent = new Intent(Map_Main.this, MyService1.class);
         startService(intent);
+
 
         /*主界面部门按钮点击事件*/
         Button button_departmentButton = findViewById(R.id.main_department_button); //进入素拓，完成部门工作任务
@@ -124,7 +136,6 @@ public class Map_Main extends AppCompatActivity {
                 dialog.show();
             }
         });
-
         /*主界面宿舍按钮点击事件*/
         Button main_dormitory_button = findViewById(R.id.main_dormitory_button);
         main_dormitory_button.setOnClickListener(new View.OnClickListener() {
@@ -316,4 +327,32 @@ public class Map_Main extends AppCompatActivity {
         bigHead.setImageBitmap(bitmap);
         return bitmap;
     }
+
+    private void graduate(double credit){
+        final double activityPoint=databaseManage.queryCHComprehensiveTest();
+        double result=credit*0.8+activityPoint*0.2;
+        if(result>10.5){
+            Intent intent = new Intent(Map_Main.this, GraduationActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            Intent intent = new Intent(Map_Main.this, FailedActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        /*主界面背景音乐播放*/
+        Intent intentMusic1 = new Intent(Map_Main.this, MyService1.class);
+        startService(intentMusic1);
+
+        /*课程背景音乐停止*/
+        Intent intentMusic2 = new Intent(Map_Main.this, MyService2.class);
+        stopService(intentMusic2);
+
+        finish();
+    }
+
 }

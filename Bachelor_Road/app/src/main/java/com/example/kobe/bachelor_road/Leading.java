@@ -1,3 +1,4 @@
+
 package com.example.kobe.bachelor_road;
 
 import android.content.DialogInterface;
@@ -82,19 +83,6 @@ public class Leading extends AppCompatActivity {
                         leading_image.setBackgroundResource(R.drawable.leading_5);
                         break;
                     case 4:
-                        android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Leading.this);
-                        dialog.setTitle("提示");
-                        dialog.setMessage("点击确定开始选择部门\n选择部门后直接开始第二周");
-                        dialog.setCancelable(false);
-                        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener(){
-                            public void onClick(DialogInterface dialog,int which) {} });
-                        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener(){
-                            public void onClick(DialogInterface dialog,int which) {
-                                Intent intent = new Intent(Leading.this, Add_Department.class);
-                                startActivity(intent);
-                                finish();
-                            } });
-                        dialog.show();
                         break;
                     default:
                         break;

@@ -573,7 +573,70 @@ public class Lesson_View extends AppCompatActivity {
         fifth_lesson.setText(intent.getStringExtra("fifth_lesson"));
         fifth_lesson.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {}
+            public void onClick(View v) {
+                if (!fifth_lesson.getText().equals("")) {
+                    currentTime = baseTime + 19 * 60;
+                    if (currentTime < databaseManage.queryCHCurrentTime()) {
+                        android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Lesson_View.this);
+                        dialog.setTitle("提示");
+                        dialog.setMessage("不能选择当前时间之前的课程");
+                        dialog.setCancelable(false);
+                        dialog.setNegativeButton("", new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog,int which) {} });
+                        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dialog,int which) {} });
+                        dialog.show();
+                    } else {
+                        CName = fifth_lesson.getText().toString();
+                        eachClassCredit = databaseManage.queryCNameCEachClassCredit(CName);
+                        eachClassEnergy = databaseManage.queryCNameCEachClassEnergy(CName);
+
+                        android.app.AlertDialog.Builder dialog = new android.app.AlertDialog.Builder(Lesson_View.this);
+                        dialog.setTitle("提示");
+                        dialog.setMessage("消耗活力值：" + eachClassEnergy + "\n"
+                                + "获得学分：" + df.format(eachClassCredit));
+                        dialog.setCancelable(false);
+                        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        });
+                        dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                CHCurrentEnergy = databaseManage.queryCHCurrentEnergy();
+                                CHCredit = databaseManage.queryCHCredit();
+                                int newEnergy = CHCurrentEnergy - eachClassEnergy;
+
+                                /*当前活力值不足以进行课程*/
+                                if (newEnergy < 0) {
+                                    android.app.AlertDialog.Builder errorDialog = new android.app.AlertDialog.Builder(Lesson_View.this);
+                                    errorDialog.setTitle("提示");
+                                    errorDialog.setMessage("活力值不足，不能进行该课程！");
+                                    errorDialog.setCancelable(false);
+                                    errorDialog.setNegativeButton("", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                        }
+                                    });
+                                    errorDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                        }
+                                    });
+                                    errorDialog.show();
+                                } else {
+                                    /*数据库数据更新*/
+                                    databaseManage.updateCHCurrentEnergy(CHCurrentEnergy - eachClassEnergy);
+                                    databaseManage.updateCHCredit(CHCredit + eachClassCredit);
+                                    databaseManage.updateCHCurrentTime(baseTime + (17 * 60) + 30);
+
+                                    Toast.makeText(Lesson_View.this, "晚自习已结束~", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        });
+                        dialog.show();
+                    }
+                }
+            }
         });
     }
 }

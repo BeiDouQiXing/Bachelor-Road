@@ -10,8 +10,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
+
     private DatabaseManage databaseManage;
     private  String boyOrGirl = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,13 +21,14 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         databaseManage = new DatabaseManage(this);
 
-        if (databaseManage.queryCHIsFirstLogin().equals("false")) {
+        if(databaseManage.queryCHIsFirstLogin().equals("false")) {
             Intent intent = new Intent(Login.this, Map_Main.class);
             Toast.makeText(Login.this,"欢迎回来！",
                     Toast.LENGTH_SHORT).show();
             startActivity(intent);
             finish();
         }
+
 
         //选择男女头像
         Button buttonHeadBoy = findViewById(R.id.boy);
@@ -58,7 +61,7 @@ public class Login extends AppCompatActivity {
                 EditText editTextStuNum = findViewById(R.id.student_number);
                 EditText editTextStuClass = findViewById(R.id.student_number);
 
-                if (editTextStuName.length() == 0||editTextStuNum.length() == 0){
+                if(editTextStuName.length() == 0||editTextStuNum.length() == 0){
 
                     Toast.makeText(Login.this,"请输入正确的姓名或学号",
                             Toast.LENGTH_SHORT).show();
@@ -67,14 +70,15 @@ public class Login extends AppCompatActivity {
                 String stuName = editTextStuName.getText().toString();
                 String stuNum = editTextStuNum.getText().toString();
                 int stuClass = Integer.valueOf(editTextStuClass.getText().toString());
-
                 //判断是否合法
-               if (isOk(stuName, stuNum) == false) {
+
+               if(isOk(stuName, stuNum) == false){
 
                     Toast.makeText(Login.this,"请输入正确的姓名或学号",
                             Toast.LENGTH_SHORT).show();
                     return;
                 } else if(boyOrGirl == ""){
+
                     Toast.makeText(Login.this, "请选择正确的头像",
                             Toast.LENGTH_SHORT).show();
                     return;
@@ -84,7 +88,8 @@ public class Login extends AppCompatActivity {
                     Log.i("hujunqin",boyOrGirl);
                     databaseManage.insertCharacter(character);
 
-                    Intent intent = new Intent(Login.this, Map_Main.class);
+                    Intent intent = new Intent(Login.this, Leading.class);
+
                     startActivity(intent);
                     finish();
                     Toast.makeText(Login.this,"注册成功",
@@ -94,8 +99,8 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    public boolean isOk(String name, String num) {
-        if(name == null || num == null|| name.equals("") == true || num.equals("") == true) {
+    public boolean isOk(String name, String num){
+        if(name == null||num == null|| name.equals("")==true||num.equals("")==true) {
             return false;
         } else {
             return true;
