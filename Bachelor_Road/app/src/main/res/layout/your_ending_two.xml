@@ -9,7 +9,7 @@
         android:background="@drawable/fail"/>
 
     <Button
-        android:id="@+id/ending_out_four"
+        android:id="@+id/ending_out_two"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#00000000"/>
