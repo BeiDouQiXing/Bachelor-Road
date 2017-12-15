@@ -55,8 +55,13 @@ public class Dorm extends AppCompatActivity {
                 } else {
                     databaseManage.updateCHCurrentTime(8 * 60);
                     databaseManage.updateCHCurrentEnergy(100);
-
                     Toast.makeText(Dorm.this, "现在是第" + String.valueOf(databaseManage.queryCHCurrentWeek()) + "周", Toast.LENGTH_SHORT).show();
+
+                    /*宿舍背景音乐停止*/
+                    Intent intentMusic3 = new Intent(Dorm.this, MyService3.class);
+                    stopService(intentMusic3);
+                    
+                    finish();
                 }
 
             }
