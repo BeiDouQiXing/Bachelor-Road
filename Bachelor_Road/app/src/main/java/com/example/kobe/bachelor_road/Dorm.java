@@ -60,7 +60,7 @@ public class Dorm extends AppCompatActivity {
                     /*宿舍背景音乐停止*/
                     Intent intentMusic3 = new Intent(Dorm.this, MyService3.class);
                     stopService(intentMusic3);
-                    
+
                     finish();
                 }
 
