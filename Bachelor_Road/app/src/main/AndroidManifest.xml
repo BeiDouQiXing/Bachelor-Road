@@ -22,16 +22,16 @@
         </activity>
         <activity
             android:name=".Map_Main"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Activity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Add_Department"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".MyDepartment"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".Timeable"
             android:screenOrientation="landscape" />
@@ -50,7 +50,6 @@
         <activity
             android:name=".Classroom_Program_C_Three"
             android:screenOrientation="landscape" />
-
         <activity
             android:name=".Leading"
             android:screenOrientation="landscape" />
@@ -59,29 +58,34 @@
             android:name=".MyService1"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote"/>
+            android:process=":remote" />
         <service
             android:name=".MyService2"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote"/>
+            android:process=":remote" />
         <service
             android:name=".MyService3"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote"/>
+            android:process=":remote" />
         <service
             android:name=".MyService4"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote"/>
+            android:process=":remote" />
 
-        <activity android:name=".GraduationActivity"
+        <activity
+            android:name=".GraduationActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".FailedActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".SleepActivity"
+            android:screenOrientation="landscape" />
+        <activity android:name=".GameActivity"
             android:screenOrientation="landscape"/>
-
-        <activity android:name=".FailedActivity"
-            android:screenOrientation="landscape"/>
-
     </application>
 
 </manifest>
