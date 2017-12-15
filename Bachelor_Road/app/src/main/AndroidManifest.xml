@@ -6,8 +6,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:icon="@mipmap/logo"
+        android:label="学士之路"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -22,16 +22,16 @@
         </activity>
         <activity
             android:name=".Map_Main"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".Activity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".Add_Department"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".MyDepartment"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"></activity>
         <activity
             android:name=".Timeable"
             android:screenOrientation="landscape" />
@@ -50,30 +50,37 @@
         <activity
             android:name=".Classroom_Program_C_Three"
             android:screenOrientation="landscape" />
+
         <activity
             android:name=".Leading"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
 
         <service
             android:name=".MyService1"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote" />
+            android:process=":remote"/>
         <service
             android:name=".MyService2"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote" />
+            android:process=":remote"/>
         <service
             android:name=".MyService3"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote" />
+            android:process=":remote"/>
         <service
             android:name=".MyService4"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote" />
+            android:process=":remote"/>
+
+        <activity android:name=".GraduationActivity"
+            android:screenOrientation="landscape"/>
+
+        <activity android:name=".FailedActivity"
+            android:screenOrientation="landscape"/>
 
     </application>
 

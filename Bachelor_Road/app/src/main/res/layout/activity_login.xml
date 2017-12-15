@@ -44,25 +44,23 @@
 
     <Button
         android:id="@+id/boy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_above="@+id/queren"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="44dp"
-        android:layout_marginLeft="68dp"
-        android:layout_marginStart="68dp"
+        android:layout_marginBottom="35dp"
+        android:layout_marginEnd="57dp"
+        android:layout_marginRight="57dp"
+        android:layout_toLeftOf="@+id/girl"
+        android:layout_toStartOf="@+id/girl"
         android:background="@drawable/boy" />
 
     <Button
         android:id="@+id/girl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/boy"
-        android:layout_marginLeft="38dp"
-        android:layout_marginStart="38dp"
-        android:layout_toEndOf="@+id/boy"
-        android:layout_toRightOf="@+id/boy"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignEnd="@+id/classes"
+        android:layout_alignRight="@+id/classes"
+        android:layout_alignTop="@+id/boy"
         android:background="@drawable/girl" />
 
     <Button

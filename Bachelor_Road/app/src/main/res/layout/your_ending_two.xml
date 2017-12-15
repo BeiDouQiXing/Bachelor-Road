@@ -6,7 +6,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/number_two"/>
+        android:background="@drawable/fail"/>
 
     <Button
         android:id="@+id/ending_out_two"
@@ -14,40 +14,4 @@
         android:layout_height="match_parent"
         android:background="#00000000"/>
 
-    <TextView
-        android:id="@+id/ending_name_one"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="23dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:text="陈涵"
-        android:layout_marginLeft="160dp"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="158dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="23dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:text="一"
-        android:layout_marginLeft="325dp"
-        android:layout_marginStart="325dp"
-        android:layout_marginTop="160dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="23dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:text="一"
-        android:layout_marginLeft="462dp"
-        android:layout_marginStart="462dp"
-        android:layout_marginTop="160dp"
-        />
 </RelativeLayout>
