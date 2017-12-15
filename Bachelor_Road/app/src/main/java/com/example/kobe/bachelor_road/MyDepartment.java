@@ -31,7 +31,7 @@ public class MyDepartment extends AppCompatActivity  {
         setContentView(R.layout.my_department);
         TextView textView = findViewById(R.id.my_department_name);
         final DatabaseManage databaseManage =new DatabaseManage(this);
-            if(isAddmit(databaseManage)==null )
+            if(isAddmit(databaseManage)== null )
                 textView.setText("您还没有选择部门");
             else
                 textView.setText(isAddmit(databaseManage).toString());
@@ -47,7 +47,7 @@ public class MyDepartment extends AppCompatActivity  {
                                                  }
         );
 
-        Button buttonToActivity =(Button)findViewById(R.id.my_department_activity);
+        Button buttonToActivity =findViewById(R.id.my_department_activity);
         buttonToActivity.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
@@ -77,7 +77,7 @@ public class MyDepartment extends AppCompatActivity  {
     }
     /*查询加入的部门*/
     public String isAddmit(DatabaseManage databaseManage){
-        for(int i = 0;i<5;i++)
+        for(int i = 1;i<6;i++)
         {
             if(databaseManage.queryDidDIsJoinDepartment(i)==1) {
                 return databaseManage.queryDidDepartment(i).DName.toString();
