@@ -306,7 +306,7 @@ public class Add_Department extends AppCompatActivity {
 
         /*查询部门是否有加入的部门*/
     public static boolean isAdmit(DatabaseManage databaseManage){
-        for(int i = 0;i<5;i++)
+        for(int i = 1;i<6;i++)
         {
             if(databaseManage.queryDidDIsJoinDepartment(i)==1)
                 return true;

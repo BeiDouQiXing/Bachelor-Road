@@ -9,7 +9,7 @@
         android:background="@drawable/dorm_sleep"/>
 
     <Button
-        android:id="@+id/game_out"
+        android:id="@+id/sleep_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="120dp"
